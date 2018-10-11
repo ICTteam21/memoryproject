@@ -21,7 +21,7 @@ namespace MemoryGame
         {
             this.grid = grid;
             InitializeGameGrid(cols, rows);
-            AddLabel();
+     
             AddImages(cols, rows);
         }
 
@@ -51,10 +51,28 @@ namespace MemoryGame
             grid.Children.Add(title);
         }
         /// <summary>
+        /// Laad de images op een random manier in een list.
+        /// </summary>
+        /// <returns></returns>
+        private List<ImageSource> GetImageList()
+        {
+            List<ImageSource> images = new List<ImageSource>();
+            for (int i = 0; i < 16; i++)
+            {
+                int imageNr = i % 8 + 1;
+                ImageSource source = new BitmapImage(new Uri("Images/logo" + imageNr + ".png", UriKind.Relative));
+                images.Add(source);
+            }
+
+            //images.Shuffle();
+            return images;
+        }
+        /// <summary>
         /// Voegt de plaatjes aan de grid 
         /// </summary>
         /// <param name="rows"></param>
         /// <param name="cols"></param>
+        
         private void AddImages( int rows, int cols)
         {
             List<ImageSource> images = GetImageList();
@@ -73,47 +91,60 @@ namespace MemoryGame
                 }
             }
         }
-
-        /// <summary>
-        /// Laad de images op een random manier in.
-        /// </summary>
-        /// <returns></returns>
-        private List<ImageSource> GetImageList()
-        {
-            List<ImageSource> images = new List<ImageSource>();
-            for(int i = 0; i< 16; i++)
-            {
-                int imageNr = i % 8 + 1;
-                ImageSource source = new BitmapImage(new Uri("Images/logo" + imageNr + ".png", UriKind.Relative));
-                images.Add(source);
-            }
-
-            images.Shuffle();
-            return images;
-        }
-
-        private int aantalClicks = 0;
         /// <summary>
         /// Is de functie die bepaald wat er gebeurt als je op een kaart klikt
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private int kliks = 0;
+        public string CardOne;
+        public string xyOne;
+        public string xyTwo;
+
         private void CardClick(object sender, MouseButtonEventArgs e)
         {
+            var element = (UIElement)e.Source;
+
+
             Image card = (Image)sender;
             ImageSource front = (ImageSource)card.Tag;
+            ImageSource back = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
+
+            kliks++;
             card.Source = front;
-            aantalClicks++;
-        }
 
-        private void CheckCards()
-        {
-            // als je 2 kaarten heb geselecteerd kijk dan of ze kloppen
-            if (aantalClicks.Equals(2))
+            if (kliks.Equals(1))
             {
-
+                CardOne = Convert.ToString(card.Tag);
+                int xOne = Grid.GetColumn(element);
+                int yOne = Grid.GetRow(element);
+                xyOne = Convert.ToString(xOne) + Convert.ToString(yOne);
             }
+            else if (kliks.Equals(2))
+            {
+                string CardTwo = Convert.ToString(card.Tag);
+                int xTwo = Grid.GetColumn(element);
+                int yTwo = Grid.GetRow(element);
+                xyTwo = Convert.ToString(xTwo) + Convert.ToString(yTwo);
+
+                if (CardOne.Equals(CardTwo) && !xyOne.Equals(xyTwo))
+                {
+                    MessageBox.Show("zijn gelijk");
+                }
+                else if (!CardTwo.Equals(CardOne))
+                {
+                    MessageBox.Show("zijn niet gelijk");
+                }
+
+
+
+                kliks = 0;
+            }
+
         }
+
+    
+       
 
     }
 }
