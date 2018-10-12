@@ -13,5 +13,6 @@ namespace Theme
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

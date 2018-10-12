@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
+
 namespace Theme
 {
     class ThemeClass
@@ -53,43 +54,84 @@ namespace Theme
 
         private void Theme1()
         {
-            Button startgame = new Button();
-            startgame.Content = "Disney";
-            startgame.FontSize = 20;
+            Button disney = new Button();
+            disney.Content = "Disney";
+            disney.FontSize = 20;
             //startgame.HorizontalAlignment = HorizontalAlignment.Center;
 
-            Grid.SetRow(startgame, 3);
-            Grid.SetColumn(startgame, 1);
-            Grid.SetColumnSpan(startgame, 3);
-            Grid.SetRowSpan(startgame, 2);
-            grid.Children.Add(startgame);
-            
+            Grid.SetRow(disney, 3);
+            Grid.SetColumn(disney, 1);
+            Grid.SetColumnSpan(disney, 3);
+            Grid.SetRowSpan(disney, 2);
+            grid.Children.Add(disney);
+            disney.Click += new RoutedEventHandler(button_click);
         }
         private void Theme2()
         {
-            Button startgame = new Button();
-            startgame.Content = "Gebouwen";
-            startgame.FontSize = 20;
+            Button gebouwen = new Button();
+            gebouwen.Content = "Gebouwen";
+            gebouwen.FontSize = 20;
             //startgame.HorizontalAlignment = HorizontalAlignment.Center;
 
-            Grid.SetRow(startgame, 6);
-            Grid.SetColumn(startgame, 1);
-            Grid.SetColumnSpan(startgame, 3);
-            Grid.SetRowSpan(startgame, 2);
-            grid.Children.Add(startgame);
+            Grid.SetRow(gebouwen, 6);
+            Grid.SetColumn(gebouwen, 1);
+            Grid.SetColumnSpan(gebouwen, 3);
+            Grid.SetRowSpan(gebouwen, 2);
+            grid.Children.Add(gebouwen);
+            gebouwen.Click += new RoutedEventHandler(button_click);
         }
         private void Theme3()
         {
-            Button startgame = new Button();
-            startgame.Content = "Logo's";
-            startgame.FontSize = 20;
+            Button logo = new Button();
+            logo.Content = "Logo's";
+            logo.FontSize = 20;
             //startgame.HorizontalAlignment = HorizontalAlignment.Center;
 
-            Grid.SetRow(startgame, 9);
-            Grid.SetColumn(startgame, 1);
-            Grid.SetColumnSpan(startgame, 3);
-            Grid.SetRowSpan(startgame, 2);
-            grid.Children.Add(startgame);
+            Grid.SetRow(logo, 9);
+            Grid.SetColumn(logo, 1);
+            Grid.SetColumnSpan(logo, 3);
+            Grid.SetRowSpan(logo, 2);
+            grid.Children.Add(logo);
+            logo.Click += new RoutedEventHandler(button_click);
+        }
+
+
+
+
+        private void PlayClick()
+        {
+                MediaPlayer Sound1 = new MediaPlayer();
+                Sound1.Open(new Uri(@"D:\stuff\school\Memory Project\Sound Effects - Memory Game\click.mp3"));
+                Sound1.Play();
+        }
+
+        private void PlayCorrect()
+        {
+            MediaPlayer Sound1 = new MediaPlayer();
+            Sound1.Open(new Uri(@"D:\stuff\school\Memory Project\Sound Effects - Memory Game\correct.mp3"));
+            Sound1.Play();
+        }
+
+        private void PlayWow()
+        {
+            MediaPlayer Sound1 = new MediaPlayer();
+            Sound1.Open(new Uri(@"D:\stuff\school\Memory Project\Sound Effects - Memory Game\wow.mp3"));
+            Sound1.Play();
+        }
+
+        public void button_click(object sender, RoutedEventArgs e)
+        {
+            PlayClick();
+        }
+
+        public void button_correct(object sender, RoutedEventArgs e)
+        {
+            PlayCorrect();
+        }
+
+        public void button_wow(object sender, RoutedEventArgs e)
+        {
+            PlayWow();
         }
     }
 }
