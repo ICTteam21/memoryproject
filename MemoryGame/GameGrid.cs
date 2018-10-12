@@ -21,11 +21,11 @@ namespace MemoryGame
         {
             this.grid = grid;
             InitializeGameGrid(cols, rows);
-     
+
             AddImages(cols, rows);
         }
 
-        private void InitializeGameGrid( int cols, int rows)
+        private void InitializeGameGrid(int cols, int rows)
         {
             for (int i = 0; i < rows; i++)
             {
@@ -64,7 +64,7 @@ namespace MemoryGame
                 images.Add(source);
             }
 
-            //images.Shuffle();
+            images.Shuffle();
             return images;
         }
         /// <summary>
@@ -72,13 +72,13 @@ namespace MemoryGame
         /// </summary>
         /// <param name="rows"></param>
         /// <param name="cols"></param>
-        
-        private void AddImages( int rows, int cols)
+
+        private void AddImages(int rows, int cols)
         {
             List<ImageSource> images = GetImageList();
-            for ( int row = 0; row < rows; row++)
+            for (int row = 0; row < rows; row++)
             {
-                for(int column = 0; column < cols; column++)
+                for (int column = 0; column < cols; column++)
                 {
                     Image backgroudImage = new Image();
                     backgroudImage.Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
@@ -98,20 +98,22 @@ namespace MemoryGame
         /// <param name="e"></param>
         private int kliks = 0;
         public string CardOne;
+        public string CardTwo;
         public string xyOne;
         public string xyTwo;
+        public Image cardA;
 
         private void CardClick(object sender, MouseButtonEventArgs e)
         {
             var element = (UIElement)e.Source;
-
-
             Image card = (Image)sender;
             ImageSource front = (ImageSource)card.Tag;
             ImageSource back = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
 
             kliks++;
+
             card.Source = front;
+
 
             if (kliks.Equals(1))
             {
@@ -119,32 +121,46 @@ namespace MemoryGame
                 int xOne = Grid.GetColumn(element);
                 int yOne = Grid.GetRow(element);
                 xyOne = Convert.ToString(xOne) + Convert.ToString(yOne);
+                cardA = (Image)sender;
             }
             else if (kliks.Equals(2))
             {
-                string CardTwo = Convert.ToString(card.Tag);
+                CardTwo = Convert.ToString(card.Tag);
                 int xTwo = Grid.GetColumn(element);
                 int yTwo = Grid.GetRow(element);
                 xyTwo = Convert.ToString(xTwo) + Convert.ToString(yTwo);
+                kliks = 0;
+
 
                 if (CardOne.Equals(CardTwo) && !xyOne.Equals(xyTwo))
                 {
                     MessageBox.Show("zijn gelijk");
+
                 }
-                else if (!CardTwo.Equals(CardOne))
+                else if (!CardTwo.Equals(CardOne) && !CardOne.Equals(CardTwo))
                 {
                     MessageBox.Show("zijn niet gelijk");
+                    cardA.Source = back;
+                    card.Source = back;
+
                 }
 
-
-
-                kliks = 0;
             }
+
+
+
 
         }
 
-    
-       
 
-    }
+
+
+
+
+
+
+
+
+    }   
 }
+
