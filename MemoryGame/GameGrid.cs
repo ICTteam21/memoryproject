@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Input;
 using System.Security.Cryptography;
+using System.Threading;
 
 namespace MemoryGame
 {
@@ -41,11 +42,13 @@ namespace MemoryGame
         /// </summary>
         private void AddLabel()
         {
-            Label title = new Label();
-            title.Content = "Memory";
-            title.FontFamily = new FontFamily("Impact");
-            title.FontSize = 40;
-            title.HorizontalAlignment = HorizontalAlignment.Center;
+            Label title = new Label
+            {
+                Content = "Memory",
+                FontFamily = new FontFamily("Impact"),
+                FontSize = 40,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
 
             Grid.SetColumn(title, 1);
             grid.Children.Add(title);
@@ -64,7 +67,7 @@ namespace MemoryGame
                 images.Add(source);
             }
 
-            images.Shuffle();
+            //images.Shuffle();
             return images;
         }
         /// <summary>
@@ -80,9 +83,11 @@ namespace MemoryGame
             {
                 for (int column = 0; column < cols; column++)
                 {
-                    Image backgroudImage = new Image();
-                    backgroudImage.Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
-                    backgroudImage.Tag = images.First();
+                    Image backgroudImage = new Image
+                    {
+                        Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                        Tag = images.First()
+                    };
                     images.RemoveAt(0);
                     backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
                     Grid.SetColumn(backgroudImage, column);
@@ -96,25 +101,42 @@ namespace MemoryGame
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private int kliks = 0;
-        public string CardOne;
-        public string CardTwo;
-        public string xyOne;
-        public string xyTwo;
-        public Image cardA;
+        
 
+        private void CardClickTryHard(object sender, MouseButtonEventArgs e)
+        {
+            int clicked = e.ClickCount;
+
+            if (clicked.Equals(1))
+            {
+                MessageBox.Show("oke");
+                clicked++;
+            }
+            else if (clicked.Equals(2))
+            {
+                MessageBox.Show("okeee");
+                clicked = 0;
+            }
+
+        }  
+
+
+        private int kliks = 0;
+        private string CardOne;
+        private string CardTwo;
+        private string xyOne;
+        private string xyTwo;
+        private Image cardA;
+        private Image cardB;
+  
         private void CardClick(object sender, MouseButtonEventArgs e)
         {
             var element = (UIElement)e.Source;
             Image card = (Image)sender;
             ImageSource front = (ImageSource)card.Tag;
-            ImageSource back = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
-
-            kliks++;
-
             card.Source = front;
 
-
+            kliks++;
             if (kliks.Equals(1))
             {
                 CardOne = Convert.ToString(card.Tag);
@@ -122,44 +144,42 @@ namespace MemoryGame
                 int yOne = Grid.GetRow(element);
                 xyOne = Convert.ToString(xOne) + Convert.ToString(yOne);
                 cardA = (Image)sender;
+                
             }
-            else if (kliks.Equals(2))
+            else if (kliks.Equals(2) )
             {
+
                 CardTwo = Convert.ToString(card.Tag);
                 int xTwo = Grid.GetColumn(element);
                 int yTwo = Grid.GetRow(element);
                 xyTwo = Convert.ToString(xTwo) + Convert.ToString(yTwo);
+                cardB = (Image)sender;
+
                 kliks = 0;
 
-
-                if (CardOne.Equals(CardTwo) && !xyOne.Equals(xyTwo))
-                {
-                    MessageBox.Show("zijn gelijk");
-
-                }
-                else if (!CardTwo.Equals(CardOne) && !CardOne.Equals(CardTwo))
-                {
-                    MessageBox.Show("zijn niet gelijk");
-                    cardA.Source = back;
-                    card.Source = back;
-
-                }
+                CheckCards(CardOne, CardTwo, xyOne, xyTwo);
 
             }
 
-
-
-
         }
 
+        private void CheckCards(string tag1, string tag2, string pos1, string pos2)
+        {
+            ImageSource back = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
 
-
-
-
-
-
-
-
+            if (tag1.Equals(tag2) && !pos1.Equals(pos2))
+            {
+                cardA.Source = null;
+                cardB.Source = null;
+            }
+            else if (!tag1.Equals(tag2))
+            {
+                
+                Thread.Sleep(1000);
+                cardA.Source = back;
+                cardB.Source = back; 
+            }
+        }
 
     }   
 }
