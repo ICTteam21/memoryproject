@@ -67,7 +67,7 @@ namespace MemoryGame
                 images.Add(source);
             }
 
-            //images.Shuffle();
+            images.Shuffle();
             return images;
         }
         /// <summary>
@@ -101,26 +101,8 @@ namespace MemoryGame
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        
 
-        private void CardClickTryHard(object sender, MouseButtonEventArgs e)
-        {
-            int clicked = e.ClickCount;
-
-            if (clicked.Equals(1))
-            {
-                MessageBox.Show("oke");
-                clicked++;
-            }
-            else if (clicked.Equals(2))
-            {
-                MessageBox.Show("okeee");
-                clicked = 0;
-            }
-
-        }  
-
-
+        private int pairs = 0;
         private int kliks = 0;
         private string CardOne;
         private string CardTwo;
@@ -163,21 +145,33 @@ namespace MemoryGame
 
         }
 
-        private void CheckCards(string tag1, string tag2, string pos1, string pos2)
+        /// <summary>
+        ///  Checks cards and turns them with the delay
+        /// </summary>
+        /// <param name="tag1"></param>
+        /// <param name="tag2"></param>
+        /// <param name="pos1"></param>
+        /// <param name="pos2"></param>
+        private async void CheckCards(string tag1, string tag2, string pos1, string pos2)
         {
             ImageSource back = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
 
+            await Task.Delay(300);
+
             if (tag1.Equals(tag2) && !pos1.Equals(pos2))
             {
+
                 cardA.Source = null;
                 cardB.Source = null;
             }
             else if (!tag1.Equals(tag2))
             {
                 
-                Thread.Sleep(1000);
                 cardA.Source = back;
-                cardB.Source = back; 
+                cardB.Source = back;
+
+
+                pairs++;
             }
         }
 
