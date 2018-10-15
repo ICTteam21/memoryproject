@@ -15,7 +15,7 @@ namespace Memory_HoofdUI
     {
 
         private Grid grid;
-        
+
         /// <summary>
         /// Het hoofdgrid.
         /// </summary>
@@ -146,7 +146,9 @@ namespace Memory_HoofdUI
 
         public static void newgame_click(object sender,RoutedEventArgs e)
         {
-            MessageBox.Show("New Game");
+            MainWindow p = new MainWindow();
+            p.reset();
+
         }
 
         public static void loadgame_click(object sender, RoutedEventArgs e)
@@ -162,8 +164,6 @@ namespace Memory_HoofdUI
         void credits_click(object sender, RoutedEventArgs e)
         {
 
-            MainWindow p = new MainWindow();
-            p.Opnieuw();
 
         }
 

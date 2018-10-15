@@ -8,7 +8,7 @@
         Title="MainWindow" Height="600" Width="800">
 
     <Grid x:Name="StartScherm" Background="#FFCD1A1A">
-
+        <StackPanel HorizontalAlignment="Left" Name="stackPanel1" VerticalAlignment="Stretch" Margin="0,32" Width="792" />
     </Grid>
 
 </Window>
