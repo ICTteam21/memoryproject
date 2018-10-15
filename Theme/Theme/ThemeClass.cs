@@ -43,7 +43,7 @@ namespace Theme
             Label title = new Label();
             title.Content = "Theme Selector";
             title.FontSize = 40;
-            //title.HorizontalAlignment = HorizontalAlignment.Center;
+            title.HorizontalAlignment = HorizontalAlignment.Center;
 
             Grid.SetRow(title, 0);
             Grid.SetColumn(title, 1);
@@ -96,6 +96,21 @@ namespace Theme
         }
 
 
+        public void LoadDisneyTheme(object sender, RoutedEventArgs e)
+        {
+            //load plaatjes
+            //verander kaartjes
+        }
+        private void LoadGebouwenTheme()
+        {
+            //load plaatjes
+            //verander kaartjes
+        }
+        private void LoadLogoTheme()
+        {
+            //load plaatjes
+            //verander kaartjes
+        }
 
 
         private void PlayClick()
