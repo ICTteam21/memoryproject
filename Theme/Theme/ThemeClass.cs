@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 
 namespace Theme
@@ -14,7 +15,7 @@ namespace Theme
     {
         private Grid grid;
 
-
+        //Het hele scherm
         public ThemeClass(Grid grid, int kolommen, int rijen)
         {
             this.grid = grid;
@@ -24,7 +25,7 @@ namespace Theme
             Theme2();
             Theme3();
         }
-
+        //Grid
         private void InitializeMain(int kolommen, int rijen)
         {
             for (int i = 0; i < rijen; i++)
@@ -37,7 +38,7 @@ namespace Theme
             }
         }
 
-
+        //Titel bovenaan
         private void Title()
         {
             Label title = new Label();
@@ -52,6 +53,7 @@ namespace Theme
             grid.Children.Add(title);
         }
 
+        //Eerste thema
         private void Theme1()
         {
             Button disney = new Button();
@@ -66,6 +68,8 @@ namespace Theme
             grid.Children.Add(disney);
             disney.Click += new RoutedEventHandler(button_click);
         }
+
+        //Tweede thema
         private void Theme2()
         {
             Button gebouwen = new Button();
@@ -80,6 +84,8 @@ namespace Theme
             grid.Children.Add(gebouwen);
             gebouwen.Click += new RoutedEventHandler(button_click);
         }
+
+        //Derde Thema
         private void Theme3()
         {
             Button logo = new Button();
@@ -95,24 +101,47 @@ namespace Theme
             logo.Click += new RoutedEventHandler(button_click);
         }
 
-
+        //Disney Thema laden
         public void LoadDisneyTheme(object sender, RoutedEventArgs e)
         {
-            //load plaatjes
-            //verander kaartjes
+            List<BitmapImage> disneykaartjes = new List<BitmapImage>();
+
+            for (int i = 1; i < 9; i++)
+            {
+                for (int o = 1; o < 3; i++)
+                {
+                    //NIET AF
+                    var logo = new BitmapImage();
+                    logo.UriSource = new Uri("D:/stuff/school/Memory Project/Plaatjes/Disney/disney" + i + "-" + o + ".png");
+                    disneykaartjes.Add(logo);   
+                }
+            }
         }
+        //Gebouwen Thema laden
         private void LoadGebouwenTheme()
         {
-            //load plaatjes
-            //verander kaartjes
-        }
-        private void LoadLogoTheme()
-        {
-            //load plaatjes
-            //verander kaartjes
+            for (int i = 1; i < 9; i++)
+            {
+                for (int o = 1; o < 3; i++)
+                {
+                    Card.Open(new Uri(@"D:\stuff\school\Memory Project\Plaatjes\Disney\gebouw" + i + "-" + o + ".jpg"));
+                }
+            }
         }
 
+        ////Logo thema laden
+        //private void LoadLogoTheme()
+        //{
+        //    for (int i = 1; i < 9; i++)
+        //    {
+        //        for (int o = 1; o < 3; i++)
+        //        {
+        //            Card.Open(new Uri(@"D:\stuff\school\Memory Project\Plaatjes\Disney\logo" + i + "-" + o + ".png"));
+        //        }
+        //    }
+        //}
 
+        //Click geluid laden
         private void PlayClick()
         {
                 MediaPlayer Sound1 = new MediaPlayer();
@@ -120,6 +149,7 @@ namespace Theme
                 Sound1.Play();
         }
 
+        //Correct geluid laden
         private void PlayCorrect()
         {
             MediaPlayer Sound1 = new MediaPlayer();
@@ -127,6 +157,7 @@ namespace Theme
             Sound1.Play();
         }
 
+        //Wow geluid laden
         private void PlayWow()
         {
             MediaPlayer Sound1 = new MediaPlayer();
@@ -134,16 +165,19 @@ namespace Theme
             Sound1.Play();
         }
 
+        //Click geluid private naar public zodat je het kan gebruiken
         public void button_click(object sender, RoutedEventArgs e)
         {
             PlayClick();
         }
 
+        //Correct geluid private naar public zodat je het kan gebruiken
         public void button_correct(object sender, RoutedEventArgs e)
         {
             PlayCorrect();
         }
 
+        //Wow geluid private naar public zodat je het kan gebruiken
         public void button_wow(object sender, RoutedEventArgs e)
         {
             PlayWow();
