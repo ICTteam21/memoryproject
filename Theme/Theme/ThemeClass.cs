@@ -43,7 +43,7 @@ namespace Theme
             Label title = new Label();
             title.Content = "Theme Selector";
             title.FontSize = 40;
-            title.HorizontalAlignment = HorizontalAlignment.Center;
+            //title.HorizontalAlignment = HorizontalAlignment.Center;
 
             Grid.SetRow(title, 0);
             Grid.SetColumn(title, 1);
