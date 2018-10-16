@@ -152,9 +152,9 @@ namespace MemoryGame
 
         public void Newgame_click(object sender, RoutedEventArgs e)
         {
-            var newForm = new Themas(); //create your new form.
-            newForm.Show(); //show the new form.
-            window.Close();   //only if you want to close the current form.
+            var SelectScherm = new SelectOptions(); //create your new form.
+            SelectScherm.Show(); //show the new form.
+            window.Close();
         }
 
         public void Loadgame_click(object sender, RoutedEventArgs e)
@@ -165,9 +165,7 @@ namespace MemoryGame
 
         public void Highscores_click(object sender, RoutedEventArgs e)
         {
-            var SelectScherm = new SelectOptions(); //create your new form.
-            SelectScherm.Show(); //show the new form.
-            window.Close();
+
 
         }
 
