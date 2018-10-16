@@ -18,12 +18,12 @@ namespace MemoryGame
         private Grid grid;
 
 
-        public GameGrid(Grid grid, int cols, int rows)
+        public GameGrid(Grid grid, int cols, int rows, string thema)
         {
             this.grid = grid;
             InitializeGameGrid(cols, rows);
 
-            AddImages(cols, rows);
+            AddImages(thema, cols, rows);
         }
 
         private void InitializeGameGrid(int cols, int rows)
@@ -57,18 +57,45 @@ namespace MemoryGame
         /// Laad de images op een random manier in een list.
         /// </summary>
         /// <returns></returns>
-        private List<ImageSource> GetImageList()
+        private List<ImageSource> GetImageListLogos()
         {
-            List<ImageSource> images = new List<ImageSource>();
+            List<ImageSource> imagesLogos = new List<ImageSource>();
             for (int i = 0; i < 16; i++)
             {
                 int imageNr = i % 8 + 1;
-                ImageSource source = new BitmapImage(new Uri("Images/logo" + imageNr + ".png", UriKind.Relative));
-                images.Add(source);
+                ImageSource source = new BitmapImage(new Uri("Images/logos/logo" + imageNr + ".png", UriKind.Relative));
+                imagesLogos.Add(source);
             }
 
-            images.Shuffle();
-            return images;
+            imagesLogos.Shuffle();
+            return imagesLogos;
+        }
+
+        private List<ImageSource> GetImageListGebouwen()
+        {
+            List<ImageSource> imagesGebouwen = new List<ImageSource>();
+            for (int i = 0; i < 16; i++)
+            {
+                int imageNr = i % 8 + 1;
+                ImageSource source = new BitmapImage(new Uri("Images/gebouwen/" + imageNr + "-1.jpg", UriKind.Relative));
+                imagesGebouwen.Add(source);
+            }
+
+            imagesGebouwen.Shuffle();
+            return imagesGebouwen;
+        }
+        private List<ImageSource> GetImageListDisney()
+        {
+            List<ImageSource> imagesGebouwen = new List<ImageSource>();
+            for (int i = 0; i < 16; i++)
+            {
+                int imageNr = i % 8 + 1;
+                ImageSource source = new BitmapImage(new Uri("Images/disney/" + imageNr + "-1.png", UriKind.Relative));
+                imagesGebouwen.Add(source);
+            }
+
+            imagesGebouwen.Shuffle();
+            return imagesGebouwen;
         }
         /// <summary>
         /// Voegt de plaatjes aan de grid 
@@ -76,23 +103,64 @@ namespace MemoryGame
         /// <param name="rows"></param>
         /// <param name="cols"></param>
 
-        private void AddImages(int rows, int cols)
+        private void AddImages(string thema, int rows, int cols)
         {
-            List<ImageSource> images = GetImageList();
-            for (int row = 0; row < rows; row++)
+            if (thema == "1")
             {
-                for (int column = 0; column < cols; column++)
+                List<ImageSource> images = GetImageListLogos();
+                for (int row = 0; row < rows; row++)
                 {
-                    Image backgroudImage = new Image
+                    for (int column = 0; column < cols; column++)
                     {
-                        Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
-                        Tag = images.First()
-                    };
-                    images.RemoveAt(0);
-                    backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
-                    Grid.SetColumn(backgroudImage, column);
-                    Grid.SetRow(backgroudImage, row);
-                    grid.Children.Add(backgroudImage);
+                        Image backgroudImage = new Image
+                        {
+                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Tag = images.First()
+                        };
+                        images.RemoveAt(0);
+                        backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
+                        Grid.SetColumn(backgroudImage, column);
+                        Grid.SetRow(backgroudImage, row);
+                        grid.Children.Add(backgroudImage);
+                    }
+                }
+            }else if (thema == "2")
+            {
+                List<ImageSource> images = GetImageListGebouwen();
+                for (int row = 0; row < rows; row++)
+                {
+                    for (int column = 0; column < cols; column++)
+                    {
+                        Image backgroudImage = new Image
+                        {
+                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Tag = images.First()
+                        };
+                        images.RemoveAt(0);
+                        backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
+                        Grid.SetColumn(backgroudImage, column);
+                        Grid.SetRow(backgroudImage, row);
+                        grid.Children.Add(backgroudImage);
+                    }
+                }
+            }else if ( thema == "3")
+            {
+                List<ImageSource> images = GetImageListDisney();
+                for (int row = 0; row < rows; row++)
+                {
+                    for (int column = 0; column < cols; column++)
+                    {
+                        Image backgroudImage = new Image
+                        {
+                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Tag = images.First()
+                        };
+                        images.RemoveAt(0);
+                        backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
+                        Grid.SetColumn(backgroudImage, column);
+                        Grid.SetRow(backgroudImage, row);
+                        grid.Children.Add(backgroudImage);
+                    }
                 }
             }
         }
