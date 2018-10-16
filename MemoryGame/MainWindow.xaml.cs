@@ -23,9 +23,6 @@ namespace MemoryGame
 
         }
 
-
-
-
     }
 
 }

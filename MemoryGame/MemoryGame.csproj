@@ -59,6 +59,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="StaticClass.cs" />
+    <Compile Include="Themas.xaml.cs">
+      <DependentUpon>Themas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ThemeClass.cs" />
     <Page Include="GameWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,6 +79,10 @@
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

@@ -157,9 +157,12 @@ namespace MemoryGame
             window.Close();   //only if you want to close the current form.
         }
 
-        public static void Loadgame_click(object sender, RoutedEventArgs e)
+        public void Loadgame_click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Load Game");
+            var ThemaScherm = new Themas(); //create your new form.
+            ThemaScherm.Show(); //show the new form.
+            window.Close();
+
         }
 
         public static void Highscores_click(object sender, RoutedEventArgs e)
