@@ -19,12 +19,14 @@ namespace MemoryGame
     /// </summary>
     public partial class Themas : Window
     {
+        private const int kolommen = 5;
+        private const int rijen = 14;
         ThemaClass grid;
 
         public Themas()
         {
             InitializeComponent();
-            grid = new ThemaClass(ThemaWindow , 4 ,4 );
+            grid = new ThemaClass(ThemaWindow , kolommen ,rijen);
         }
 
 
