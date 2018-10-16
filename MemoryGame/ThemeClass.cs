@@ -15,7 +15,6 @@ namespace MemoryGame
     {
         private Themas window;
         private Grid grid;
-        private string thema;
         //Het hele scherm
         public ThemaClass(Themas window, Grid grid, int kolommen, int rijen)
         {
@@ -69,7 +68,7 @@ namespace MemoryGame
             Grid.SetRowSpan(disney, 2);
             grid.Children.Add(disney);
             disney.Click += new RoutedEventHandler(button_click);
-            disney.Click += new RoutedEventHandler(Newgame_click);
+            disney.Click += new RoutedEventHandler(Disney_click);
            
         }
 
@@ -87,11 +86,11 @@ namespace MemoryGame
             Grid.SetRowSpan(gebouwen, 2);
             grid.Children.Add(gebouwen);
             gebouwen.Click += new RoutedEventHandler(button_click);
-            gebouwen.Click += new RoutedEventHandler(Newgame_click);
+            gebouwen.Click += new RoutedEventHandler(Gebouwen_click);
         }
 
         //Derde Thema
-        private void Theme3(object sender, RoutedEventArgs e)
+        private void Theme3()
         {   
             Button logo = new Button();
             logo.Content = "Logo's";
@@ -104,17 +103,29 @@ namespace MemoryGame
             Grid.SetRowSpan(logo, 2);
             grid.Children.Add(logo);
             logo.Click += new RoutedEventHandler(button_click);
-            logo.Click += new RoutedEventHandler(Newgame_click);
+            logo.Click += new RoutedEventHandler(Logo_click);
         }
-
-        public void Newgame_click(object sender, RoutedEventArgs e)
+        public void Logo_click(object sender, RoutedEventArgs e)
         {
-            thema = sender.ToString();
-            var newForm = new GameWindow(thema); //create your new form.
+
+            var newForm = new GameWindow("1"); //create your new form.
             newForm.Show(); //show the new form.
             window.Close();  //only if you want to close the current form.
         }
+        public void Gebouwen_click(object sender, RoutedEventArgs e)
+        {
+            
+            var newForm = new GameWindow("2"); //create your new form.
+            newForm.Show(); //show the new form.
+            window.Close();  //only if you want to close the current form.
+        }
+        public void Disney_click(object sender, RoutedEventArgs e)
+        {
 
+            var newForm = new GameWindow("3"); //create your new form.
+            newForm.Show(); //show the new form.
+            window.Close();  //only if you want to close the current form.
+        }
 
 
 

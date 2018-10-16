@@ -84,6 +84,19 @@ namespace MemoryGame
             imagesGebouwen.Shuffle();
             return imagesGebouwen;
         }
+        private List<ImageSource> GetImageListDisney()
+        {
+            List<ImageSource> imagesGebouwen = new List<ImageSource>();
+            for (int i = 0; i < 16; i++)
+            {
+                int imageNr = i % 8 + 1;
+                ImageSource source = new BitmapImage(new Uri("Images/disney/" + imageNr + "-1.png", UriKind.Relative));
+                imagesGebouwen.Add(source);
+            }
+
+            imagesGebouwen.Shuffle();
+            return imagesGebouwen;
+        }
         /// <summary>
         /// Voegt de plaatjes aan de grid 
         /// </summary>
@@ -92,7 +105,7 @@ namespace MemoryGame
 
         private void AddImages(string thema, int rows, int cols)
         {
-            if (thema == "logo")
+            if (thema == "1")
             {
                 List<ImageSource> images = GetImageListLogos();
                 for (int row = 0; row < rows; row++)
@@ -111,9 +124,28 @@ namespace MemoryGame
                         grid.Children.Add(backgroudImage);
                     }
                 }
-            }else if (thema == "gebouwen")
+            }else if (thema == "2")
             {
                 List<ImageSource> images = GetImageListGebouwen();
+                for (int row = 0; row < rows; row++)
+                {
+                    for (int column = 0; column < cols; column++)
+                    {
+                        Image backgroudImage = new Image
+                        {
+                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Tag = images.First()
+                        };
+                        images.RemoveAt(0);
+                        backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
+                        Grid.SetColumn(backgroudImage, column);
+                        Grid.SetRow(backgroudImage, row);
+                        grid.Children.Add(backgroudImage);
+                    }
+                }
+            }else if ( thema == "3")
+            {
+                List<ImageSource> images = GetImageListDisney();
                 for (int row = 0; row < rows; row++)
                 {
                     for (int column = 0; column < cols; column++)
