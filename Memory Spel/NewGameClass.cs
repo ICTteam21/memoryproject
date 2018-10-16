@@ -217,6 +217,7 @@ namespace Memory_Spel
             Grid.SetColumnSpan(Text1, 1);
             Grid.SetRowSpan(Text1, 1);
             grid.Children.Add(Text1);
+           
         }
         //Name box 2//
         private void AddText2()
