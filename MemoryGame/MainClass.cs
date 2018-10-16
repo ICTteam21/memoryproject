@@ -165,9 +165,12 @@ namespace MemoryGame
 
         }
 
-        public static void Highscores_click(object sender, RoutedEventArgs e)
+        public void Highscores_click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Highscores");
+            var SelectScherm = new SelectOptions(); //create your new form.
+            SelectScherm.Show(); //show the new form.
+            window.Close();
+
         }
 
         void Credits_click(object sender, RoutedEventArgs e)
