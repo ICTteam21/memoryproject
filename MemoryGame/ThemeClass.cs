@@ -91,8 +91,8 @@ namespace MemoryGame
         }
 
         //Derde Thema
-        private void Theme3(object sender, RoutedEventArgs e)
-        {   
+        private void Theme3()
+        {
             Button logo = new Button();
             logo.Content = "Logo's";
             logo.FontSize = 20;
@@ -114,7 +114,6 @@ namespace MemoryGame
             newForm.Show(); //show the new form.
             window.Close();  //only if you want to close the current form.
         }
-
 
 
 
