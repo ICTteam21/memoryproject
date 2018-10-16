@@ -26,7 +26,7 @@ namespace MemoryGame
         public SelectOptions()
         {
             InitializeComponent();
-            grid = new SelectClass(SelectOpties ,kolommen , rijen);
+            grid = new SelectClass(this, SelectOpties ,kolommen , rijen);
         }
     }
 }
