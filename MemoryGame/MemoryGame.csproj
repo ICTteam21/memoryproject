@@ -58,6 +58,10 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SelectClass.cs" />
+    <Compile Include="SelectOptions.xaml.cs">
+      <DependentUpon>SelectOptions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StaticClass.cs" />
     <Compile Include="Themas.xaml.cs">
       <DependentUpon>Themas.xaml</DependentUpon>
@@ -79,6 +83,10 @@
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SelectOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themas.xaml">
       <SubType>Designer</SubType>
@@ -111,7 +119,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\4x4preview.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\background.png" />
     <Resource Include="Images\logo1.png" />
