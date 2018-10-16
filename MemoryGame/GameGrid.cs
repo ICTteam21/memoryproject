@@ -17,6 +17,17 @@ namespace MemoryGame
     {
         private Grid grid;
 
+        Label Player1name = new Label();
+        Label Score1 = new Label();
+        Label Player1Score = new Label();
+        Label Player2name = new Label();
+        Label Score2 = new Label();
+        Label Player2Score = new Label();
+
+        int aandebeurt = 1;
+        int P1Points = 0;
+        int P2Points = 0;
+
 
         public GameGrid(Grid grid, int cols, int rows)
         {
@@ -24,6 +35,9 @@ namespace MemoryGame
             InitializeGameGrid(cols, rows);
 
             AddImages(cols, rows);
+            Playerstats();
+
+
         }
 
         private void InitializeGameGrid(int cols, int rows)
@@ -32,7 +46,7 @@ namespace MemoryGame
             {
                 grid.RowDefinitions.Add(new RowDefinition());
             }
-            for (int j = 0; j < cols; j++)
+            for (int j = 0; j < cols ; j++)
             {
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
             }
@@ -50,7 +64,8 @@ namespace MemoryGame
                 HorizontalAlignment = HorizontalAlignment.Center
             };
 
-            Grid.SetColumn(title, 1);
+            Grid.SetColumn(title, 6);
+            Grid.SetRow(title, 5);
             grid.Children.Add(title);
         }
         /// <summary>
@@ -139,9 +154,9 @@ namespace MemoryGame
                 cardB = (Image)sender;
 
                 kliks = 0;
-
+                
                 CheckCards(CardOne, CardTwo, xyOne, xyTwo);
-
+                
             }
 
 
@@ -154,6 +169,10 @@ namespace MemoryGame
         /// <param name="tag2"></param>
         /// <param name="pos1"></param>
         /// <param name="pos2"></param>
+        /// 
+
+
+
         private async void CheckCards(string tag1, string tag2, string pos1, string pos2)
         {
             ImageSource back = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
@@ -165,20 +184,107 @@ namespace MemoryGame
 
                 cardA.Source = null;
                 cardB.Source = null;
+
+                //kijkt wie er aan de beurt is en kent punten toe of verandert de beurt.
+                if (aandebeurt == 1)
+                {
+                    P1Points++;
+                    Player1Score.Content = P1Points;
+                }
+                else
+                {
+                    P2Points++;
+                    Player2Score.Content = P2Points;
+                }
+
+
             }
             else if (!tag1.Equals(tag2))
             {
-                
+
                 cardA.Source = back;
                 cardB.Source = back;
-
-
                 pairs++;
+
+                if (aandebeurt == 1)
+                {
+                    aandebeurt = 2;
+                    Player2name.Background = Brushes.Green;
+                    Player1name.Background = Brushes.Orange;
+                }
+                else
+                {
+                    aandebeurt = 1;
+                    Player1name.Background = Brushes.Green;
+                    Player2name.Background = Brushes.Orange;
+                }
             }
-            else 
+            else
             {
                 cardA.Source = back;
             }
+
+            
+        }
+
+        public void Playerstats()
+        {
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+
+            Player1name.Background = Brushes.Green;
+            Player1name.Content = "Tjeerd";
+            Player1name.FontSize = 30;
+            Player1name.HorizontalContentAlignment = HorizontalAlignment.Center;
+            Grid.SetRow(Player1name, 0);
+            Grid.SetColumn(Player1name, 4);
+            Grid.SetColumnSpan(Player1name, 2);
+            grid.Children.Add(Player1name);
+
+            
+            Score1.Content = "Score:";
+            Score1.FontSize = 30;
+            Score1.HorizontalContentAlignment = HorizontalAlignment.Center;
+            Score1.VerticalContentAlignment = VerticalAlignment.Center;
+            Grid.SetRow(Score1, 0);
+            Grid.SetColumn(Score1, 4);
+            grid.Children.Add(Score1);
+            
+            Player1Score.Content = 0;
+            Player1Score.FontSize = 30;
+            Player1Score.HorizontalContentAlignment = HorizontalAlignment.Center;
+            Player1Score.VerticalContentAlignment = VerticalAlignment.Center;
+            Grid.SetRow(Player1Score, 0);
+            Grid.SetColumn(Player1Score, 5);
+            grid.Children.Add(Player1Score);
+
+
+            
+            Player2name.Background = Brushes.Orange;
+            Player2name.Content = "Jacco";
+            Player2name.FontSize = 30;
+            Player2name.HorizontalContentAlignment = HorizontalAlignment.Center;
+            Grid.SetRow(Player2name, 2);
+            Grid.SetColumn(Player2name, 4);
+            Grid.SetColumnSpan(Player2name, 2);
+            grid.Children.Add(Player2name);
+            
+            Score2.Content = "Score:";
+            Score2.FontSize = 30;
+            Score2.HorizontalContentAlignment = HorizontalAlignment.Center;
+            Score2.VerticalContentAlignment = VerticalAlignment.Center;
+            Grid.SetRow(Score2, 2);
+            Grid.SetColumn(Score2, 4);
+            grid.Children.Add(Score2);
+            
+            Player2Score.Content = 0;
+            Player2Score.FontSize = 30;
+            Player2Score.HorizontalContentAlignment = HorizontalAlignment.Center;
+            Player2Score.VerticalContentAlignment = VerticalAlignment.Center;
+            Grid.SetRow(Player2Score, 2);
+            Grid.SetColumn(Player2Score, 5);
+            grid.Children.Add(Player2Score);
+
 
         }
 

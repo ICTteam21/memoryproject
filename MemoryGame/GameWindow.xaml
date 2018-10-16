@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MemoryGame"
         mc:Ignorable="d"
-        Title="MemoryGame" Height="464.91" Width= "901.656">
+        Title="MemoryGame" Height="500" Width= "800">
 
 
-    <Grid x:Name="GameGrid">
-
+    <Grid x:Name="Window" MaxHeight="1080" MaxWidth="1920">
+        <!-- GRID SPEEL SPEL -->
+        <Grid x:Name="GameGrid" Margin="0,0,-0.4,0.4">
+            
+        </Grid>
+        <!-- GRID INGEVOERDE DATA (NAAM, SCORE ETC)-->
     </Grid>
 </Window>
