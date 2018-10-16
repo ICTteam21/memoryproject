@@ -18,10 +18,14 @@ namespace MemoryGame
         {
             InitializeComponent();
 
-            grid = new MainClass(StartScherm);
+            grid = new MainClass(this, StartScherm);
 
 
         }
+
+
+
+
     }
 
 }

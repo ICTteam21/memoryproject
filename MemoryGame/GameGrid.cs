@@ -115,6 +115,7 @@ namespace MemoryGame
         {
             var element = (UIElement)e.Source;
             Image card = (Image)sender;
+            ImageSource back = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
             ImageSource front = (ImageSource)card.Tag;
             card.Source = front;
 
@@ -142,6 +143,7 @@ namespace MemoryGame
                 CheckCards(CardOne, CardTwo, xyOne, xyTwo);
 
             }
+
 
         }
 
@@ -173,6 +175,11 @@ namespace MemoryGame
 
                 pairs++;
             }
+            else 
+            {
+                cardA.Source = back;
+            }
+
         }
 
     }   

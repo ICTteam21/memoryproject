@@ -13,16 +13,18 @@ namespace MemoryGame
     
     class MainClass
     {
-
+        private MainMenuWindow window;
         private Grid grid;
+
+        public object Children { get; internal set; }
 
         /// <summary>
         /// Het hoofdgrid.
         /// </summary>
         /// <param name="grid"></param>
-        public MainClass(Grid grid)
+        public MainClass(MainMenuWindow window, Grid grid)
         {
-            
+            this.window = window;
             this.grid = grid;
 
             int kolommen = 5;
@@ -152,7 +154,7 @@ namespace MemoryGame
         {
             var newForm = new GameWindow(); //create your new form.
             newForm.Show(); //show the new form.
-               //only if you want to close the current form.
+            window.Close();   //only if you want to close the current form.
         }
 
         public static void Loadgame_click(object sender, RoutedEventArgs e)
