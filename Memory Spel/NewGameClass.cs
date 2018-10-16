@@ -5,13 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace Memory_Spel
 {
     class NewGameClass
     {
         private Grid grid;
-
+        
+        RadioButton Check4 = new RadioButton();
+        RadioButton Check1 = new RadioButton();
+        RadioButton Check2 = new RadioButton();
+        RadioButton Check3 = new RadioButton();
+        Label size = new Label();
 
         public NewGameClass(Grid grid, int kolommen, int rijen)
         {
@@ -28,6 +34,8 @@ namespace Memory_Spel
             AddText2();
             AddName1();
             AddName2();
+            
+            
         }
 
         private void InitializeMain(int kolommen, int rijen)
@@ -42,7 +50,7 @@ namespace Memory_Spel
             }
         }
 
-
+        //Title//
         private void AddTitle2()
         {
             Label title = new Label();
@@ -56,7 +64,7 @@ namespace Memory_Spel
             Grid.SetRowSpan(title, 2);
             grid.Children.Add(title);
         }
-
+        //Continue button//
         private void AddContinue()
         {
             Button Continue = new Button();
@@ -70,8 +78,15 @@ namespace Memory_Spel
             Grid.SetColumnSpan(Continue, 1);
             Grid.SetRowSpan(Continue, 1);
             grid.Children.Add(Continue);
+            Continue.Click += Continue_Click;
         }
 
+        private void Continue_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("continue");
+        }
+
+        //Back button// 
         private void AddBack()
         {
             Button Back = new Button();
@@ -84,10 +99,19 @@ namespace Memory_Spel
             Grid.SetColumnSpan(Back, 1);
             Grid.SetRowSpan(Back, 1);
             grid.Children.Add(Back);
-        }
-        private void AddCheck1()
+            Back.Click += Back_Click1;
+                }
+
+        private void Back_Click1(object sender, RoutedEventArgs e)
         {
-            RadioButton Check1 = new RadioButton();
+            MessageBox.Show("back");
+        }
+
+      
+        //Radiobutton 1//
+        public void AddCheck1()
+        {
+           
             Check1.Content = "Difficulty 1";
             Check1.FontSize = 15;
 
@@ -97,11 +121,24 @@ namespace Memory_Spel
             Grid.SetColumnSpan(Check1, 1);
             Grid.SetRowSpan(Check1, 1);
             grid.Children.Add(Check1);
+            Check1.Checked += Check1_Checked;
+
         }
 
-        private void AddCheck2()
+      
+
+        public void Check1_Checked(object sender, RoutedEventArgs e)
         {
-            RadioButton Check2 = new RadioButton();
+
+            labelenplaatjenieuw();
+        }
+
+
+
+        //Radiobutton 2//
+        public void AddCheck2()
+        {
+            
             Check2.Content = "Difficulty 2";
             Check2.FontSize = 15;
 
@@ -111,10 +148,26 @@ namespace Memory_Spel
             Grid.SetColumnSpan(Check2, 1);
             Grid.SetRowSpan(Check2, 1);
             grid.Children.Add(Check2);
+            Check2.Checked += Check2_Checked; ;
         }
-        private void AddCheck3()
+
+        public void Check2_Checked(object sender, RoutedEventArgs e)
         {
-            RadioButton Check3 = new RadioButton();
+          
+
+
+            labelenplaatjenieuw();
+
+
+
+        }
+
+
+
+        //Radiobutton 3//
+        public void AddCheck3()
+        {
+            
             Check3.Content = "Difficulty 3";
             Check3.FontSize = 15;
 
@@ -124,10 +177,18 @@ namespace Memory_Spel
             Grid.SetColumnSpan(Check3, 1);
             Grid.SetRowSpan(Check3, 1);
             grid.Children.Add(Check3);
+            Check3.Checked += Check3_Checked;
         }
-        private void AddCheck4()
+
+        private void Check3_Checked(object sender, RoutedEventArgs e)
         {
-            RadioButton Check4 = new RadioButton();
+            labelenplaatjenieuw();
+        }
+
+        //Radiobutton 4//
+        public void AddCheck4()
+        {
+            
             Check4.Content = "Difficulty 4";
             Check4.FontSize = 15;
 
@@ -137,11 +198,18 @@ namespace Memory_Spel
             Grid.SetColumnSpan(Check4, 1);
             Grid.SetRowSpan(Check4, 1);
             grid.Children.Add(Check4);
+            Check4.Checked += Check4_Checked;
         }
+
+        private void Check4_Checked(object sender, RoutedEventArgs e)
+        {
+            labelenplaatjenieuw();
+        }
+
+        //Name box 1//
         private void AddText1()
         {
             TextBox Text1 = new TextBox();
-            Text1.FontSize = 13;
 
 
             Grid.SetRow(Text1, 2);
@@ -150,7 +218,7 @@ namespace Memory_Spel
             Grid.SetRowSpan(Text1, 1);
             grid.Children.Add(Text1);
         }
-
+        //Name box 2//
         private void AddText2()
         {
             TextBox Text2 = new TextBox();
@@ -164,10 +232,11 @@ namespace Memory_Spel
             grid.Children.Add(Text2);
 
         }
+        //Label player//
         private void AddName1()
         {
             Label Name1 = new Label();
-            Name1.Content = "Naam speler : ";
+            Name1.Content = "Name Player 1 : ";
             Name1.FontSize = 13;
 
             Grid.SetRow(Name1, 2);
@@ -177,10 +246,11 @@ namespace Memory_Spel
             grid.Children.Add(Name1);
 
         }
+        //label player 2//
         private void AddName2()
         {
             Label Name2 = new Label();
-            Name2.Content = "Naam speler : ";
+            Name2.Content = "Name Player 2 : ";
             Name2.FontSize = 13;
 
             Grid.SetRow(Name2, 2);
@@ -188,6 +258,111 @@ namespace Memory_Spel
             Grid.SetColumnSpan(Name2, 1);
             Grid.SetRowSpan(Name2, 1);
             grid.Children.Add(Name2);
+        }
+        
+
+        public void labelenplaatjenieuw()
+        {
+            if (Check2.IsChecked == true)
+            {
+                
+                Image preview2 = new Image();
+                preview2.Source = new BitmapImage(new Uri("4x4preview.png", UriKind.Relative));
+                Grid.SetRow(preview2, 7);
+                Grid.SetColumn(preview2, 5);
+                Grid.SetColumnSpan(preview2, 7);
+                Grid.SetRowSpan(preview2, 7);
+                grid.Children.Remove(preview2);
+                grid.Children.Add(preview2);
+
+                size.Content = "4x4 + 30 seconds time limit";
+                size.FontSize = 12;
+                Grid.SetRow(size, 5);
+                Grid.SetColumn(size, 6);
+                Grid.SetColumnSpan(size, 7);
+                Grid.SetRowSpan(size, 1);
+                grid.Children.Remove(size);
+                grid.Children.Add(size);
+
+                return;
+
+            }
+            else if (Check1.IsChecked == true)
+            {
+                Image preview2 = new Image();
+                preview2.Source = new BitmapImage(new Uri("4x4preview.png", UriKind.Relative));
+                Grid.SetRow(preview2, 7);
+                Grid.SetColumn(preview2, 5);
+                Grid.SetColumnSpan(preview2, 7);
+                Grid.SetRowSpan(preview2, 7);
+                grid.Children.Remove(preview2);
+                grid.Children.Add(preview2);
+
+
+
+               
+                size.Content = "4x4 + No time limit";
+                size.FontSize = 12;
+                Grid.SetRow(size, 5);
+                Grid.SetColumn(size, 6);
+                Grid.SetColumnSpan(size, 7);
+                Grid.SetRowSpan(size, 1);
+                grid.Children.Remove(size);
+                grid.Children.Add(size); 
+                return;
+            }
+            else if (Check3.IsChecked == true)
+            {
+                Image preview2 = new Image();
+                preview2.Source = new BitmapImage(new Uri("4x4preview.png", UriKind.Relative));
+                Grid.SetRow(preview2, 7);
+                Grid.SetColumn(preview2, 5);
+                Grid.SetColumnSpan(preview2, 7);
+                Grid.SetRowSpan(preview2, 7);
+                grid.Children.Remove(preview2);
+                grid.Children.Add(preview2);
+
+
+
+
+                size.Content = "4x4 + 10 seconds time limit";
+                size.FontSize = 12;
+                Grid.SetRow(size, 5);
+                Grid.SetColumn(size, 6);
+                Grid.SetColumnSpan(size, 7);
+                Grid.SetRowSpan(size, 1);
+                grid.Children.Remove(size);
+                grid.Children.Add(size); ;
+                return;
+            }
+            else if (Check4.IsChecked == true)
+            {
+                Image preview2 = new Image();
+                preview2.Source = new BitmapImage(new Uri("4x4preview.png", UriKind.Relative));
+                Grid.SetRow(preview2, 7);
+                Grid.SetColumn(preview2, 5);
+                Grid.SetColumnSpan(preview2, 7);
+                Grid.SetRowSpan(preview2, 7);
+                grid.Children.Remove(preview2);
+                grid.Children.Add(preview2);
+
+
+
+
+
+                size.Content = "4x4 + 5 seconds time limit";
+                size.FontSize = 12;
+                Grid.SetRow(size, 5);
+                Grid.SetColumn(size, 6);
+                Grid.SetColumnSpan(size, 7);
+                Grid.SetRowSpan(size, 1);
+                grid.Children.Remove(size);
+                grid.Children.Add(size);
+                return;
+            }
+
+
+          
         }
     }
 }

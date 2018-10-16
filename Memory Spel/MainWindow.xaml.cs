@@ -32,5 +32,7 @@ namespace Memory_Spel
             InitializeComponent();
             grid = new NewGameClass(NewGameScherm, kolommen, rijen);
         }
+
+        
     }
 }

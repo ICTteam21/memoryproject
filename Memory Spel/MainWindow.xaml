@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:Memory_Spel"
         mc:Ignorable="d"
         Title="MainWindow" Height="504.231" Width="878.462">
-    <Grid x:Name="NewGameScherm" Margin="0,0,2,0">
 
-    </Grid>
+    <Grid Background="Aqua" x:Name="NewGameScherm" Margin="0,0,2,0"/>
 </Window>
