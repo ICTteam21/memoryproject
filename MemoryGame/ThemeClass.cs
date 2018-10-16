@@ -13,11 +13,13 @@ namespace MemoryGame
 {
     class ThemaClass
     {
+        private Themas window;
         private Grid grid;
-
+        private string thema;
         //Het hele scherm
-        public ThemaClass(Grid grid, int kolommen, int rijen)
+        public ThemaClass(Themas window, Grid grid, int kolommen, int rijen)
         {
+            this.window = window;
             this.grid = grid;
             InitializeMain(kolommen, rijen);
             Title();
@@ -60,13 +62,15 @@ namespace MemoryGame
             disney.Content = "Disney";
             disney.FontSize = 20;
             //startgame.HorizontalAlignment = HorizontalAlignment.Center;
-
+            
             Grid.SetRow(disney, 3);
             Grid.SetColumn(disney, 1);
             Grid.SetColumnSpan(disney, 3);
             Grid.SetRowSpan(disney, 2);
             grid.Children.Add(disney);
             disney.Click += new RoutedEventHandler(button_click);
+            disney.Click += new RoutedEventHandler(Newgame_click);
+           
         }
 
         //Tweede thema
@@ -76,18 +80,19 @@ namespace MemoryGame
             gebouwen.Content = "Gebouwen";
             gebouwen.FontSize = 20;
             //startgame.HorizontalAlignment = HorizontalAlignment.Center;
-
+ 
             Grid.SetRow(gebouwen, 6);
             Grid.SetColumn(gebouwen, 1);
             Grid.SetColumnSpan(gebouwen, 3);
             Grid.SetRowSpan(gebouwen, 2);
             grid.Children.Add(gebouwen);
             gebouwen.Click += new RoutedEventHandler(button_click);
+            gebouwen.Click += new RoutedEventHandler(Newgame_click);
         }
 
         //Derde Thema
-        private void Theme3()
-        {
+        private void Theme3(object sender, RoutedEventArgs e)
+        {   
             Button logo = new Button();
             logo.Content = "Logo's";
             logo.FontSize = 20;
@@ -99,47 +104,21 @@ namespace MemoryGame
             Grid.SetRowSpan(logo, 2);
             grid.Children.Add(logo);
             logo.Click += new RoutedEventHandler(button_click);
+            logo.Click += new RoutedEventHandler(Newgame_click);
         }
 
-        //Disney Thema laden
-        public void LoadDisneyTheme(object sender, RoutedEventArgs e)
+        public void Newgame_click(object sender, RoutedEventArgs e)
         {
-            List<BitmapImage> disneykaartjes = new List<BitmapImage>();
-
-            for (int i = 1; i < 9; i++)
-            {
-                for (int o = 1; o < 3; i++)
-                {
-                    //NIET AF
-                    var logo = new BitmapImage();
-                    logo.UriSource = new Uri("D:/stuff/school/Memory Project/Plaatjes/Disney/disney" + i + "-" + o + ".png");
-                    disneykaartjes.Add(logo);   
-                }
-            }
-        }
-        //Gebouwen Thema laden
-        private void LoadGebouwenTheme()
-        {
-            for (int i = 1; i < 9; i++)
-            {
-                for (int o = 1; o < 3; i++)
-                {
-                    //Card.Open(new Uri(@"D:\stuff\school\Memory Project\Plaatjes\Disney\gebouw" + i + "-" + o + ".jpg"));
-                }
-            }
+            thema = sender.ToString();
+            var newForm = new GameWindow(thema); //create your new form.
+            newForm.Show(); //show the new form.
+            window.Close();  //only if you want to close the current form.
         }
 
-        ////Logo thema laden
-        //private void LoadLogoTheme()
-        //{
-        //    for (int i = 1; i < 9; i++)
-        //    {
-        //        for (int o = 1; o < 3; i++)
-        //        {
-        //            Card.Open(new Uri(@"D:\stuff\school\Memory Project\Plaatjes\Disney\logo" + i + "-" + o + ".png"));
-        //        }
-        //    }
-        //}
+
+
+
+
 
         //Click geluid laden
         private void PlayClick()
@@ -182,5 +161,8 @@ namespace MemoryGame
         {
             PlayWow();
         }
+
+
+
     }
 }

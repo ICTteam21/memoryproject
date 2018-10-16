@@ -152,16 +152,14 @@ namespace MemoryGame
 
         public void Newgame_click(object sender, RoutedEventArgs e)
         {
-            var newForm = new GameWindow(); //create your new form.
+            var newForm = new Themas(); //create your new form.
             newForm.Show(); //show the new form.
             window.Close();   //only if you want to close the current form.
         }
 
         public void Loadgame_click(object sender, RoutedEventArgs e)
         {
-            var ThemaScherm = new Themas(); //create your new form.
-            ThemaScherm.Show(); //show the new form.
-            window.Close();
+
 
         }
 
