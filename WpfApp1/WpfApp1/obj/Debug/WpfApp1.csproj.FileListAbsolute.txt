@@ -1,0 +1,15 @@
+D:\C# programmeren\laadspel\WpfApp1\WpfApp1\bin\Debug\WpfApp1.exe.config
+D:\C# programmeren\laadspel\WpfApp1\WpfApp1\bin\Debug\WpfApp1.exe
+D:\C# programmeren\laadspel\WpfApp1\WpfApp1\bin\Debug\WpfApp1.pdb
+D:\C# programmeren\laadspel\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csprojAssemblyReference.cache
+D:\C# programmeren\laadspel\WpfApp1\WpfApp1\obj\Debug\MainWindow.g.cs
+D:\C# programmeren\laadspel\WpfApp1\WpfApp1\obj\Debug\App.g.cs
+D:\C# programmeren\laadspel\WpfApp1\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.cache
+D:\C# programmeren\laadspel\WpfApp1\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.lref
+D:\C# programmeren\laadspel\WpfApp1\WpfApp1\obj\Debug\MainWindow.baml
+D:\C# programmeren\laadspel\WpfApp1\WpfApp1\obj\Debug\WpfApp1.g.resources
+D:\C# programmeren\laadspel\WpfApp1\WpfApp1\obj\Debug\WpfApp1.Properties.Resources.resources
+D:\C# programmeren\laadspel\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.GenerateResource.cache
+D:\C# programmeren\laadspel\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.CoreCompileInputs.cache
+D:\C# programmeren\laadspel\WpfApp1\WpfApp1\obj\Debug\WpfApp1.exe
+D:\C# programmeren\laadspel\WpfApp1\WpfApp1\obj\Debug\WpfApp1.pdb
