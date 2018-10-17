@@ -34,6 +34,8 @@ namespace MemoryGame
         int aandebeurt = 1;
         int P1Points = 0;
         int P2Points = 0;
+        private string themanaamsave;
+        private int fileCount;
 
         public GameGrid(Grid grid, int cols, int rows, int thema)
         {
