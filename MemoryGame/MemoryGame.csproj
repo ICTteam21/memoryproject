@@ -122,7 +122,10 @@
   <ItemGroup>
     <Resource Include="Images\background.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Textdocs\NewGame\" />
+    <Folder Include="Textdocs\SavedGames\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\logos\logo1.png" />
     <Resource Include="Images\logos\logo2.png" />

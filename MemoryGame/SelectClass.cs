@@ -15,10 +15,14 @@ namespace MemoryGame
         
         private SelectOptions window;
 
-        RadioButton Check4 = new RadioButton();
+        
         RadioButton Check1 = new RadioButton();
         RadioButton Check2 = new RadioButton();
         RadioButton Check3 = new RadioButton();
+        RadioButton Check4 = new RadioButton();
+        TextBox Text1 = new TextBox();
+        TextBox Text2 = new TextBox();
+
         Label size = new Label();
 
         public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen)
@@ -40,7 +44,7 @@ namespace MemoryGame
 
         }
 
-        private void InitializeMain(int kolommen, int rijen)
+        public void InitializeMain(int kolommen, int rijen)
         {
             for (int i = 0; i < rijen; i++)
             {
@@ -53,7 +57,7 @@ namespace MemoryGame
         }
 
         //Title//
-        private void AddTitle2()
+        public void AddTitle2()
         {
             Label title = new Label();
             title.Content = "New Game Selector";
@@ -66,8 +70,9 @@ namespace MemoryGame
             Grid.SetRowSpan(title, 3);
             grid.Children.Add(title);
         }
+
         //Continue button//
-        private void AddContinue()
+        public void AddContinue()
         {
             Button Continue = new Button();
             Continue.Content = "Continue";
@@ -83,15 +88,16 @@ namespace MemoryGame
             Continue.Click += Continue_Click;
         }
 
-        private void Continue_Click(object sender, RoutedEventArgs e)
+        public void Continue_Click(object sender, RoutedEventArgs e)
         {
+            Transferdata();
             var Themes = new Themas(); //create your new form.
             Themes.Show(); //show the new form.
             window.Close();
         }
 
         //Back button// 
-        private void AddBack()
+        public void AddBack()
         {
             Button Back = new Button();
             Back.Content = "Back";
@@ -106,7 +112,7 @@ namespace MemoryGame
             Back.Click += Back_Click1;
                 }
 
-        private void Back_Click1(object sender, RoutedEventArgs e)
+        public void Back_Click1(object sender, RoutedEventArgs e)
         {
             var SelectScherm = new MainMenuWindow(); //create your new form.
             SelectScherm.Show(); //show the new form.
@@ -116,10 +122,8 @@ namespace MemoryGame
         //Radiobutton 1//
         public void AddCheck1()
         {
-           
             Check1.Content = "Difficulty 1";
             Check1.FontSize = 15;
-
 
             Grid.SetRow(Check1, 7);
             Grid.SetColumn(Check1, 1);
@@ -158,13 +162,7 @@ namespace MemoryGame
 
         public void Check2_Checked(object sender, RoutedEventArgs e)
         {
-          
-
-
             labelenplaatjenieuw();
-
-
-
         }
 
 
@@ -185,7 +183,7 @@ namespace MemoryGame
             Check3.Checked += Check3_Checked;
         }
 
-        private void Check3_Checked(object sender, RoutedEventArgs e)
+        public void Check3_Checked(object sender, RoutedEventArgs e)
         {
             labelenplaatjenieuw();
         }
@@ -206,16 +204,16 @@ namespace MemoryGame
             Check4.Checked += Check4_Checked;
         }
 
-        private void Check4_Checked(object sender, RoutedEventArgs e)
+        public void Check4_Checked(object sender, RoutedEventArgs e)
         {
             labelenplaatjenieuw();
         }
 
         //Name box 1//
-        private void AddText1()
+        public void AddText1()
         {
-            TextBox Text1 = new TextBox();
-
+            
+            Text2.FontSize = 13;
 
             Grid.SetRow(Text1, 3);
             Grid.SetColumn(Text1, 2);
@@ -225,9 +223,9 @@ namespace MemoryGame
            
         }
         //Name box 2//
-        private void AddText2()
+        public void AddText2()
         {
-            TextBox Text2 = new TextBox();
+            
             Text2.FontSize = 13;
 
 
@@ -239,7 +237,7 @@ namespace MemoryGame
 
         }
         //Label player//
-        private void AddName1()
+        public void AddName1()
         {
             Label Name1 = new Label();
             Name1.Content = "Name Player 1 : ";
@@ -253,7 +251,7 @@ namespace MemoryGame
 
         }
         //label player 2//
-        private void AddName2()
+        public void AddName2()
         {
             Label Name2 = new Label();
             Name2.Content = "Name Player 2 : ";
@@ -320,7 +318,7 @@ namespace MemoryGame
 
                 // label 3//
                 grid.Children.Remove(size);
-                grid.Children.Add(size); ;
+                grid.Children.Add(size); 
                 return;
             }
             else if (Check4.IsChecked == true)
@@ -339,5 +337,13 @@ namespace MemoryGame
 
           
         }
+
+        public void Transferdata()
+        {
+            string[] lines = { Text1.Text, Text2.Text, "Third line" };
+            System.IO.File.WriteAllLines(@"C:\Users\Silentjeerd\Desktop\Memory Game Git\memoryproject\MemoryGame\Textdocs\NewGame\New.txt", lines);
+            
+        }
+
     }
 }
