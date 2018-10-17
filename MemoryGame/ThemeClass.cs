@@ -107,22 +107,22 @@ namespace MemoryGame
 
 
 
-        private int i;
+        private string n;
 
         public void btnSelectThema(object sender, RoutedEventArgs e)
         {
             
             if (sender == logo)
             {
-                i = 1;
+                n = "logos";
             }else if (sender == gebouwen)
             {
-                i = 2; 
+                n = "gebouwen"; 
             }else if(sender == disney)
             {
-                i = 3;
+                n = "disney";
             }
-            var newForm = new GameWindow( i ); //create your new form.
+            var newForm = new GameWindow( n ); //create your new form.
             newForm.Show(); //show the new form.
             window.Close();  //only if you want to close the current form.
 

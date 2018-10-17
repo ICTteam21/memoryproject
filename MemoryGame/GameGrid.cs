@@ -28,8 +28,13 @@ namespace MemoryGame
         Button SaveGameandClose = new Button();
 
         
-        string Player1Name = File.ReadLines(@"C:\Users\Silentjeerd\Desktop\Memory Game Git\memoryproject\MemoryGame\Textdocs\NewGame\New.txt").Skip(0).Take(1).First();
-        string Player2Name = File.ReadLines(@"C:\Users\Silentjeerd\Desktop\Memory Game Git\memoryproject\MemoryGame\Textdocs\NewGame\New.txt").Skip(1).Take(1).First();
+        //string Player1Name = File.ReadLines(@"Textdocs/New.txt").Skip(0).Take(1).First();
+        //string Player2Name = File.ReadLines(@"Textdocs/New.txt").Skip(1).Take(1).First();
+
+        string Player1Name = "Test subject 1";
+        string Player2Name = "Test subject 2";
+
+
 
         int aandebeurt = 1;
         int P1Points = 0;
@@ -37,7 +42,7 @@ namespace MemoryGame
         private string themanaamsave;
         private int fileCount;
 
-        public GameGrid(Grid grid, int cols, int rows, int thema)
+        public GameGrid(Grid grid, int cols, int rows, string thema)
         {
             this.grid = grid;
             InitializeGameGrid(cols, rows);
@@ -46,8 +51,8 @@ namespace MemoryGame
             Playerstats();
             Savegameandclosebutton();
 
-            fileCount = (from file in Directory.EnumerateFiles(@"C:\Users\Silentjeerd\Desktop\Memory Game Git\memoryproject\MemoryGame\Textdocs\SavedGames", "*", SearchOption.AllDirectories)
-                         select file).Count();
+            //fileCount = (from file in Directory.EnumerateFiles("Textdocs/SavedGames", "*", SearchOption.AllDirectories)
+            //             select file).Count();
 
 
         }
@@ -68,57 +73,75 @@ namespace MemoryGame
         /// Laad de images op een random manier in een list.
         /// </summary>
         /// <returns></returns>
-        private List<ImageSource> GetImageListLogos()
+        /// 
+        private List<ImageSource> GetImagesList(string thema)
         {
-            List<ImageSource> imagesLogos = new List<ImageSource>();
+
+
+            List<ImageSource> imagesList = new List<ImageSource>();
             for (int i = 0; i < 16; i++)
             {
                 int imageNr = i % 8 + 1;
-                ImageSource source = new BitmapImage(new Uri("Images/logos/logo" + imageNr + ".png", UriKind.Relative));
-                imagesLogos.Add(source);
+                ImageSource source = new BitmapImage(new Uri("Images/"+ thema + imageNr + ".png", UriKind.Relative));
+                imagesList.Add(source);
             }
 
-            imagesLogos.Shuffle();
-            return imagesLogos;
-        }
-        private List<ImageSource> GetImageListGebouwen()
-        {
-            List<ImageSource> imagesGebouwen = new List<ImageSource>();
-            for (int i = 0; i < 16; i++)
-            {
-                int imageNr = i % 8 + 1;
-                ImageSource source = new BitmapImage(new Uri("Images/gebouwen/" + imageNr + "-1.jpg", UriKind.Relative));
-                imagesGebouwen.Add(source);
-            }
+            imagesList.Shuffle();
+            return imagesList;
 
-            imagesGebouwen.Shuffle();
-            return imagesGebouwen;
-        }
-        private List<ImageSource> GetImageListDisney()
-        {
-            List<ImageSource> imagesGebouwen = new List<ImageSource>();
-            for (int i = 0; i < 16; i++)
-            {
-                int imageNr = i % 8 + 1;
-                ImageSource source = new BitmapImage(new Uri("Images/disney/" + imageNr + "-1.png", UriKind.Relative));
-                imagesGebouwen.Add(source);
-            }
 
-            imagesGebouwen.Shuffle();
-            return imagesGebouwen;
         }
+        //private List<ImageSource> GetImageListLogos()
+        //{
+        //    List<ImageSource> imagesLogos = new List<ImageSource>();
+        //    for (int i = 0; i < 16; i++)
+        //    {
+        //        int imageNr = i % 8 + 1;
+        //        ImageSource source = new BitmapImage(new Uri("Images/logos/logo" + imageNr + ".png", UriKind.Relative));
+        //        imagesLogos.Add(source);
+        //    }
+
+        //    imagesLogos.Shuffle();
+        //    return imagesLogos;
+        //}
+        //private List<ImageSource> GetImageListGebouwen()
+        //{
+        //    List<ImageSource> imagesGebouwen = new List<ImageSource>();
+        //    for (int i = 0; i < 16; i++)
+        //    {
+        //        int imageNr = i % 8 + 1;
+        //        ImageSource source = new BitmapImage(new Uri("Images/gebouwen/" + imageNr + "-1.jpg", UriKind.Relative));
+        //        imagesGebouwen.Add(source);
+        //    }
+
+        //    imagesGebouwen.Shuffle();
+        //    return imagesGebouwen;
+        //}
+        //private List<ImageSource> GetImageListDisney()
+        //{
+        //    List<ImageSource> imagesGebouwen = new List<ImageSource>();
+        //    for (int i = 0; i < 16; i++)
+        //    {
+        //        int imageNr = i % 8 + 1;
+        //        ImageSource source = new BitmapImage(new Uri("Images/disney/" + imageNr + "-1.png", UriKind.Relative));
+        //        imagesGebouwen.Add(source);
+        //    }
+
+        //    imagesGebouwen.Shuffle();
+        //    return imagesGebouwen;
+        //}
         /// <summary>
         /// Voegt de plaatjes aan de grid 
         /// </summary>
         /// <param name="rows"></param>
         /// <param name="cols"></param>
         
-        private void AddImages(int thema, int rows, int cols)
+        private void AddImages(string thema, int rows, int cols)
         {
+            List<ImageSource> images = GetImagesList(thema);
 
-            if (thema.Equals(1))
+            if (thema.Equals("logos"))
             {
-                List<ImageSource> images = GetImageListLogos();
                 themanaamsave = "Logo's";
                 for (int row = 0; row < rows; row++)
                 {
@@ -137,9 +160,8 @@ namespace MemoryGame
                     }
                 }
             }
-            else if (thema.Equals(2))
+            else if (thema.Equals("gebouwen"))
             {
-                List<ImageSource> images = GetImageListGebouwen();
                 themanaamsave = "Gebouwen";
                 for (int row = 0; row < rows; row++)
                 {
@@ -158,9 +180,9 @@ namespace MemoryGame
                     }
                 }
             }
-            else if (thema.Equals(3))
+            else if (thema.Equals("disney"))
             {
-                List<ImageSource> images = GetImageListDisney();
+
                 themanaamsave = "Disney";
                 for (int row = 0; row < rows; row++)
                 {
@@ -385,7 +407,7 @@ namespace MemoryGame
 
             string[] lines = { Convert.ToString(aandebeurt), Player1Name, Convert.ToString(P1Points) , Player2Name, Convert.ToString(P2Points)};
             string naam = (fileCount + 1) +" "+ themanaamsave +  " - " +  "P1 " + Player1Name + " Points-" + Convert.ToString(P1Points) + " P2 " + Player2Name + " Points-" + Convert.ToString(P2Points) + " Turn-" + naamaandebeurt + ".txt" ;
-            System.IO.File.WriteAllLines(@"C:\Users\Silentjeerd\Desktop\Memory Game Git\memoryproject\MemoryGame\Textdocs\SavedGames\" + naam , lines);
+            System.IO.File.WriteAllLines(@"Textdocs\SavedGames\" + naam , lines);
 
 
         }
