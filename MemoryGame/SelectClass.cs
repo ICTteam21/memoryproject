@@ -340,8 +340,14 @@ namespace MemoryGame
 
         public void Transferdata()
         {
-            string[] lines = { Text1.Text, Text2.Text, "Third line" };
-            System.IO.File.WriteAllLines(@"C:\Users\Silentjeerd\Desktop\Memory Game Git\memoryproject\MemoryGame\Textdocs\NewGame\New.txt", lines);
+            string[] lines = { Text1.Text, Text2.Text };
+            string pathing;
+            string path2;
+            pathing = System.AppDomain.CurrentDomain.BaseDirectory;
+            path2 = pathing.Replace("bin", "Textdocs");
+            path2 = path2.Replace("Debug", "NewGame");
+
+            System.IO.File.WriteAllLines(path2 + "New.txt", lines);
             
         }
 
