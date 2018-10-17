@@ -15,7 +15,11 @@ namespace MemoryGame
     {
         private Themas window;
         private Grid grid;
-        //Het hele scherm
+        Button logo = new Button();
+        Button gebouwen = new Button();
+        Button disney = new Button();
+
+
         public ThemaClass(Themas window, Grid grid, int kolommen, int rijen)
         {
             this.window = window;
@@ -42,10 +46,12 @@ namespace MemoryGame
         //Titel bovenaan
         private void Title()
         {
-            Label title = new Label();
-            title.Content = "Theme Selector";
-            title.FontSize = 40;
-            title.HorizontalAlignment = HorizontalAlignment.Center;
+            Label title = new Label
+            {
+                Content = "Theme Selector",
+                FontSize = 40,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
 
             Grid.SetRow(title, 0);
             Grid.SetColumn(title, 1);
@@ -54,78 +60,74 @@ namespace MemoryGame
             grid.Children.Add(title);
         }
 
-        //Eerste thema
+
         private void Theme1()
         {
-            Button disney = new Button();
             disney.Content = "Disney";
             disney.FontSize = 20;
-            //startgame.HorizontalAlignment = HorizontalAlignment.Center;
-            
+
             Grid.SetRow(disney, 3);
             Grid.SetColumn(disney, 1);
             Grid.SetColumnSpan(disney, 3);
             Grid.SetRowSpan(disney, 2);
             grid.Children.Add(disney);
             disney.Click += new RoutedEventHandler(button_click);
-            disney.Click += new RoutedEventHandler(Disney_click);
-           
+            disney.Click += btnSelectThema;
+
         }
 
-        //Tweede thema
+
         private void Theme2()
         {
-            Button gebouwen = new Button();
             gebouwen.Content = "Gebouwen";
             gebouwen.FontSize = 20;
-            //startgame.HorizontalAlignment = HorizontalAlignment.Center;
- 
             Grid.SetRow(gebouwen, 6);
             Grid.SetColumn(gebouwen, 1);
             Grid.SetColumnSpan(gebouwen, 3);
             Grid.SetRowSpan(gebouwen, 2);
             grid.Children.Add(gebouwen);
             gebouwen.Click += new RoutedEventHandler(button_click);
-            gebouwen.Click += new RoutedEventHandler(Gebouwen_click);
+            gebouwen.Click += btnSelectThema;
         }
 
-        //Derde Thema
+
         private void Theme3()
-        {   
-            Button logo = new Button();
+        {
             logo.Content = "Logo's";
             logo.FontSize = 20;
-            //startgame.HorizontalAlignment = HorizontalAlignment.Center;
-
             Grid.SetRow(logo, 9);
             Grid.SetColumn(logo, 1);
             Grid.SetColumnSpan(logo, 3);
             Grid.SetRowSpan(logo, 2);
             grid.Children.Add(logo);
             logo.Click += new RoutedEventHandler(button_click);
-            logo.Click += new RoutedEventHandler(Logo_click);
+            logo.Click += btnSelectThema;
         }
-        public void Logo_click(object sender, RoutedEventArgs e)
-        {
 
-            var newForm = new GameWindow("1"); //create your new form.
-            newForm.Show(); //show the new form.
-            window.Close();  //only if you want to close the current form.
-        }
-        public void Gebouwen_click(object sender, RoutedEventArgs e)
+
+
+
+        private int i;
+
+        public void btnSelectThema(object sender, RoutedEventArgs e)
         {
             
-            var newForm = new GameWindow("2"); //create your new form.
+            if (sender == logo)
+            {
+                i = 1;
+            }else if (sender == gebouwen)
+            {
+                i = 2; 
+            }else if(sender == disney)
+            {
+                i = 3;
+            }
+            var newForm = new GameWindow( i ); //create your new form.
             newForm.Show(); //show the new form.
             window.Close();  //only if you want to close the current form.
-        }
-        public void Disney_click(object sender, RoutedEventArgs e)
-        {
 
-            var newForm = new GameWindow("3"); //create your new form.
-            newForm.Show(); //show the new form.
-            window.Close();  //only if you want to close the current form.
         }
+
 
 
 

@@ -18,6 +18,7 @@ namespace MemoryGame
     class GameGrid
     {
         private Grid grid;
+        private bool IsTaskRunning = false;
         Label Player1name = new Label();
         Label Score1 = new Label();
         Label Player1Score = new Label();
@@ -34,19 +35,7 @@ namespace MemoryGame
         int P1Points = 0;
         int P2Points = 0;
 
-        private int pairs = 0;
-        private int kliks = 0;
-        private string CardOne;
-        private string CardTwo;
-        private string xyOne;
-        private string xyTwo;
-        private Image cardA;
-        private Image cardB;
-        private int fileCount;
-        private string themanaamsave;
-
-
-        public GameGrid(Grid grid, int cols, int rows, string thema)
+        public GameGrid(Grid grid, int cols, int rows, int thema)
         {
             this.grid = grid;
             InitializeGameGrid(cols, rows);
@@ -72,23 +61,7 @@ namespace MemoryGame
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
             }
         }
-        /// <summary>
-        /// Titlenaam toevoegen aan deze component
-        /// </summary>
-        private void AddLabel()
-        {
-            Label title = new Label
-            {
-                Content = "Memory",
-                FontFamily = new FontFamily("Impact"),
-                FontSize = 40,
-                HorizontalAlignment = HorizontalAlignment.Center
-            };
 
-            Grid.SetColumn(title, 6);
-            Grid.SetRow(title, 5);
-            grid.Children.Add(title);
-        }
         /// <summary>
         /// Laad de images op een random manier in een list.
         /// </summary>
@@ -106,7 +79,6 @@ namespace MemoryGame
             imagesLogos.Shuffle();
             return imagesLogos;
         }
-
         private List<ImageSource> GetImageListGebouwen()
         {
             List<ImageSource> imagesGebouwen = new List<ImageSource>();
@@ -138,10 +110,11 @@ namespace MemoryGame
         /// </summary>
         /// <param name="rows"></param>
         /// <param name="cols"></param>
-
-        private void AddImages(string thema, int rows, int cols)
+        
+        private void AddImages(int thema, int rows, int cols)
         {
-            if (thema == "1")
+
+            if (thema.Equals(1))
             {
                 List<ImageSource> images = GetImageListLogos();
                 themanaamsave = "Logo's";
@@ -161,7 +134,8 @@ namespace MemoryGame
                         grid.Children.Add(backgroudImage);
                     }
                 }
-            }else if (thema == "2")
+            }
+            else if (thema.Equals(2))
             {
                 List<ImageSource> images = GetImageListGebouwen();
                 themanaamsave = "Gebouwen";
@@ -181,7 +155,8 @@ namespace MemoryGame
                         grid.Children.Add(backgroudImage);
                     }
                 }
-            }else if ( thema == "3")
+            }
+            else if (thema.Equals(3))
             {
                 List<ImageSource> images = GetImageListDisney();
                 themanaamsave = "Disney";
@@ -202,49 +177,57 @@ namespace MemoryGame
                     }
                 }
             }
+
         }
+
+
         /// <summary>
         /// Is de functie die bepaald wat er gebeurt als je op een kaart klikt
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-
-
+        private Image cardB;
+        private Image cardA;
+        private string xyTwo;
+        private string xyOne;
+        private string CardTwo;
+        private string CardOne;
+        private int pairs = 0;
+  
         private void CardClick(object sender, MouseButtonEventArgs e)
         {
             var element = (UIElement)e.Source;
             Image card = (Image)sender;
             ImageSource back = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
             ImageSource front = (ImageSource)card.Tag;
-            card.Source = front;
 
-            kliks++;
-            if (kliks.Equals(1))
+
+            if(IsTaskRunning == false)
             {
-                CardOne = Convert.ToString(card.Tag);
-                int xOne = Grid.GetColumn(element);
-                int yOne = Grid.GetRow(element);
-                xyOne = Convert.ToString(xOne) + Convert.ToString(yOne);
-                cardA = (Image)sender;
-                
+                if (cardA == null)
+                {
+
+                    CardOne = Convert.ToString(card.Tag);
+                    int xOne = Grid.GetColumn(element);
+                    int yOne = Grid.GetRow(element);
+                    xyOne = Convert.ToString(xOne) + Convert.ToString(yOne);
+                    cardA = (Image)sender;
+                    card.Source = front;
+                }
+                else if (cardB == null)
+                {
+
+                    CardTwo = Convert.ToString(card.Tag);
+                    int xTwo = Grid.GetColumn(element);
+                    int yTwo = Grid.GetRow(element);
+                    xyTwo = Convert.ToString(xTwo) + Convert.ToString(yTwo);
+                    cardB = (Image)sender;
+                    card.Source = front;
+                    CheckCards(CardOne, CardTwo, xyOne, xyTwo);
+
+                }
             }
-            else if (kliks.Equals(2) )
-            {
-
-                CardTwo = Convert.ToString(card.Tag);
-                int xTwo = Grid.GetColumn(element);
-                int yTwo = Grid.GetRow(element);
-                xyTwo = Convert.ToString(xTwo) + Convert.ToString(yTwo);
-                cardB = (Image)sender;
-
-                kliks = 0;
-                
-                CheckCards(CardOne, CardTwo, xyOne, xyTwo);
-                
-            }
-
-
         }
 
         /// <summary>
@@ -261,10 +244,10 @@ namespace MemoryGame
         private async void CheckCards(string tag1, string tag2, string pos1, string pos2)
         {
             ImageSource back = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
-
+            IsTaskRunning = true;
             await Task.Delay(300);
 
-            if (tag1.Equals(tag2) && !pos1.Equals(pos2))
+            if (tag1.Equals(tag2) && !pos1.Equals(pos2)) // win 
             {
 
                 cardA.Source = null;
@@ -281,10 +264,10 @@ namespace MemoryGame
                     P2Points++;
                     Player2Score.Content = P2Points;
                 }
-
+                
 
             }
-            else if (!tag1.Equals(tag2))
+            else if (!tag1.Equals(tag2)) // lose
             {
 
                 cardA.Source = back;
@@ -309,7 +292,9 @@ namespace MemoryGame
                 cardA.Source = back;
             }
 
-            
+            cardA = null;
+            cardB = null;
+            IsTaskRunning = false;
         }
 
         public void Playerstats()
