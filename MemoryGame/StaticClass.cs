@@ -31,16 +31,5 @@ namespace MemoryGame
                 list[n] = value;
             }
         }
-
-        private static System.Timers.Timer aTimer;
-
-        private static void SetTimer()
-        {
-            aTimer = new System.Timers.Timer(2000);
-
-
-        }
-
-
     }
 }
