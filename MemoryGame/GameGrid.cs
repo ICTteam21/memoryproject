@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Security.Cryptography;
 using System.Threading;
 using System.IO;
-
+using System.Reflection;
 
 namespace MemoryGame
 {
@@ -27,20 +27,18 @@ namespace MemoryGame
         Label Player2Score = new Label();
         Button SaveGameandClose = new Button();
 
-        
-        //string Player1Name = File.ReadLines(@"Textdocs/New.txt").Skip(0).Take(1).First();
-        //string Player2Name = File.ReadLines(@"Textdocs/New.txt").Skip(1).Take(1).First();
 
-        string Player1Name = "Test subject 1";
-        string Player2Name = "Test subject 2";
-
-
+        string Player1Name; 
+        string Player2Name; 
 
         int aandebeurt = 1;
         int P1Points = 0;
         int P2Points = 0;
         private string themanaamsave;
         private int fileCount;
+        string pathing;
+        string path2;
+        string path3;
 
         public GameGrid(Grid grid, int cols, int rows, string thema)
         {
@@ -48,14 +46,32 @@ namespace MemoryGame
             InitializeGameGrid(cols, rows);
 
             AddImages(thema, cols, rows);
+            paaaaaaad();
             Playerstats();
             Savegameandclosebutton();
+            
 
-            //fileCount = (from file in Directory.EnumerateFiles("Textdocs/SavedGames", "*", SearchOption.AllDirectories)
-            //             select file).Count();
+            fileCount = (from file in Directory.EnumerateFiles(path2, "*", SearchOption.AllDirectories)
+                         select file).Count();
 
 
         }
+
+        public void paaaaaaad()
+        {
+            pathing = System.AppDomain.CurrentDomain.BaseDirectory;
+            path2 = pathing.Replace("bin","Textdocs");
+            path2 = path2.Replace("Debug", "NewGame");
+
+            path3 = pathing.Replace("bin","Textdocs");
+            path3 = path3.Replace("Debug", "SavedGames");
+
+            Player1Name = File.ReadLines(path2 + "New.txt").Skip(0).Take(1).First();
+            Player2Name = File.ReadLines(path2 + "New.txt").Skip(1).Take(1).First();
+        }
+        
+
+
 
         private void InitializeGameGrid(int cols, int rows)
         {
@@ -405,9 +421,9 @@ namespace MemoryGame
 
 
 
-            string[] lines = { Convert.ToString(aandebeurt), Player1Name, Convert.ToString(P1Points) , Player2Name, Convert.ToString(P2Points)};
-            string naam = (fileCount + 1) +" "+ themanaamsave +  " - " +  "P1 " + Player1Name + " Points-" + Convert.ToString(P1Points) + " P2 " + Player2Name + " Points-" + Convert.ToString(P2Points) + " Turn-" + naamaandebeurt + ".txt" ;
-            System.IO.File.WriteAllLines(@"Textdocs\SavedGames\" + naam , lines);
+            string[] lines = { Convert.ToString(aandebeurt), Player1Name, Convert.ToString(P1Points), Player2Name, Convert.ToString(P2Points) };
+            string naam = (fileCount + 1) + " " + themanaamsave + " - " + "P1 " + Player1Name + " Points-" + Convert.ToString(P1Points) + " P2 " + Player2Name + " Points-" + Convert.ToString(P2Points) + " Turn-" + naamaandebeurt + ".txt";
+            System.IO.File.WriteAllLines(path3 + naam, lines);
 
 
         }
