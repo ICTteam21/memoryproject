@@ -23,10 +23,10 @@ namespace MemoryGame
         private const int kolommen = 9;
         private const int rijen = 20;
 
-        public SelectOptions()
+        public SelectOptions(int wat)
         {
             InitializeComponent();
-            grid = new SelectClass(this, SelectOpties ,kolommen , rijen);
+            grid = new SelectClass(this, SelectOpties ,kolommen , rijen, wat);
         }
     }
 }

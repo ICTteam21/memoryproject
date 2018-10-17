@@ -15,6 +15,7 @@ namespace MemoryGame
     {
         private MainMenuWindow window;
         private Grid grid;
+        Button newgame = new Button();
 
         public object Children { get; internal set; }
 
@@ -74,12 +75,11 @@ namespace MemoryGame
 
         public void AddNewGame()
         {
-            Button newgame = new Button
-            {
-                Content = "New Game",
-                FontSize = 20,
-                Background = Brushes.CadetBlue
-            };
+            
+            
+            newgame.Content = "New Game";
+            newgame.FontSize = 20;
+            newgame.Background = Brushes.CadetBlue;
 
             Grid.SetRow(newgame, 3);
             Grid.SetColumn(newgame, 1);
@@ -90,6 +90,42 @@ namespace MemoryGame
             newgame.Click += new RoutedEventHandler(Newgame_click);
 
         }
+        public void AddNewGame2()
+        {
+            Button newgame2 = new Button();
+            newgame2.Content = "2 Player";
+            newgame2.FontSize = 20;
+            newgame2.Background = Brushes.CadetBlue;
+
+            Grid.SetRow(newgame2, 3);
+            Grid.SetColumn(newgame2, 2);
+            Grid.SetColumnSpan(newgame2, 2);
+            Grid.SetRowSpan(newgame2, 2);
+            grid.Children.Add(newgame2);
+
+            newgame2.Click += new RoutedEventHandler(Newgame2_click);
+
+
+        }
+
+        public void AddNewGame1()
+        {
+            Button newgame1 = new Button();
+            newgame1.Content = "1 Player";
+            newgame1.FontSize = 20;
+            newgame1.Background = Brushes.CadetBlue;
+
+            Grid.SetRow(newgame1, 3);
+            Grid.SetColumn(newgame1, 1);
+            Grid.SetColumnSpan(newgame1, 1);
+            Grid.SetRowSpan(newgame1, 2);
+            grid.Children.Add(newgame1);
+
+            newgame1.Click += new RoutedEventHandler(Newgame1_click);
+
+
+        }
+
 
         public void AddLoadGame()
         {
@@ -152,7 +188,21 @@ namespace MemoryGame
 
         public void Newgame_click(object sender, RoutedEventArgs e)
         {
-            var SelectScherm = new SelectOptions(); //create your new form.
+            AddNewGame1();
+            AddNewGame2();
+        }
+
+        public void Newgame1_click(object sender, RoutedEventArgs e)
+        {
+            int wat = 1;
+            var SelectScherm = new SelectOptions(wat); //create your new form.
+            SelectScherm.Show(); //show the new form.
+            window.Close();
+        }
+        public void Newgame2_click(object sender, RoutedEventArgs e)
+        {
+            int wat = 2;
+            var SelectScherm = new SelectOptions(wat); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
         }

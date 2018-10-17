@@ -25,7 +25,7 @@ namespace MemoryGame
 
         Label size = new Label();
 
-        public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen)
+        public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen, int wat)
         {
             this.window = window;
             this.grid = grid;
@@ -37,10 +37,20 @@ namespace MemoryGame
             AddCheck2();
             AddCheck3();
             AddCheck4();
-            AddText1();
-            AddText2();
-            AddName1();
-            AddName2();
+            
+
+            if(wat == 1)
+            {
+                AddText1();
+                AddName1();
+            }
+            else
+            {
+                AddName1();
+                AddName2();
+                AddText1();
+                AddText2();
+            }
 
         }
 
