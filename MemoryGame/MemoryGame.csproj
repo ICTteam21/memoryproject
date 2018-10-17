@@ -127,50 +127,50 @@
     <Folder Include="Textdocs\SavedGames\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\logos\logo1.png" />
-    <Resource Include="Images\logos\logo2.png" />
-    <Resource Include="Images\logos\logo3.png" />
-    <Resource Include="Images\logos\logo4.png" />
-    <Resource Include="Images\logos\logo5.png" />
-    <Resource Include="Images\logos\logo6.png" />
-    <Resource Include="Images\logos\logo7.png" />
-    <Resource Include="Images\logos\logo8.png" />
+    <Resource Include="Images\logos\1.png" />
+    <Resource Include="Images\logos\2.png" />
+    <Resource Include="Images\logos\3.png" />
+    <Resource Include="Images\logos\4.png" />
+    <Resource Include="Images\logos\5.png" />
+    <Resource Include="Images\logos\6.png" />
+    <Resource Include="Images\logos\7.png" />
+    <Resource Include="Images\logos\8.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\gebouwen\1-1.jpg" />
+    <Content Include="Images\gebouwen\1.png" />
     <Resource Include="Images\gebouwen\1-2.jpg" />
     <Resource Include="Images\gebouwen\2-1.jpg" />
-    <Resource Include="Images\gebouwen\2-2.jpg" />
-    <Resource Include="Images\gebouwen\3-1.jpg" />
+    <Content Include="Images\gebouwen\2.png" />
+    <Content Include="Images\gebouwen\3.png" />
     <Resource Include="Images\gebouwen\3-2.jpg" />
-    <Resource Include="Images\gebouwen\4-1.jpg" />
+    <Content Include="Images\gebouwen\4.png" />
     <Resource Include="Images\gebouwen\4-2.jpg" />
-    <Resource Include="Images\gebouwen\5-1.jpg" />
+    <Content Include="Images\gebouwen\5.png" />
     <Resource Include="Images\gebouwen\5-2.jpg" />
     <Resource Include="Images\gebouwen\6-1.jpg" />
-    <Resource Include="Images\gebouwen\6-2.jpg" />
-    <Resource Include="Images\gebouwen\7-1.jpg" />
+    <Content Include="Images\gebouwen\6.png" />
+    <Content Include="Images\gebouwen\7.png" />
     <Resource Include="Images\gebouwen\7-2.jpg" />
     <Resource Include="Images\gebouwen\8-1.jpg" />
-    <Resource Include="Images\gebouwen\8-2.jpg" />
+    <Content Include="Images\gebouwen\8.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\disney\1-1.png" />
+    <Resource Include="Images\disney\1.png" />
     <Resource Include="Images\disney\1-2.png" />
     <Resource Include="Images\disney\2-1.png" />
-    <Resource Include="Images\disney\2-2.png" />
+    <Resource Include="Images\disney\2.png" />
     <Resource Include="Images\disney\3-1.png" />
-    <Resource Include="Images\disney\3-2.png" />
+    <Resource Include="Images\disney\3.png" />
     <Resource Include="Images\disney\4-1.png" />
-    <Resource Include="Images\disney\4-2.png" />
-    <Resource Include="Images\disney\5-1.png" />
+    <Resource Include="Images\disney\4.png" />
+    <Resource Include="Images\disney\5.png" />
     <Resource Include="Images\disney\5-2.png" />
-    <Resource Include="Images\disney\6-1.png" />
+    <Resource Include="Images\disney\6.png" />
     <Resource Include="Images\disney\6-2.png" />
     <Resource Include="Images\disney\7-1.png" />
-    <Resource Include="Images\disney\7-2.png" />
+    <Resource Include="Images\disney\7.png" />
     <Resource Include="Images\disney\8-1.png" />
-    <Resource Include="Images\disney\8-2.png" />
+    <Resource Include="Images\disney\8.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\4x4 preview.png" />

@@ -98,7 +98,7 @@ namespace MemoryGame
             for (int i = 0; i < 16; i++)
             {
                 int imageNr = i % 8 + 1;
-                ImageSource source = new BitmapImage(new Uri("Images/"+ thema + imageNr + ".png", UriKind.Relative));
+                ImageSource source = new BitmapImage(new Uri("Images/"+ thema +"/"+ imageNr + ".png", UriKind.Relative));
                 imagesList.Add(source);
             }
 
@@ -107,45 +107,7 @@ namespace MemoryGame
 
 
         }
-        //private List<ImageSource> GetImageListLogos()
-        //{
-        //    List<ImageSource> imagesLogos = new List<ImageSource>();
-        //    for (int i = 0; i < 16; i++)
-        //    {
-        //        int imageNr = i % 8 + 1;
-        //        ImageSource source = new BitmapImage(new Uri("Images/logos/logo" + imageNr + ".png", UriKind.Relative));
-        //        imagesLogos.Add(source);
-        //    }
 
-        //    imagesLogos.Shuffle();
-        //    return imagesLogos;
-        //}
-        //private List<ImageSource> GetImageListGebouwen()
-        //{
-        //    List<ImageSource> imagesGebouwen = new List<ImageSource>();
-        //    for (int i = 0; i < 16; i++)
-        //    {
-        //        int imageNr = i % 8 + 1;
-        //        ImageSource source = new BitmapImage(new Uri("Images/gebouwen/" + imageNr + "-1.jpg", UriKind.Relative));
-        //        imagesGebouwen.Add(source);
-        //    }
-
-        //    imagesGebouwen.Shuffle();
-        //    return imagesGebouwen;
-        //}
-        //private List<ImageSource> GetImageListDisney()
-        //{
-        //    List<ImageSource> imagesGebouwen = new List<ImageSource>();
-        //    for (int i = 0; i < 16; i++)
-        //    {
-        //        int imageNr = i % 8 + 1;
-        //        ImageSource source = new BitmapImage(new Uri("Images/disney/" + imageNr + "-1.png", UriKind.Relative));
-        //        imagesGebouwen.Add(source);
-        //    }
-
-        //    imagesGebouwen.Shuffle();
-        //    return imagesGebouwen;
-        //}
         /// <summary>
         /// Voegt de plaatjes aan de grid 
         /// </summary>
