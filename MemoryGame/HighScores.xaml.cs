@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace MemoryGame
 {
     /// <summary>
@@ -21,12 +22,26 @@ namespace MemoryGame
     {
         HighScoresClass grid;
         private const int kolommen = 9;
-        private const int rijen = 20;
+        private const int rijen = 9;
 
         public HighScores()
         {
             InitializeComponent();
             grid = new HighScoresClass(this, HighScoresScreen, kolommen, rijen);
+            
         }
+
+
+
+
+        
+
+
+
     }
+
+
+
+
+
 }
