@@ -102,7 +102,7 @@ namespace MemoryGame
                 imagesList.Add(source);
             }
 
-            imagesList.Shuffle();
+            //imagesList.Shuffle();
             return imagesList;
 
 
@@ -116,8 +116,11 @@ namespace MemoryGame
         
         private void AddImages(string thema, int rows, int cols)
         {
+            // get lists
             List<ImageSource> images = GetImagesList(thema);
 
+
+            // logic
             if (thema.Equals("logos"))
             {
                 themanaamsave = "Logo's";
@@ -189,12 +192,12 @@ namespace MemoryGame
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        private Image cardB;
-        private Image cardA;
+        private Image imgCardOne;
+        private Image imgCardTwo;
         private string xyTwo;
         private string xyOne;
-        private string CardTwo;
-        private string CardOne;
+        private string tagOne;
+        private string tagTwo;
         private int pairs = 0;
   
         private void CardClick(object sender, MouseButtonEventArgs e)
@@ -207,26 +210,24 @@ namespace MemoryGame
 
             if(IsTaskRunning == false)
             {
-                if (cardA == null)
+                if (imgCardOne == null)
                 {
-
-                    CardOne = Convert.ToString(card.Tag);
+                    imgCardOne = (Image)sender;
+                    tagOne = Convert.ToString(front);
                     int xOne = Grid.GetColumn(element);
                     int yOne = Grid.GetRow(element);
                     xyOne = Convert.ToString(xOne) + Convert.ToString(yOne);
-                    cardA = (Image)sender;
                     card.Source = front;
                 }
-                else if (cardB == null)
+                else if (imgCardTwo == null)
                 {
-
-                    CardTwo = Convert.ToString(card.Tag);
+                    imgCardTwo = (Image)sender;
+                    tagTwo = Convert.ToString(front);
                     int xTwo = Grid.GetColumn(element);
                     int yTwo = Grid.GetRow(element);
                     xyTwo = Convert.ToString(xTwo) + Convert.ToString(yTwo);
-                    cardB = (Image)sender;
                     card.Source = front;
-                    CheckCards(CardOne, CardTwo, xyOne, xyTwo);
+                    CheckCards(tagOne, tagTwo, xyOne, xyTwo);
 
                 }
             }
@@ -246,14 +247,16 @@ namespace MemoryGame
         private async void CheckCards(string tag1, string tag2, string pos1, string pos2)
         {
             ImageSource back = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
+            
             IsTaskRunning = true;
             await Task.Delay(300);
+            
 
-            if (tag1.Equals(tag2) && !pos1.Equals(pos2)) // win 
+            if (tag1.Contains(tag2) && !pos1.Equals(pos2)) // win 
             {
 
-                cardA.Source = null;
-                cardB.Source = null;
+                imgCardOne.Source = null;
+                imgCardTwo.Source = null;
 
                 //kijkt wie er aan de beurt is en kent punten toe of verandert de beurt.
                 if (aandebeurt == 1)
@@ -266,14 +269,15 @@ namespace MemoryGame
                     P2Points++;
                     Player2Score.Content = P2Points;
                 }
-                
+                imgCardOne = null;
+                imgCardTwo = null;
 
             }
-            else if (!tag1.Equals(tag2)) // lose
+            else if (!tag1.Contains(tag2) && !pos1.Equals(pos2) ) // lose
             {
 
-                cardA.Source = back;
-                cardB.Source = back;
+                imgCardOne.Source = back;
+                imgCardTwo.Source = back;
                 pairs++;
 
                 if (aandebeurt == 1)
@@ -288,16 +292,27 @@ namespace MemoryGame
                     Player1name.Background = Brushes.Green;
                     Player2name.Background = Brushes.Orange;
                 }
+                imgCardOne = null;
+                imgCardTwo = null;
             }
-            else
+            if (tag1.Equals(tag2) || pos1.Equals(pos2)) // op hetzelfde kaartje geklikt
             {
-                cardA.Source = back;
+                imgCardTwo = null;
+                
+                imgCardTwo = null;
             }
 
-            cardA = null;
-            cardB = null;
+
+
             IsTaskRunning = false;
         }
+        
+
+
+
+
+
+
 
         public void Playerstats()
         {

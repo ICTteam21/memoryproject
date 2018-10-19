@@ -224,11 +224,20 @@ namespace MemoryGame
 
         }
 
+
+
+        // to test need to remove
+        
         void Credits_click(object sender, RoutedEventArgs e)
         {
 
+<<<<<<< Updated upstream
             var SelectScherm = new Settings(); //create your new form.
             SelectScherm.Show(); //show the new form.
+=======
+            var newForm = new GameWindow( "disney" ); //create your new form.
+            newForm.Show(); //show the new form.
+>>>>>>> Stashed changes
             window.Close();
         }
 

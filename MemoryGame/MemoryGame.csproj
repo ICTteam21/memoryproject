@@ -162,22 +162,22 @@
     <Resource Include="Images\logos\8.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\gebouwen\1.png" />
+    <Resource Include="Images\gebouwen\1.png" />
     <Resource Include="Images\gebouwen\1-2.jpg" />
     <Resource Include="Images\gebouwen\2-1.jpg" />
-    <Content Include="Images\gebouwen\2.png" />
-    <Content Include="Images\gebouwen\3.png" />
+    <Resource Include="Images\gebouwen\2.png" />
+    <Resource Include="Images\gebouwen\3.png" />
     <Resource Include="Images\gebouwen\3-2.jpg" />
-    <Content Include="Images\gebouwen\4.png" />
+    <Resource Include="Images\gebouwen\4.png" />
     <Resource Include="Images\gebouwen\4-2.jpg" />
-    <Content Include="Images\gebouwen\5.png" />
+    <Resource Include="Images\gebouwen\5.png" />
     <Resource Include="Images\gebouwen\5-2.jpg" />
     <Resource Include="Images\gebouwen\6-1.jpg" />
-    <Content Include="Images\gebouwen\6.png" />
-    <Content Include="Images\gebouwen\7.png" />
+    <Resource Include="Images\gebouwen\6.png" />
+    <Resource Include="Images\gebouwen\7.png" />
     <Resource Include="Images\gebouwen\7-2.jpg" />
     <Resource Include="Images\gebouwen\8-1.jpg" />
-    <Content Include="Images\gebouwen\8.png" />
+    <Resource Include="Images\gebouwen\8.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\disney\1.png" />
