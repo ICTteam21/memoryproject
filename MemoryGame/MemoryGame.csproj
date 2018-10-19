@@ -54,6 +54,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HighScores.xaml.cs">
+      <DependentUpon>HighScores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HighScoresClass.cs" />
+    <Compile Include="LoadClass.cs" />
+    <Compile Include="LoadScreen.xaml.cs">
+      <DependentUpon>LoadScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainClass.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -62,6 +70,10 @@
     <Compile Include="SelectOptions.xaml.cs">
       <DependentUpon>SelectOptions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsClass.cs" />
     <Compile Include="StaticClass.cs" />
     <Compile Include="Themas.xaml.cs">
       <DependentUpon>Themas.xaml</DependentUpon>
@@ -80,11 +92,23 @@
       <DependentUpon>GameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="HighScores.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoadScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SelectOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

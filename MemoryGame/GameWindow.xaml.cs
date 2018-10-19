@@ -21,6 +21,7 @@ namespace MemoryGame
         {
             InitializeComponent();
             grid = new GameGrid(GameGrid, NIET_KLAAR_COLS, NIET_KLAAR_ROWS, thema);
+            //WindowState = WindowState.Maximized;
         }
         
     }

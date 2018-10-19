@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
+
 namespace MemoryGame
 {
     class SelectClass
@@ -22,10 +23,11 @@ namespace MemoryGame
         RadioButton Check4 = new RadioButton();
         TextBox Text1 = new TextBox();
         TextBox Text2 = new TextBox();
+        Button resize = new Button();
 
         Label size = new Label();
 
-        public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen, int wat)
+        public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen, int AantalSpelers)
         {
             this.window = window;
             this.grid = grid;
@@ -37,9 +39,9 @@ namespace MemoryGame
             AddCheck2();
             AddCheck3();
             AddCheck4();
-            
+            Resize();
 
-            if(wat == 1)
+            if(AantalSpelers == 1)
             {
                 AddText1();
                 AddName1();
@@ -219,6 +221,20 @@ namespace MemoryGame
             labelenplaatjenieuw();
         }
 
+        public void Resize()
+        {
+            
+            resize.Content = "resize";
+            resize.Click += Resize_Click;
+            grid.Children.Add(resize);
+        }
+
+        private void Resize_Click(object sender, RoutedEventArgs e)
+        {
+            window.WindowState = WindowState.Maximized;
+        }
+
+
         //Name box 1//
         public void AddText1()
         {
@@ -230,6 +246,7 @@ namespace MemoryGame
             Grid.SetColumnSpan(Text1, 1);
             Grid.SetRowSpan(Text1, 1);
             grid.Children.Add(Text1);
+            
            
         }
         //Name box 2//
@@ -327,6 +344,7 @@ namespace MemoryGame
                 grid.Children.Add(preview2);
 
                 // label 3//
+                size.Content = "4x4 10 seconds time limit";
                 grid.Children.Remove(size);
                 grid.Children.Add(size); 
                 return;
@@ -350,7 +368,7 @@ namespace MemoryGame
 
         public void Transferdata()
         {
-            string[] lines = { Text1.Text, Text2.Text };
+            string[] lines = { Text1.Text, Text2.Text, };
             string pathing;
             string path2;
             pathing = System.AppDomain.CurrentDomain.BaseDirectory;

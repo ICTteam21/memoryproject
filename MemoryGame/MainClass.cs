@@ -194,27 +194,32 @@ namespace MemoryGame
 
         public void Newgame1_click(object sender, RoutedEventArgs e)
         {
-            int wat = 1;
-            var SelectScherm = new SelectOptions(wat); //create your new form.
+            int AantalSpelers = 1;
+            var SelectScherm = new SelectOptions(AantalSpelers); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
         }
         public void Newgame2_click(object sender, RoutedEventArgs e)
         {
-            int wat = 2;
-            var SelectScherm = new SelectOptions(wat); //create your new form.
+            int AantalSpelers = 2;
+            var SelectScherm = new SelectOptions(AantalSpelers); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
         }
 
         public void Loadgame_click(object sender, RoutedEventArgs e)
         {
-
+            var Loading = new LoadScreen(); //create your new form.
+            Loading.Show(); //show the new form.
+            window.Close();
 
         }
 
         public void Highscores_click(object sender, RoutedEventArgs e)
         {
+            var HighScores = new HighScores(); //create your new form.
+            HighScores.Show(); //show the new form.
+            window.Close();
 
 
         }
@@ -222,7 +227,9 @@ namespace MemoryGame
         void Credits_click(object sender, RoutedEventArgs e)
         {
 
-
+            var SelectScherm = new Settings(); //create your new form.
+            SelectScherm.Show(); //show the new form.
+            window.Close();
         }
 
     }
