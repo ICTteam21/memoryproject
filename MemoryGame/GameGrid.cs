@@ -12,6 +12,10 @@ using System.Security.Cryptography;
 using System.Threading;
 using System.IO;
 using System.Reflection;
+using System.Windows.Shapes;
+using System.Runtime.InteropServices;
+using Excel = Microsoft.Office.Interop.Excel;
+
 
 namespace MemoryGame
 {
@@ -27,7 +31,6 @@ namespace MemoryGame
         Label Player2Score = new Label();
         Button SaveGameandClose = new Button();
 
-
         string Player1Name; 
         string Player2Name; 
 
@@ -39,14 +42,15 @@ namespace MemoryGame
         string pathing;
         string path2;
         string path3;
+        string statspath;
 
         public GameGrid(Grid grid, int cols, int rows, string thema)
         {
             this.grid = grid;
             InitializeGameGrid(cols, rows);
-
             AddImages(thema, cols, rows);
             paaaaaaad();
+            padnaarstatistics();
             Playerstats();
             Savegameandclosebutton();
             
@@ -402,10 +406,54 @@ namespace MemoryGame
             string naam = (fileCount + 1) + " " + themanaamsave + " - " + "P1 " + Player1Name + " Points-" + Convert.ToString(P1Points) + " P2 " + Player2Name + " Points-" + Convert.ToString(P2Points) + " Turn-" + naamaandebeurt + ".txt";
             System.IO.File.WriteAllLines(path3 + naam, lines);
 
+            thegameisdone();
 
         }
 
 
+
+
+        public void thegameisdone()
+        {
+            Excel.Application xlApp;
+            Excel.Workbook xlWorkBook;
+            Excel.Worksheet xlWorkSheet;
+            Excel.Range range;
+
+            xlApp = new Microsoft.Office.Interop.Excel.Application();
+
+            xlWorkBook = xlApp.Workbooks.Open(statspath, 0, false, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+            xlApp.UserControl = true;
+
+            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            range = xlWorkSheet.UsedRange;
+
+            int rij = range.Rows.Count;
+
+            xlWorkSheet.Cells[rij + 1 , 1] = Player1Name;
+            xlWorkSheet.Cells[rij + 1, 2] = P1Points;
+            xlWorkSheet.Cells[rij + 2, 1] = Player2Name;
+            xlWorkSheet.Cells[rij + 2, 2] = P2Points;
+
+            range = xlWorkSheet.Range[xlWorkSheet.Cells[3, 1], xlWorkSheet.Cells[rij + 2, 2]];
+            range.Sort(range.Columns[2], Excel.XlSortOrder.xlDescending);
+
+            xlWorkBook.Save();
+            xlApp.Quit();
+
+            
+
+
+        }
+
+        public void padnaarstatistics()
+        {
+            pathing = System.AppDomain.CurrentDomain.BaseDirectory;
+            statspath = pathing.Replace("bin", "Statistics");
+            statspath = statspath.Replace("Debug", "Highscorestats");
+            statspath = statspath + "HighscoresMemory.xlsx";
+
+        }
     }
 }
 
