@@ -441,6 +441,7 @@ namespace MemoryGame
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
 
+
                 Player1name.Background = Brushes.Green;
                 Player1name.Content = Player1Name;
                 Player1name.FontSize = 30;
