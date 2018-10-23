@@ -44,6 +44,10 @@ namespace MemoryGame
         string path3;
         string statspath;
 
+        int rijen;
+        int kolommen;
+        List<string> gridsetup = new List<string>();
+
         public GameGrid(Grid grid, int cols, int rows, string thema)
         {
             this.grid = grid;
@@ -79,6 +83,9 @@ namespace MemoryGame
 
         private void InitializeGameGrid(int cols, int rows)
         {
+
+            rijen = rows;
+            kolommen = cols;
             for (int i = 0; i < rows; i++)
             {
                 grid.RowDefinitions.Add(new RowDefinition());
@@ -118,7 +125,7 @@ namespace MemoryGame
         /// <param name="rows"></param>
         /// <param name="cols"></param>
         
-        private void AddImages(string thema, int rows, int cols)
+        public void AddImages(string thema, int rows, int cols)
         {
             // get lists
             List<ImageSource> images = GetImagesList(thema);
@@ -317,7 +324,9 @@ namespace MemoryGame
 
 
 
-
+        /// <summary>
+        /// Deze methode zorgt voor de kolom met daarin namen en scores.
+        /// </summary>
         public void Playerstats()
         {
             grid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -331,7 +340,6 @@ namespace MemoryGame
             Grid.SetColumn(Player1name, 4);
             Grid.SetColumnSpan(Player1name, 2);
             grid.Children.Add(Player1name);
-
             
             Score1.Content = "Score:";
             Score1.FontSize = 30;
@@ -348,8 +356,6 @@ namespace MemoryGame
             Grid.SetRow(Player1Score, 0);
             Grid.SetColumn(Player1Score, 5);
             grid.Children.Add(Player1Score);
-
-
             
             Player2name.Background = Brushes.Orange;
             Player2name.Content = Player2Name;
@@ -376,6 +382,9 @@ namespace MemoryGame
             Grid.SetColumn(Player2Score, 5);
             grid.Children.Add(Player2Score);
         }
+
+
+
         public void Savegameandclosebutton()
         {
             SaveGameandClose.Content = "Save Game";
@@ -388,9 +397,14 @@ namespace MemoryGame
             grid.Children.Add(SaveGameandClose);
         }
 
+
+        /// <summary>
+        /// Dit slaat het spel op in een text bestand.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void SaveGame_Click(Object sender, RoutedEventArgs e)
         {
-
             string naamaandebeurt;
             if(aandebeurt == 1)
             {
@@ -400,19 +414,17 @@ namespace MemoryGame
                 naamaandebeurt = Player2Name;
             }
 
-
-
             string[] lines = { Convert.ToString(aandebeurt), Player1Name, Convert.ToString(P1Points), Player2Name, Convert.ToString(P2Points) };
             string naam = (fileCount + 1) + " " + themanaamsave + " - " + "P1 " + Player1Name + " Points-" + Convert.ToString(P1Points) + " P2 " + Player2Name + " Points-" + Convert.ToString(P2Points) + " Turn-" + naamaandebeurt + ".txt";
             System.IO.File.WriteAllLines(path3 + naam, lines);
-
-            thegameisdone();
-
         }
 
+    
 
-
-
+        /// <summary>
+        /// Deze methode moet opgeroepen worden wanneer een spel klaar is.
+        /// Hij zal vervolgens de data wegschrijven in excel.
+        /// </summary>
         public void thegameisdone()
         {
             Excel.Application xlApp;
@@ -446,6 +458,9 @@ namespace MemoryGame
 
         }
 
+        /// <summary>
+        /// Haalt het pad op voor de methode die naar excel schrijft.
+        /// </summary>
         public void padnaarstatistics()
         {
             pathing = System.AppDomain.CurrentDomain.BaseDirectory;

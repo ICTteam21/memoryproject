@@ -451,8 +451,6 @@ namespace MemoryGame
                     punten = (double)(range.Cells[rCnt, 2] as Excel.Range).Value2;
                     labelspdata(naam, i, 16, punten, rij);
 
-
-
                 }
                 Marshal.ReleaseComObject(xlWorkSheet);
             }
