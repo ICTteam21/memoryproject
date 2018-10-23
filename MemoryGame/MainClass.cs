@@ -28,8 +28,8 @@ namespace MemoryGame
             this.window = window;
             this.grid = grid;
 
-            int kolommen = 5;
-            int rijen = 15;
+            int kolommen = 6;
+            int rijen = 20;
 
             InitializeMain(kolommen, rijen);
             
@@ -60,30 +60,37 @@ namespace MemoryGame
             Label title = new Label
             {
                 Content = "Memory Game",
-                FontSize = 40,
-                HorizontalAlignment = HorizontalAlignment.Center
+                FontSize = 120,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                FontFamily = new FontFamily("Bahnschrift"),
             };
 
 
-            Grid.SetRow(title, 0);
+            Grid.SetRow(title, 1);
             Grid.SetColumn(title, 1);
-            Grid.SetColumnSpan(title, 3);
-            Grid.SetRowSpan(title, 2);
+            Grid.SetColumnSpan(title, 4);
+            Grid.SetRowSpan(title, 4);
             grid.Children.Add(title);
 
         }
 
         public void AddNewGame()
         {
-            
-            
-            newgame.Content = "New Game";
-            newgame.FontSize = 20;
-            newgame.Background = Brushes.CadetBlue;
+            Button newgame = new Button
+            {
+                Content = "New Game",
+                FontSize = 60,
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(3),
+                FontFamily = new FontFamily("Bahnschrift"),
+                Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
+            };
 
-            Grid.SetRow(newgame, 3);
-            Grid.SetColumn(newgame, 1);
-            Grid.SetColumnSpan(newgame, 3);
+
+
+            Grid.SetRow(newgame, 7);
+            Grid.SetColumn(newgame, 2);
+            Grid.SetColumnSpan(newgame, 2);
             Grid.SetRowSpan(newgame, 2);
             grid.Children.Add(newgame);
 
@@ -92,14 +99,19 @@ namespace MemoryGame
         }
         public void AddNewGame2()
         {
-            Button newgame2 = new Button();
-            newgame2.Content = "2 Player";
-            newgame2.FontSize = 20;
-            newgame2.Background = Brushes.CadetBlue;
+            Button newgame2 = new Button
+            {
+                Content = "2 Players",
+                FontSize = 50,
+                BorderBrush = Brushes.LightGray,
+                BorderThickness = new Thickness(3),
+                FontFamily = new FontFamily("Bahnschrift"),
+                Background = new LinearGradientBrush(Colors.White, Colors.LightSteelBlue, 3),
+            };
 
-            Grid.SetRow(newgame2, 3);
-            Grid.SetColumn(newgame2, 2);
-            Grid.SetColumnSpan(newgame2, 2);
+            Grid.SetRow(newgame2, 7);
+            Grid.SetColumn(newgame2, 3);
+            Grid.SetColumnSpan(newgame2, 1);
             Grid.SetRowSpan(newgame2, 2);
             grid.Children.Add(newgame2);
 
@@ -110,13 +122,18 @@ namespace MemoryGame
 
         public void AddNewGame1()
         {
-            Button newgame1 = new Button();
-            newgame1.Content = "1 Player";
-            newgame1.FontSize = 20;
-            newgame1.Background = Brushes.CadetBlue;
+            Button newgame1 = new Button
+            {
+                Content = "1 Player",
+                FontSize = 50,
+                BorderBrush = Brushes.LightGray,
+                BorderThickness = new Thickness(3),
+                FontFamily = new FontFamily("Bahnschrift"),
+                Background = new LinearGradientBrush(Colors.LightSteelBlue, Colors.White, 3),
+            };
 
-            Grid.SetRow(newgame1, 3);
-            Grid.SetColumn(newgame1, 1);
+            Grid.SetRow(newgame1, 7);
+            Grid.SetColumn(newgame1, 2);
             Grid.SetColumnSpan(newgame1, 1);
             Grid.SetRowSpan(newgame1, 2);
             grid.Children.Add(newgame1);
@@ -132,13 +149,16 @@ namespace MemoryGame
             Button loadgame = new Button
             {
                 Content = "Load Game",
-                FontSize = 20,
-                Background = Brushes.CadetBlue
+                FontSize = 60,
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(3),
+                FontFamily = new FontFamily("Bahnschrift"),
+                Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
             };
 
-            Grid.SetRow(loadgame, 6);
-            Grid.SetColumn(loadgame, 1);
-            Grid.SetColumnSpan(loadgame, 3);
+            Grid.SetRow(loadgame, 10);
+            Grid.SetColumn(loadgame, 2);
+            Grid.SetColumnSpan(loadgame, 2);
             Grid.SetRowSpan(loadgame, 2);
             grid.Children.Add(loadgame);
 
@@ -151,13 +171,16 @@ namespace MemoryGame
             Button highscores = new Button
             {
                 Content = "Highscores",
-                FontSize = 20,
-                Background = Brushes.CadetBlue
-            };
+                FontSize = 60,
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(3),
+                FontFamily = new FontFamily("Bahnschrift"),
+                Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
+        };
 
-            Grid.SetRow(highscores, 9);
-            Grid.SetColumn(highscores, 1);
-            Grid.SetColumnSpan(highscores, 3);
+            Grid.SetRow(highscores, 13);
+            Grid.SetColumn(highscores, 2);
+            Grid.SetColumnSpan(highscores, 2);
             Grid.SetRowSpan(highscores, 2);
             grid.Children.Add(highscores);
 
@@ -170,19 +193,22 @@ namespace MemoryGame
             Button credits = new Button
             {
                 Content = "Credits",
-                FontSize = 20,
-                Background = Brushes.CadetBlue
+                FontSize = 60,
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(3),
+                FontFamily = new FontFamily("Bahnschrift"),
+                Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
             };
 
-            Grid.SetRow(credits, 12);
-            Grid.SetColumn(credits, 1);
-            Grid.SetColumnSpan(credits, 3);
+            Grid.SetRow(credits, 16);
+            Grid.SetColumn(credits, 2);
+            Grid.SetColumnSpan(credits, 2);
             Grid.SetRowSpan(credits, 2);
             grid.Children.Add(credits);
 
             credits.Click += new RoutedEventHandler(Credits_click);
 
-            
+
         }
 
 
@@ -231,13 +257,8 @@ namespace MemoryGame
         void Credits_click(object sender, RoutedEventArgs e)
         {
 
-<<<<<<< Updated upstream
             var SelectScherm = new Settings(); //create your new form.
             SelectScherm.Show(); //show the new form.
-=======
-            var newForm = new GameWindow( "disney" ); //create your new form.
-            newForm.Show(); //show the new form.
->>>>>>> Stashed changes
             window.Close();
         }
 
