@@ -16,7 +16,7 @@ namespace MemoryGame
         
         private SelectOptions window;
 
-        
+    
         RadioButton Check1 = new RadioButton();
         RadioButton Check2 = new RadioButton();
         RadioButton Check3 = new RadioButton();
@@ -24,11 +24,12 @@ namespace MemoryGame
         TextBox Text1 = new TextBox();
         TextBox Text2 = new TextBox();
         Button resize = new Button();
-
         Label size = new Label();
+        public static int diff = 0;
 
-        public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen, int AantalSpelers)
+        public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen, int aantalSpelers)
         {
+
             this.window = window;
             this.grid = grid;
             InitializeMain(kolommen, rijen);
@@ -41,7 +42,7 @@ namespace MemoryGame
             AddCheck4();
             Resize();
 
-            if(AantalSpelers == 1)
+            if(aantalSpelers == 1)
             {
                 AddText1();
                 AddName1();
@@ -131,7 +132,9 @@ namespace MemoryGame
             window.Close();
         }
 
-        //Radiobutton 1//
+        /// <summary>
+        ///  Diffuculty 1 radiobutton
+        /// </summary>
         public void AddCheck1()
         {
             Check1.Content = "Difficulty 1";
@@ -142,21 +145,12 @@ namespace MemoryGame
             Grid.SetColumnSpan(Check1, 2);
             Grid.SetRowSpan(Check1, 2);
             grid.Children.Add(Check1);
-            Check1.Checked += Check1_Checked;
-
+            Check1.Checked += RadioButtonClicked;
+ 
         }
-
-      
-
-        public void Check1_Checked(object sender, RoutedEventArgs e)
-        {
-
-            labelenplaatjenieuw();
-        }
-
-
-
-        //Radiobutton 2//
+        /// <summary>
+        ///  Diffuculty 2 radiobutton
+        /// </summary>
         public void AddCheck2()
         {
             
@@ -169,17 +163,13 @@ namespace MemoryGame
             Grid.SetColumnSpan(Check2, 2);
             Grid.SetRowSpan(Check2, 2);
             grid.Children.Add(Check2);
-            Check2.Checked += Check2_Checked; ;
+            Check2.Checked += RadioButtonClicked;
+
         }
 
-        public void Check2_Checked(object sender, RoutedEventArgs e)
-        {
-            labelenplaatjenieuw();
-        }
-
-
-
-        //Radiobutton 3//
+        /// <summary>
+        ///  Diffuculty 3 radiobutton
+        /// </summary>
         public void AddCheck3()
         {
             
@@ -192,15 +182,13 @@ namespace MemoryGame
             Grid.SetColumnSpan(Check3, 2);
             Grid.SetRowSpan(Check3, 2);
             grid.Children.Add(Check3);
-            Check3.Checked += Check3_Checked;
+            Check3.Checked += RadioButtonClicked;
+ 
         }
 
-        public void Check3_Checked(object sender, RoutedEventArgs e)
-        {
-            labelenplaatjenieuw();
-        }
-
-        //Radiobutton 4//
+        /// <summary>
+        ///  Diffuculty 4 radiobutton
+        /// </summary>
         public void AddCheck4()
         {
             
@@ -213,12 +201,88 @@ namespace MemoryGame
             Grid.SetColumnSpan(Check4, 2);
             Grid.SetRowSpan(Check4, 2);
             grid.Children.Add(Check4);
-            Check4.Checked += Check4_Checked;
+            Check4.Checked += RadioButtonClicked;
+
         }
 
-        public void Check4_Checked(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// diffuculty selector and sets the preview image
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void RadioButtonClicked(object sender, RoutedEventArgs e)
         {
-            labelenplaatjenieuw();
+            Image preview2 = new Image
+            {
+                Source = new BitmapImage(new Uri("Images/4x4 preview.png", UriKind.Relative))
+            };
+            Grid.SetRow(preview2, 7);
+            Grid.SetColumn(preview2, 5);
+            Grid.SetColumnSpan(preview2, 7);
+            Grid.SetRowSpan(preview2, 7);
+            //Label setup//
+            size.FontSize = 12;
+            Grid.SetRow(size, 5);
+            Grid.SetColumn(size, 6);
+            Grid.SetColumnSpan(size, 7);
+            Grid.SetRowSpan(size, 2);
+
+            if (Check1.IsChecked == true)
+            {
+                //Remove and Add Image//
+
+                grid.Children.Remove(preview2);
+                grid.Children.Add(preview2);
+
+                // label 2//
+                size.Content = "10 minute time limit";
+                grid.Children.Remove(size);
+                grid.Children.Add(size);
+                diff = 1;
+                return;
+
+            }
+            else if (Check2.IsChecked == true)
+            {
+
+                //Remove and Add Image//
+                grid.Children.Remove(preview2);
+                grid.Children.Add(preview2);
+
+                // label 1//
+                size.Content = "5 minute time limit";
+                grid.Children.Remove(size);
+                grid.Children.Add(size);
+                diff = 2;
+                return;
+            }
+            else if (Check3.IsChecked == true)
+            {
+                //Remove and Add Image//
+                grid.Children.Remove(preview2);
+                grid.Children.Add(preview2);
+
+                // label 3//
+                size.Content = "2 minute time limit";
+                grid.Children.Remove(size);
+                grid.Children.Add(size);
+                diff = 3;
+                return;
+            }
+            else if (Check4.IsChecked == true)
+            {
+                //Remove and Add Image//
+                grid.Children.Remove(preview2);
+                grid.Children.Add(preview2);
+
+                // label 4//
+                size.Content = "1 minute time limit";
+                grid.Children.Remove(size);
+                grid.Children.Add(size);
+                diff = 4;
+                return;
+            }
+
         }
 
         public void Resize()
@@ -289,81 +353,6 @@ namespace MemoryGame
             Grid.SetColumnSpan(Name2, 1);
             Grid.SetRowSpan(Name2, 2);
             grid.Children.Add(Name2);
-        }
-        
-
-        public void labelenplaatjenieuw()
-        {   //Image setup//
-            Image preview2 = new Image();
-            preview2.Source = new BitmapImage(new Uri("Images/4x4 preview.png", UriKind.Relative));
-            Grid.SetRow(preview2, 7);
-            Grid.SetColumn(preview2, 5);
-            Grid.SetColumnSpan(preview2, 7);
-            Grid.SetRowSpan(preview2, 7);
-            //Label setup//
-            size.FontSize = 12;
-            Grid.SetRow(size, 5);
-            Grid.SetColumn(size, 6);
-            Grid.SetColumnSpan(size, 7);
-            Grid.SetRowSpan(size, 2);
-            
-            if (Check2.IsChecked == true)
-            {
-                //Remove and Add Image//
-
-                grid.Children.Remove(preview2);
-                grid.Children.Add(preview2);
-
-                // label 2//
-                size.Content = "4x4 + 30 seconds time limit";
-                grid.Children.Remove(size);
-                grid.Children.Add(size);
-
-                return;
-
-            }
-            else if (Check1.IsChecked == true)
-            {
-
-                //Remove and Add Image//
-                grid.Children.Remove(preview2);
-                grid.Children.Add(preview2);
-
-
-
-                // label 1//
-                size.Content = "4x4 + No time limit";
-                grid.Children.Remove(size);
-                grid.Children.Add(size); 
-                return;
-            }
-            else if (Check3.IsChecked == true)
-            {
-                //Remove and Add Image//
-                grid.Children.Remove(preview2);
-                grid.Children.Add(preview2);
-
-                // label 3//
-                size.Content = "4x4 10 seconds time limit";
-                grid.Children.Remove(size);
-                grid.Children.Add(size); 
-                return;
-            }
-            else if (Check4.IsChecked == true)
-            {
-               //Remove and Add Image//
-                grid.Children.Remove(preview2);
-                grid.Children.Add(preview2);
-
-                // label 4//
-                size.Content = "4x4 + 5 seconds time limit";
-                grid.Children.Remove(size);
-                grid.Children.Add(size);
-                return;
-            }
-
-
-          
         }
 
         public void Transferdata()

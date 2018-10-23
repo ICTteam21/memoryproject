@@ -16,6 +16,7 @@ namespace MemoryGame
         private MainMenuWindow window;
         private Grid grid;
         Button newgame = new Button();
+        public static int aantalSpelers;
 
         public object Children { get; internal set; }
 
@@ -194,15 +195,15 @@ namespace MemoryGame
 
         public void Newgame1_click(object sender, RoutedEventArgs e)
         {
-            int AantalSpelers = 1;
-            var SelectScherm = new SelectOptions(AantalSpelers); //create your new form.
+            aantalSpelers = 1;
+            var SelectScherm = new SelectOptions(aantalSpelers); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
         }
         public void Newgame2_click(object sender, RoutedEventArgs e)
         {
-            int AantalSpelers = 2;
-            var SelectScherm = new SelectOptions(AantalSpelers); //create your new form.
+            aantalSpelers = 2; 
+            var SelectScherm = new SelectOptions(aantalSpelers); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
         }
@@ -231,13 +232,13 @@ namespace MemoryGame
         void Credits_click(object sender, RoutedEventArgs e)
         {
 
-<<<<<<< Updated upstream
+
             var SelectScherm = new Settings(); //create your new form.
             SelectScherm.Show(); //show the new form.
-=======
-            var newForm = new GameWindow( "disney" ); //create your new form.
+
+            var newForm = new GameWindow( "disney" , 1); //create your new form.
             newForm.Show(); //show the new form.
->>>>>>> Stashed changes
+
             window.Close();
         }
 
