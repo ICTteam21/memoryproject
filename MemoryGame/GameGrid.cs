@@ -15,12 +15,15 @@ using System.Reflection;
 using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Timers;
 
 
 namespace MemoryGame
 {
     class GameGrid
     {
+        
+        private Window window;
         private Grid grid;
         private bool IsTaskRunning = false;
         Label Player1name = new Label();
@@ -30,6 +33,7 @@ namespace MemoryGame
         Label Score2 = new Label();
         Label Player2Score = new Label();
         Button SaveGameandClose = new Button();
+        private static System.Timers.Timer aTimer; 
 
         string Player1Name; 
         string Player2Name; 
@@ -44,18 +48,15 @@ namespace MemoryGame
         string path3;
         string statspath;
 
-        int rijen;
-        int kolommen;
-        List<string> gridsetup = new List<string>();
-
-        public GameGrid(Grid grid, int cols, int rows, string thema)
+        public GameGrid(Window window, Grid grid, int cols, int rows, string thema, int diff)
         {
+            this.window = window; 
             this.grid = grid;
             InitializeGameGrid(cols, rows);
-            AddImages(thema, cols, rows);
+            AddImages(diff, thema, cols, rows);
             paaaaaaad();
+            Playerstats(MainClass.aantalSpelers);
             padnaarstatistics();
-            Playerstats();
             Savegameandclosebutton();
             
 
@@ -78,9 +79,6 @@ namespace MemoryGame
             Player2Name = File.ReadLines(path2 + "New.txt").Skip(1).Take(1).First();
         }
         
-
-
-
         private void InitializeGameGrid(int cols, int rows)
         {
 
@@ -113,7 +111,7 @@ namespace MemoryGame
                 imagesList.Add(source);
             }
 
-            //imagesList.Shuffle();
+            imagesList.Shuffle();
             return imagesList;
 
 
@@ -125,12 +123,11 @@ namespace MemoryGame
         /// <param name="rows"></param>
         /// <param name="cols"></param>
         
-        public void AddImages(string thema, int rows, int cols)
+        private void AddImages(int diff, string thema, int rows, int cols)
         {
             // get lists
             List<ImageSource> images = GetImagesList(thema);
-
-
+           
             // logic
             if (thema.Equals("logos"))
             {
@@ -193,6 +190,16 @@ namespace MemoryGame
                     }
                 }
             }
+            if (SelectClass.diff.Equals(0))
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("Druk op ok om de tijd te starten", "Het spel gaat beginnen!");
+                SetTimer(diff);
+            }
+
 
         }
 
@@ -210,7 +217,13 @@ namespace MemoryGame
         private string tagOne;
         private string tagTwo;
         private int pairs = 0;
-  
+
+
+        /// <summary>
+        /// Slaat img.Tag op en gridpositie in string en geeft ze door aan CheckCards
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CardClick(object sender, MouseButtonEventArgs e)
         {
             var element = (UIElement)e.Source;
@@ -251,58 +264,35 @@ namespace MemoryGame
         /// <param name="tag2"></param>
         /// <param name="pos1"></param>
         /// <param name="pos2"></param>
-        /// 
-
-
-
+        ///
+        private bool win;
         private async void CheckCards(string tag1, string tag2, string pos1, string pos2)
         {
             ImageSource back = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
-            
+
             IsTaskRunning = true;
             await Task.Delay(300);
             
 
-            if (tag1.Contains(tag2) && !pos1.Equals(pos2)) // win 
+            if (tag2.Contains(tag1) && !pos1.Equals(pos2)) // win 
             {
-
+                win = true;
+                pairs++;
                 imgCardOne.Source = null;
                 imgCardTwo.Source = null;
+                CheckTurns();
 
-                //kijkt wie er aan de beurt is en kent punten toe of verandert de beurt.
-                if (aandebeurt == 1)
-                {
-                    P1Points++;
-                    Player1Score.Content = P1Points;
-                }
-                else
-                {
-                    P2Points++;
-                    Player2Score.Content = P2Points;
-                }
                 imgCardOne = null;
                 imgCardTwo = null;
-
+                
             }
-            else if (!tag1.Contains(tag2) && !pos1.Equals(pos2) ) // lose
+            else if (!tag2.Contains(tag1) && !pos1.Equals(pos2) ) // lose
             {
-
+                win = false;
                 imgCardOne.Source = back;
                 imgCardTwo.Source = back;
-                pairs++;
+                CheckTurns();
 
-                if (aandebeurt == 1)
-                {
-                    aandebeurt = 2;
-                    Player2name.Background = Brushes.Green;
-                    Player1name.Background = Brushes.Orange;
-                }
-                else
-                {
-                    aandebeurt = 1;
-                    Player1name.Background = Brushes.Green;
-                    Player2name.Background = Brushes.Orange;
-                }
                 imgCardOne = null;
                 imgCardTwo = null;
             }
@@ -317,70 +307,232 @@ namespace MemoryGame
 
             IsTaskRunning = false;
         }
-        
-
-
-
-
-
-
         /// <summary>
-        /// Deze methode zorgt voor de kolom met daarin namen en scores.
+        ///  kijkt wie er aan de beurt is en kent punten toe 
+        ///  kijkt eerst of er 1 of 2 spelers zijn.
         /// </summary>
-        public void Playerstats()
+        private void CheckTurns()
         {
-            grid.ColumnDefinitions.Add(new ColumnDefinition());
-            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            if (MainClass.aantalSpelers.Equals(1)) // als er 1 speler is 
+            {
+                if (win.Equals(true)) // geef punten aan speler als er een paar is gevonden 
+                {
+                    P1Points += 50;
+                    Player1Score.Content = P1Points;
+                }
+                if (pairs.Equals(8) && !SelectClass.diff.Equals(0)) 
+                {
+                    MessageBox.Show("Goed gedaan! Je hebt binnen de tijd alle paren gevonden!", "Klik op ok om je highscores te zien");
+                    var highscoresWindow = new HighScores();
+                    window.Close();
+                    highscoresWindow.Show();
+                }else if (pairs.Equals(8))
+                {
+                    MessageBox.Show("Goed gedaan! Je hebt alle paren gevonden!", "Klik op ok om je highscores te zien");
+                    var highscoresWindow = new HighScores();
+                    window.Close();
+                    highscoresWindow.Show();
+                }
+            }
+            else if (MainClass.aantalSpelers.Equals(2)) // als er 2 spelers zijn 
+            {
+                if (win.Equals(true)) // als de huidige speler de kaartjes bij elkaar heeft geef punten 
+                {
 
-            Player1name.Background = Brushes.Green;
-            Player1name.Content = Player1Name;
-            Player1name.FontSize = 30;
-            Player1name.HorizontalContentAlignment = HorizontalAlignment.Center;
-            Grid.SetRow(Player1name, 0);
-            Grid.SetColumn(Player1name, 4);
-            Grid.SetColumnSpan(Player1name, 2);
-            grid.Children.Add(Player1name);
-            
-            Score1.Content = "Score:";
-            Score1.FontSize = 30;
-            Score1.HorizontalContentAlignment = HorizontalAlignment.Center;
-            Score1.VerticalContentAlignment = VerticalAlignment.Center;
-            Grid.SetRow(Score1, 0);
-            Grid.SetColumn(Score1, 4);
-            grid.Children.Add(Score1);
-            
-            Player1Score.Content = 0;
-            Player1Score.FontSize = 30;
-            Player1Score.HorizontalContentAlignment = HorizontalAlignment.Center;
-            Player1Score.VerticalContentAlignment = VerticalAlignment.Center;
-            Grid.SetRow(Player1Score, 0);
-            Grid.SetColumn(Player1Score, 5);
-            grid.Children.Add(Player1Score);
-            
-            Player2name.Background = Brushes.Orange;
-            Player2name.Content = Player2Name;
-            Player2name.FontSize = 30;
-            Player2name.HorizontalContentAlignment = HorizontalAlignment.Center;
-            Grid.SetRow(Player2name, 2);
-            Grid.SetColumn(Player2name, 4);
-            Grid.SetColumnSpan(Player2name, 2);
-            grid.Children.Add(Player2name);
-            
-            Score2.Content = "Score:";
-            Score2.FontSize = 30;
-            Score2.HorizontalContentAlignment = HorizontalAlignment.Center;
-            Score2.VerticalContentAlignment = VerticalAlignment.Center;
-            Grid.SetRow(Score2, 2);
-            Grid.SetColumn(Score2, 4);
-            grid.Children.Add(Score2);
-            
-            Player2Score.Content = 0;
-            Player2Score.FontSize = 30;
-            Player2Score.HorizontalContentAlignment = HorizontalAlignment.Center;
-            Player2Score.VerticalContentAlignment = VerticalAlignment.Center;
-            Grid.SetRow(Player2Score, 2);
-            Grid.SetColumn(Player2Score, 5);
-            grid.Children.Add(Player2Score);
+                    if (aandebeurt == 1)
+                    {
+                        P1Points += 50;
+                        Player1Score.Content = P1Points;
+                    }
+                    else
+                    {
+                        P2Points += 50;
+                        Player2Score.Content = P2Points;
+                    }
+                }
+                else if (win.Equals(false)) // als er niet een paar is gevonden ga dan naar de volgende speler
+                {
+                    if (aandebeurt == 1)
+                    {
+                        aandebeurt = 2;
+                        Player2name.Background = Brushes.Green;
+                        Player1name.Background = Brushes.Orange;
+                    }
+                    else
+                    {
+                        aandebeurt = 1;
+                        Player1name.Background = Brushes.Green;
+                        Player2name.Background = Brushes.Orange;
+                    }
+                }
+                if (pairs.Equals(8)) // als er iemand alle plaatjes heeft gewonnen, ga naar highscores
+                {
+                    if (P1Points > P2Points)
+                    {
+                        int pDiff = P1Points - P2Points;
+                        MessageBox.Show("Speler " + Player1Name + " heeft gewonnen! \n" + Player1Name + " heeft met " + pDiff + " punten meer gewonnen!", "Klik op ok om je highscores te zien");
+                        var highscoresWindow = new HighScores();
+                        window.Close();
+                        highscoresWindow.Show();
+                    }
+                    else if ( P1Points < P2Points){
+                        int pDiff = P2Points - P1Points;
+                        MessageBox.Show("Speler " + Player2Name + " heeft gewonnen! \n" + Player2Name + " heeft met " + pDiff + " punten meer gewonnen!", "Klik op ok om je highscores te zien");
+                        var highscoresWindow = new HighScores();
+                        window.Close();
+                        highscoresWindow.Show();
+                    }
+                    else if (P1Points.Equals(P2Points))
+                    {
+                        MessageBox.Show( Player1Name + " en " + Player2Name + " jullie zijn erg aan elkaar gewaagt !\n  " + "Probeer het nog een keer!", "Klik op ok om je highscores te zien");
+                        var highscoresWindow = new HighScores();
+                        window.Close();
+                        highscoresWindow.Show();
+                    }
+                }
+
+            }
+        }
+        /// <summary>
+        /// De timer en hierin de handelingen die er uitvoerd moeten 
+        /// Resetten of gwn klaar etc.
+        /// </summary>
+        /// <param name="diff"> diff is de "globale" parameter dei gelijk staat aan de moeilijkheidsgraad </param>
+        private void SetTimer(int diff)
+        {
+            if (diff.Equals(0))
+            {
+
+            }else if (diff.Equals(1))
+            {
+                aTimer = new System.Timers.Timer(600000);
+                aTimer.Elapsed += OnTimedEvent;
+                aTimer.Enabled = true;
+            }
+            else if(diff.Equals(2)){
+                aTimer = new System.Timers.Timer(300000);
+                aTimer.Elapsed += OnTimedEvent;
+                aTimer.Enabled = true;
+            }
+            else if (diff.Equals(3)){
+                aTimer = new System.Timers.Timer(120000);
+                aTimer.Elapsed += OnTimedEvent;
+                aTimer.Enabled = true;
+            }
+            else if (diff.Equals(4)){
+                aTimer = new System.Timers.Timer(30000);
+                aTimer.Elapsed += OnTimedEvent;
+                aTimer.Enabled = true;
+            }
+
+        }
+        /// <summary>
+        /// event handler voor de setTimer
+        /// Dus wat er gebeurt als de timer is verstreken
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
+        private void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            MessageBox.Show("De tijd is op! ","Klik om terug te gaan");
+            var eindeSpelDoorTimer = new HighScores();
+            eindeSpelDoorTimer.Show();
+            window.Close();
+
+        }
+        Label timer = new Label();
+
+        public void Playerstats(int aantalSpelers)
+        {
+            if (aantalSpelers.Equals(1))
+            {
+                grid.ColumnDefinitions.Add(new ColumnDefinition());
+                grid.ColumnDefinitions.Add(new ColumnDefinition());
+
+
+                Player1name.Background = Brushes.Green;
+                Player1name.Content = Player1Name;
+                Player1name.FontSize = 30;
+                Player1name.HorizontalContentAlignment = HorizontalAlignment.Center;
+                Grid.SetRow(Player1name, 0);
+                Grid.SetColumn(Player1name, 4);
+                Grid.SetColumnSpan(Player1name, 2);
+                grid.Children.Add(Player1name);
+
+
+                Score1.Content = "Score:";
+                Score1.FontSize = 30;
+                Score1.HorizontalContentAlignment = HorizontalAlignment.Center;
+                Score1.VerticalContentAlignment = VerticalAlignment.Center;
+                Grid.SetRow(Score1, 0);
+                Grid.SetColumn(Score1, 4);
+                grid.Children.Add(Score1);
+
+                Player1Score.Content = 0;
+                Player1Score.FontSize = 30;
+                Player1Score.HorizontalContentAlignment = HorizontalAlignment.Center;
+                Player1Score.VerticalContentAlignment = VerticalAlignment.Center;
+                Grid.SetRow(Player1Score, 0);
+                Grid.SetColumn(Player1Score, 5);
+                grid.Children.Add(Player1Score);
+            }
+            if (aantalSpelers.Equals(2))
+            {
+                grid.ColumnDefinitions.Add(new ColumnDefinition());
+                grid.ColumnDefinitions.Add(new ColumnDefinition());
+
+                Player1name.Background = Brushes.Green;
+                Player1name.Content = Player1Name;
+                Player1name.FontSize = 30;
+                Player1name.HorizontalContentAlignment = HorizontalAlignment.Center;
+                Grid.SetRow(Player1name, 0);
+                Grid.SetColumn(Player1name, 4);
+                Grid.SetColumnSpan(Player1name, 2);
+                grid.Children.Add(Player1name);
+
+
+                Score1.Content = "Score:";
+                Score1.FontSize = 30;
+                Score1.HorizontalContentAlignment = HorizontalAlignment.Center;
+                Score1.VerticalContentAlignment = VerticalAlignment.Center;
+                Grid.SetRow(Score1, 0);
+                Grid.SetColumn(Score1, 4);
+                grid.Children.Add(Score1);
+
+                Player1Score.Content = 0;
+                Player1Score.FontSize = 30;
+                Player1Score.HorizontalContentAlignment = HorizontalAlignment.Center;
+                Player1Score.VerticalContentAlignment = VerticalAlignment.Center;
+                Grid.SetRow(Player1Score, 0);
+                Grid.SetColumn(Player1Score, 5);
+                grid.Children.Add(Player1Score);
+
+                Player2name.Background = Brushes.Orange;
+                Player2name.Content = Player2Name;
+                Player2name.FontSize = 30;
+                Player2name.HorizontalContentAlignment = HorizontalAlignment.Center;
+                Grid.SetRow(Player2name, 2);
+                Grid.SetColumn(Player2name, 4);
+                Grid.SetColumnSpan(Player2name, 2);
+                grid.Children.Add(Player2name);
+
+                Score2.Content = "Score:";
+                Score2.FontSize = 30;
+                Score2.HorizontalContentAlignment = HorizontalAlignment.Center;
+                Score2.VerticalContentAlignment = VerticalAlignment.Center;
+                Grid.SetRow(Score2, 2);
+                Grid.SetColumn(Score2, 4);
+                grid.Children.Add(Score2);
+
+                Player2Score.Content = 0;
+                Player2Score.FontSize = 30;
+                Player2Score.HorizontalContentAlignment = HorizontalAlignment.Center;
+                Player2Score.VerticalContentAlignment = VerticalAlignment.Center;
+                Grid.SetRow(Player2Score, 2);
+                Grid.SetColumn(Player2Score, 5);
+                grid.Children.Add(Player2Score);
+            }  
+
         }
 
 

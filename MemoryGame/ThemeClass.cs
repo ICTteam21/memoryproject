@@ -20,15 +20,18 @@ namespace MemoryGame
         Button disney = new Button();
 
 
+
         public ThemaClass(Themas window, Grid grid, int kolommen, int rijen)
         {
             this.window = window;
             this.grid = grid;
+
             InitializeMain(kolommen, rijen);
             Title();
             Theme1();
             Theme2();
             Theme3();
+            
         }
         //Grid
         private void InitializeMain(int kolommen, int rijen)
@@ -71,7 +74,6 @@ namespace MemoryGame
             Grid.SetColumnSpan(disney, 3);
             Grid.SetRowSpan(disney, 2);
             grid.Children.Add(disney);
-            disney.Click += new RoutedEventHandler(button_click);
             disney.Click += btnSelectThema;
 
         }
@@ -86,7 +88,6 @@ namespace MemoryGame
             Grid.SetColumnSpan(gebouwen, 3);
             Grid.SetRowSpan(gebouwen, 2);
             grid.Children.Add(gebouwen);
-            gebouwen.Click += new RoutedEventHandler(button_click);
             gebouwen.Click += btnSelectThema;
         }
 
@@ -100,7 +101,6 @@ namespace MemoryGame
             Grid.SetColumnSpan(logo, 3);
             Grid.SetRowSpan(logo, 2);
             grid.Children.Add(logo);
-            logo.Click += new RoutedEventHandler(button_click);
             logo.Click += btnSelectThema;
         }
 
@@ -122,60 +122,14 @@ namespace MemoryGame
             {
                 n = "disney";
             }
-            var newForm = new GameWindow( n ); //create your new form.
-            newForm.Show(); //show the new form.
+            var nieuwSpel = new GameWindow( n , SelectClass.diff  ); //create your new form.
+            nieuwSpel.Show(); //show the new form.
             window.Close();  //only if you want to close the current form.
 
         }
 
 
-
-
-
-
-        //Click geluid laden
-        private void PlayClick()
-        {
-                MediaPlayer Sound1 = new MediaPlayer();
-                Sound1.Open(new Uri(@"D:\stuff\school\Memory Project\Sound Effects - Memory Game\click.mp3"));
-                Sound1.Play();
-        }
-
-        //Correct geluid laden
-        private void PlayCorrect()
-        {
-            MediaPlayer Sound1 = new MediaPlayer();
-            Sound1.Open(new Uri(@"D:\stuff\school\Memory Project\Sound Effects - Memory Game\correct.mp3"));
-            Sound1.Play();
-        }
-
-        //Wow geluid laden
-        private void PlayWow()
-        {
-            MediaPlayer Sound1 = new MediaPlayer();
-            Sound1.Open(new Uri(@"D:\stuff\school\Memory Project\Sound Effects - Memory Game\wow.mp3"));
-            Sound1.Play();
-        }
-
-        //Click geluid private naar public zodat je het kan gebruiken
-        public void button_click(object sender, RoutedEventArgs e)
-        {
-            PlayClick();
-        }
-
-        //Correct geluid private naar public zodat je het kan gebruiken
-        public void button_correct(object sender, RoutedEventArgs e)
-        {
-            PlayCorrect();
-        }
-
-        //Wow geluid private naar public zodat je het kan gebruiken
-        public void button_wow(object sender, RoutedEventArgs e)
-        {
-            PlayWow();
-        }
-
-
+      
 
     }
 }
