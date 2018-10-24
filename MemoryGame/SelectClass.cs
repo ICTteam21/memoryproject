@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 
@@ -72,11 +73,13 @@ namespace MemoryGame
         //Title//
         public void AddTitle2()
         {
-            Label title = new Label();
-            title.Content = "New Game Selector";
-            title.FontSize = 30;
-            title.HorizontalAlignment = HorizontalAlignment.Center;
-
+            Label title = new Label
+            {
+                Content = "New Game Selector",
+                FontSize = 30,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                FontFamily = new FontFamily("Bahnschrift"),
+            };
             Grid.SetRow(title, 0);
             Grid.SetColumn(title, 2);
             Grid.SetColumnSpan(title, 4);
@@ -87,11 +90,15 @@ namespace MemoryGame
         //Continue button//
         public void AddContinue()
         {
-            Button Continue = new Button();
-            Continue.Content = "Continue";
-            Continue.FontSize = 18;
-            //startgame.HorizontalAlignment = HorizontalAlignment.Center;
-
+            Button Continue = new Button
+            {
+                Content = "Continue",
+                FontSize = 40,
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(3),
+                FontFamily = new FontFamily("Bahnschrift"),
+                Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
+            };
 
             Grid.SetRow(Continue, 18);
             Grid.SetColumn(Continue, 7);
@@ -112,11 +119,15 @@ namespace MemoryGame
         //Back button// 
         public void AddBack()
         {
-            Button Back = new Button();
-            Back.Content = "Back";
-            Back.FontSize = 18;
-            //startgame.HorizontalAlignment = HorizontalAlignment.Center;
-
+            Button Back = new Button
+            {
+                Content = "Back",
+                FontSize = 40,
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(3),
+                FontFamily = new FontFamily("Bahnschrift"),
+                Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
+            };
             Grid.SetRow(Back, 18);
             Grid.SetColumn(Back, 5);
             Grid.SetColumnSpan(Back, 1);
@@ -138,7 +149,11 @@ namespace MemoryGame
         public void AddCheck1()
         {
             Check1.Content = "Difficulty 1";
-            Check1.FontSize = 15;
+            Check1.FontSize = 40;
+            Check1.BorderBrush = Brushes.Black;
+            Check1.BorderThickness = new Thickness(3);
+            Check1.FontFamily = new FontFamily("Bahnschrift");
+            Check1.Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue);
 
             Grid.SetRow(Check1, 7);
             Grid.SetColumn(Check1, 1);
@@ -153,9 +168,13 @@ namespace MemoryGame
         /// </summary>
         public void AddCheck2()
         {
-            
+
             Check2.Content = "Difficulty 2";
-            Check2.FontSize = 15;
+            Check2.FontSize = 40;
+            Check2.BorderBrush = Brushes.Black;
+            Check2.BorderThickness = new Thickness(3);
+            Check2.FontFamily = new FontFamily("Bahnschrift");
+            Check2.Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue);
 
 
             Grid.SetRow(Check2, 9);
@@ -172,9 +191,13 @@ namespace MemoryGame
         /// </summary>
         public void AddCheck3()
         {
-            
+
             Check3.Content = "Difficulty 3";
-            Check3.FontSize = 15;
+            Check3.FontSize = 40;
+            Check3.BorderBrush = Brushes.Black;
+            Check3.BorderThickness = new Thickness(3);
+            Check3.FontFamily = new FontFamily("Bahnschrift");
+            Check3.Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue);
 
 
             Grid.SetRow(Check3, 11);
@@ -191,9 +214,13 @@ namespace MemoryGame
         /// </summary>
         public void AddCheck4()
         {
-            
+
             Check4.Content = "Difficulty 4";
-            Check4.FontSize = 15;
+            Check4.FontSize = 40;
+            Check4.BorderBrush = Brushes.Black;
+            Check4.BorderThickness = new Thickness(3);
+            Check4.FontFamily = new FontFamily("Bahnschrift");
+            Check4.Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue);
 
 
             Grid.SetRow(Check4, 13);
@@ -214,7 +241,7 @@ namespace MemoryGame
         {
             Image preview2 = new Image
             {
-                Source = new BitmapImage(new Uri("Images/4x4 preview.png", UriKind.Relative))
+                Source = new BitmapImage(new Uri("Images/4x4 preview.png", UriKind.Relative)),
             };
             Grid.SetRow(preview2, 7);
             Grid.SetColumn(preview2, 5);
@@ -236,6 +263,8 @@ namespace MemoryGame
 
                 // label 2//
                 size.Content = "10 minute time limit";
+                size.FontSize = 25;
+                size.FontFamily = new FontFamily("Bahnschrift");
                 grid.Children.Remove(size);
                 grid.Children.Add(size);
                 diff = 1;
@@ -251,6 +280,8 @@ namespace MemoryGame
 
                 // label 1//
                 size.Content = "5 minute time limit";
+                size.FontSize = 25;
+                size.FontFamily = new FontFamily("Bahnschrift");
                 grid.Children.Remove(size);
                 grid.Children.Add(size);
                 diff = 2;
@@ -264,6 +295,8 @@ namespace MemoryGame
 
                 // label 3//
                 size.Content = "2 minute time limit";
+                size.FontSize = 25;
+                size.FontFamily = new FontFamily("Bahnschrift");
                 grid.Children.Remove(size);
                 grid.Children.Add(size);
                 diff = 3;
@@ -277,6 +310,8 @@ namespace MemoryGame
 
                 // label 4//
                 size.Content = "1 minute time limit";
+                size.FontSize = 25;
+                size.FontFamily = new FontFamily("Bahnschrift");
                 grid.Children.Remove(size);
                 grid.Children.Add(size);
                 diff = 4;
@@ -289,6 +324,11 @@ namespace MemoryGame
         {
             
             resize.Content = "resize";
+            resize.FontSize = 40;
+            resize.BorderBrush = Brushes.Black;
+            resize.BorderThickness = new Thickness(3);
+            resize.FontFamily = new FontFamily("Bahnschrift");
+            resize.Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue);
             resize.Click += Resize_Click;
             grid.Children.Add(resize);
         }
@@ -303,7 +343,10 @@ namespace MemoryGame
         public void AddText1()
         {
             
-            Text2.FontSize = 13;
+            Text1.FontSize = 40;
+            Text1.BorderBrush = Brushes.Black;
+            Text1.BorderThickness = new Thickness(3);
+            Text1.FontFamily = new FontFamily("Bahnschrift");
 
             Grid.SetRow(Text1, 3);
             Grid.SetColumn(Text1, 2);
@@ -332,7 +375,9 @@ namespace MemoryGame
         {
             Label Name1 = new Label();
             Name1.Content = "Name Player 1 : ";
-            Name1.FontSize = 13;
+            Name1.FontSize = 25;
+            Name1.FontFamily = new FontFamily("Bahnschrift");
+
 
             Grid.SetRow(Name1, 3);
             Grid.SetColumn(Name1, 1);
@@ -346,7 +391,8 @@ namespace MemoryGame
         {
             Label Name2 = new Label();
             Name2.Content = "Name Player 2 : ";
-            Name2.FontSize = 13;
+            Name2.FontSize = 25;
+            Name2.FontFamily = new FontFamily("Bahnschrift");
 
             Grid.SetRow(Name2, 3);
             Grid.SetColumn(Name2, 5);

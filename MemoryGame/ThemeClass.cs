@@ -52,8 +52,9 @@ namespace MemoryGame
             Label title = new Label
             {
                 Content = "Theme Selector",
-                FontSize = 40,
-                HorizontalAlignment = HorizontalAlignment.Center
+                FontSize = 80,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                FontFamily = new FontFamily("Bahnschrift"),
             };
 
             Grid.SetRow(title, 0);
