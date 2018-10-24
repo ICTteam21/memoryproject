@@ -82,8 +82,8 @@ namespace MemoryGame
         private void InitializeGameGrid(int cols, int rows)
         {
 
-            rijen = rows;
-            kolommen = cols;
+            //rijen = rows;
+            //kolommen = cols;
             for (int i = 0; i < rows; i++)
             {
                 grid.RowDefinitions.Add(new RowDefinition());
@@ -322,16 +322,21 @@ namespace MemoryGame
                 }
                 if (pairs.Equals(8) && !SelectClass.diff.Equals(0)) 
                 {
-                    MessageBox.Show("Goed gedaan! Je hebt binnen de tijd alle paren gevonden!", "Klik op ok om je highscores te zien");
+                    MessageBox.Show("Goed gedaan! Je hebt binnen de tijd alle paren gevonden!", "Klik op ok om de highscores te zien");
+                    thegameisdone(1, 1);
                     var highscoresWindow = new HighScores();
+
                     window.Close();
                     highscoresWindow.Show();
+
                 }else if (pairs.Equals(8))
                 {
-                    MessageBox.Show("Goed gedaan! Je hebt alle paren gevonden!", "Klik op ok om je highscores te zien");
+                    MessageBox.Show("Goed gedaan! Je hebt alle paren gevonden!", "Klik op ok om de highscores te zien");
+                    thegameisdone(1, 1);
                     var highscoresWindow = new HighScores();
                     window.Close();
                     highscoresWindow.Show();
+
                 }
             }
             else if (MainClass.aantalSpelers.Equals(2)) // als er 2 spelers zijn 
@@ -371,6 +376,7 @@ namespace MemoryGame
                     {
                         int pDiff = P1Points - P2Points;
                         MessageBox.Show("Speler " + Player1Name + " heeft gewonnen! \n" + Player1Name + " heeft met " + pDiff + " punten meer gewonnen!", "Klik op ok om je highscores te zien");
+                        thegameisdone(1, 2);
                         var highscoresWindow = new HighScores();
                         window.Close();
                         highscoresWindow.Show();
@@ -378,6 +384,7 @@ namespace MemoryGame
                     else if ( P1Points < P2Points){
                         int pDiff = P2Points - P1Points;
                         MessageBox.Show("Speler " + Player2Name + " heeft gewonnen! \n" + Player2Name + " heeft met " + pDiff + " punten meer gewonnen!", "Klik op ok om je highscores te zien");
+                        thegameisdone(1, 2);
                         var highscoresWindow = new HighScores();
                         window.Close();
                         highscoresWindow.Show();
@@ -385,6 +392,7 @@ namespace MemoryGame
                     else if (P1Points.Equals(P2Points))
                     {
                         MessageBox.Show( Player1Name + " en " + Player2Name + " jullie zijn erg aan elkaar gewaagt !\n  " + "Probeer het nog een keer!", "Klik op ok om je highscores te zien");
+                        thegameisdone(1, 2);
                         var highscoresWindow = new HighScores();
                         window.Close();
                         highscoresWindow.Show();
@@ -571,42 +579,62 @@ namespace MemoryGame
             System.IO.File.WriteAllLines(path3 + naam, lines);
         }
 
-    
+
 
         /// <summary>
         /// Deze methode moet opgeroepen worden wanneer een spel klaar is.
         /// Hij zal vervolgens de data wegschrijven in excel.
         /// </summary>
-        public void thegameisdone()
+        /// <param name="difficulty"></param>   moeilijkheidsgraad 1 tot 4
+        /// <param name="players"></param>      aantal spelers 1 a 2.
+        public void thegameisdone(int difficulty, int players)
         {
             Excel.Application xlApp;
             Excel.Workbook xlWorkBook;
             Excel.Worksheet xlWorkSheet;
             Excel.Range range;
+            int worksheet;
+
+            if(players == 1)
+            {
+                worksheet = 4 + difficulty;
+            }else
+            {
+                worksheet = difficulty;
+            }
+
 
             xlApp = new Microsoft.Office.Interop.Excel.Application();
 
             xlWorkBook = xlApp.Workbooks.Open(statspath, 0, false, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
             xlApp.UserControl = true;
 
-            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            // dit selecteerd op het moment het eerste werkblad ( variabel op difficulty en players ).
+            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(worksheet);
             range = xlWorkSheet.UsedRange;
 
-            int rij = range.Rows.Count;
+            //geeft het aantal gebruikte rijen terug.
+            double rij = xlApp.WorksheetFunction.CountA(xlWorkSheet.Columns[1]);
 
-            xlWorkSheet.Cells[rij + 1 , 1] = Player1Name;
-            xlWorkSheet.Cells[rij + 1, 2] = P1Points;
-            xlWorkSheet.Cells[rij + 2, 1] = Player2Name;
-            xlWorkSheet.Cells[rij + 2, 2] = P2Points;
-
+            //voert data in op basis van spelers.
+            if (players == 1)
+            {
+                xlWorkSheet.Cells[rij + 1, 1] = Player1Name;
+                xlWorkSheet.Cells[rij + 1, 2] = P1Points;
+            }
+            else
+            {
+                xlWorkSheet.Cells[rij + 1, 1] = Player1Name;
+                xlWorkSheet.Cells[rij + 1, 2] = P1Points;
+                xlWorkSheet.Cells[rij + 2, 1] = Player2Name;
+                xlWorkSheet.Cells[rij + 2, 2] = P2Points;
+            }
+            //dit pakt alle cellen met daarin scores en namen en sorteerd deze.
             range = xlWorkSheet.Range[xlWorkSheet.Cells[3, 1], xlWorkSheet.Cells[rij + 2, 2]];
             range.Sort(range.Columns[2], Excel.XlSortOrder.xlDescending);
 
             xlWorkBook.Save();
             xlApp.Quit();
-
-            
-
 
         }
 

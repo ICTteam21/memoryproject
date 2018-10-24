@@ -416,20 +416,22 @@ namespace MemoryGame
             {
 
 
-                int rw = 0;
+                double rw = 0;
                 xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(i);
                 //Hier set het de range op het gebruikte range(dus waar dingen staan).
                 range = xlWorkSheet.UsedRange;
 
-                //Zorgt ervoor dat het aantal scores maximaal 5 is.
+                var usedRows = xlApp.WorksheetFunction.CountA(xlWorkSheet.Columns[1]);
 
-                if(range.Rows.Count > 7)
+                //Zorgt ervoor dat het aantal scores maximaal 5 is.
+                if(usedRows > 7)
                 {
                     rw = 7;
+                    
                 }
                 else
                 {
-                    rw = range.Rows.Count;
+                    rw = usedRows;
                 }
 
 

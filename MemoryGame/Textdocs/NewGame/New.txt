@@ -1,9 +1,2 @@
-<<<<<<< HEAD
-Test
-test2
-
-
-=======
-asd
-asd
->>>>>>> BrancheChris
+Tjeerd
+Tjitske
