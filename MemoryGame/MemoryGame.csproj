@@ -163,25 +163,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\gebouwen\1.png" />
-    <Resource Include="Images\gebouwen\1-2.jpg" />
-    <Resource Include="Images\gebouwen\2-1.jpg" />
     <Resource Include="Images\gebouwen\2.png" />
     <Resource Include="Images\gebouwen\3.png" />
-    <Resource Include="Images\gebouwen\3-2.jpg" />
     <Resource Include="Images\gebouwen\4.png" />
-    <Resource Include="Images\gebouwen\4-2.jpg" />
     <Resource Include="Images\gebouwen\5.png" />
-    <Resource Include="Images\gebouwen\5-2.jpg" />
-    <Resource Include="Images\gebouwen\6-1.jpg" />
     <Resource Include="Images\gebouwen\6.png" />
     <Resource Include="Images\gebouwen\7.png" />
-    <Resource Include="Images\gebouwen\7-2.jpg" />
-    <Resource Include="Images\gebouwen\8-1.jpg" />
     <Resource Include="Images\gebouwen\8.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\disney\1.png" />
-    <Resource Include="Images\disney\1-2.png" />
     <Resource Include="Images\disney\2-1.png" />
     <Resource Include="Images\disney\2.png" />
     <Resource Include="Images\disney\3-1.png" />
@@ -189,9 +180,7 @@
     <Resource Include="Images\disney\4-1.png" />
     <Resource Include="Images\disney\4.png" />
     <Resource Include="Images\disney\5.png" />
-    <Resource Include="Images\disney\5-2.png" />
     <Resource Include="Images\disney\6.png" />
-    <Resource Include="Images\disney\6-2.png" />
     <Resource Include="Images\disney\7-1.png" />
     <Resource Include="Images\disney\7.png" />
     <Resource Include="Images\disney\8-1.png" />
@@ -228,6 +217,60 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\disney\1-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\disney\5-1.png" />
+    <Resource Include="Images\disney\6-1.png" />
+    <Resource Include="Images\gebouwen\1-1.png" />
+    <Resource Include="Images\gebouwen\10-1.png" />
+    <Resource Include="Images\gebouwen\10.png" />
+    <Resource Include="Images\gebouwen\2-1.png" />
+    <Resource Include="Images\gebouwen\3-1.png" />
+    <Resource Include="Images\gebouwen\4-1.png" />
+    <Resource Include="Images\gebouwen\5-1.png" />
+    <Resource Include="Images\gebouwen\6-1.png" />
+    <Resource Include="Images\gebouwen\7-1.png" />
+    <Resource Include="Images\gebouwen\8-1.png" />
+    <Resource Include="Images\gebouwen\9-1.png" />
+    <Resource Include="Images\gebouwen\9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logos\10.png" />
+    <Resource Include="Images\logos\9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\shapes\animal.png" />
+    <Resource Include="Images\shapes\animal2.png" />
+    <Resource Include="Images\shapes\boom.png" />
+    <Resource Include="Images\shapes\boom2.png" />
+    <Resource Include="Images\shapes\checkmark.png" />
+    <Resource Include="Images\shapes\checkmark2.png" />
+    <Resource Include="Images\shapes\circle.png" />
+    <Resource Include="Images\shapes\circle2.png" />
+    <Resource Include="Images\shapes\crown.png" />
+    <Resource Include="Images\shapes\crown2.png" />
+    <Resource Include="Images\shapes\heart.png" />
+    <Resource Include="Images\shapes\heart2.png" />
+    <Resource Include="Images\shapes\pentagon.png" />
+    <Resource Include="Images\shapes\pentagon2.png" />
+    <Resource Include="Images\shapes\square.png" />
+    <Resource Include="Images\shapes\square2.png" />
+    <Resource Include="Images\shapes\star.png" />
+    <Resource Include="Images\shapes\star2.png" />
+    <Resource Include="Images\shapes\triangle.png" />
+    <Resource Include="Images\shapes\triangle2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\banners\disneybanner.jpg" />
+    <Resource Include="Images\banners\gebouwenbanner.jpg" />
+    <Resource Include="Images\banners\logobanner.jpg" />
+    <Resource Include="Images\cardbacks\disneycardback.png" />
+    <Resource Include="Images\cardbacks\gebouwcardback.png" />
+    <Resource Include="Images\cardbacks\logobackcard.png" />
+    <Resource Include="Images\cardbacks\shapescardback.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
