@@ -359,8 +359,11 @@ namespace MemoryGame
         //Name box 2//
         public void AddText2()
         {
-            
-            Text2.FontSize = 13;
+
+            Text1.FontSize = 40;
+            Text1.BorderBrush = Brushes.Black;
+            Text1.BorderThickness = new Thickness(3);
+            Text1.FontFamily = new FontFamily("Bahnschrift");
 
 
             Grid.SetRow(Text2, 3);
