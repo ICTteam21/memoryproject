@@ -39,6 +39,10 @@ namespace MemoryGame
         private HighScores window;
         public HighScoresClass(HighScores window, Grid grid, int kolommen, int rijen)
         {
+            if (MainClass.windowstate == 2)
+            { window.WindowState = WindowState.Maximized; }
+            else
+            { window.WindowState = WindowState.Normal; }
             this.window = window;
             this.grid = grid;
             InitializeMain(kolommen, rijen);

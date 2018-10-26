@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="SelectOptions" Height="1000" Width="1600" WindowStartupLocation="CenterScreen" Background= "#C8C8C8">
     <Grid x:Name="SelectOpties">
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
 
     </Grid>
 </Window>

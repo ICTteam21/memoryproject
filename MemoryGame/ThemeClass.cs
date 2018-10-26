@@ -21,8 +21,17 @@ namespace MemoryGame
 
 
 
-        public ThemaClass(Themas window, Grid grid, int kolommen, int rijen)
+        public ThemaClass(Themas window, Grid grid, int kolommen, int rijen, int windowstate, int windowstyle)
         {
+
+            if (MainClass.windowstyle == 2)
+            { window.WindowStyle = WindowStyle.None; }
+            else
+            { window.WindowStyle = WindowStyle.SingleBorderWindow; }
+            if (MainClass.windowstate == 2)
+            { window.WindowState = WindowState.Maximized; }
+            else
+            { window.WindowState = WindowState.Normal; }
             this.window = window;
             this.grid = grid;
 
@@ -123,7 +132,7 @@ namespace MemoryGame
             {
                 n = "disney";
             }
-            var nieuwSpel = new GameWindow( n , SelectClass.diff  ); //create your new form.
+            var nieuwSpel = new GameWindow( n , SelectClass.diff,MainClass.windowstate, MainClass.windowstyle ); //create your new form.
             nieuwSpel.Show(); //show the new form.
             window.Close();  //only if you want to close the current form.
 

@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 
+
 namespace MemoryGame
 {
     class SelectClass
@@ -16,21 +17,28 @@ namespace MemoryGame
         private Grid grid;
         
         private SelectOptions window;
-
-    
+        
+        
         RadioButton Check1 = new RadioButton();
         RadioButton Check2 = new RadioButton();
         RadioButton Check3 = new RadioButton();
         RadioButton Check4 = new RadioButton();
         TextBox Text1 = new TextBox();
         TextBox Text2 = new TextBox();
-        Button resize = new Button();
+        
         Label size = new Label();
         public static int diff = 0;
 
-        public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen, int aantalSpelers)
+        public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen, int aantalSpelers, int windowstate, int windowstyle)
         {
-
+            if (MainClass.windowstyle == 2)
+            { window.WindowStyle = WindowStyle.None; }
+            else
+            { window.WindowStyle = WindowStyle.SingleBorderWindow; }
+            if (MainClass.windowstate == 2)
+            { window.WindowState = WindowState.Maximized; }
+            else
+            { window.WindowState = WindowState.Normal; }
             this.window = window;
             this.grid = grid;
             InitializeMain(kolommen, rijen);
@@ -41,7 +49,7 @@ namespace MemoryGame
             AddCheck2();
             AddCheck3();
             AddCheck4();
-            Resize();
+           
 
             if(aantalSpelers == 1)
             {
@@ -91,7 +99,7 @@ namespace MemoryGame
         public void AddContinue()
         {
             Button Continue = new Button
-            {
+            {   
                 Content = "Continue",
                 FontSize = 40,
                 BorderBrush = Brushes.Black,
@@ -110,8 +118,9 @@ namespace MemoryGame
 
         public void Continue_Click(object sender, RoutedEventArgs e)
         {
+           
             Transferdata();
-            var Themes = new Themas(); //create your new form.
+            var Themes = new Themas(MainClass.windowstate,MainClass.windowstyle); //create your new form.
             Themes.Show(); //show the new form.
             window.Close();
         }
@@ -320,23 +329,7 @@ namespace MemoryGame
 
         }
 
-        public void Resize()
-        {
-            
-            resize.Content = "resize";
-            resize.FontSize = 40;
-            resize.BorderBrush = Brushes.Black;
-            resize.BorderThickness = new Thickness(3);
-            resize.FontFamily = new FontFamily("Bahnschrift");
-            resize.Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue);
-            resize.Click += Resize_Click;
-            grid.Children.Add(resize);
-        }
-
-        private void Resize_Click(object sender, RoutedEventArgs e)
-        {
-            window.WindowState = WindowState.Maximized;
-        }
+        
 
 
         //Name box 1//
@@ -361,7 +354,7 @@ namespace MemoryGame
         {
             
             Text2.FontSize = 13;
-
+            
 
             Grid.SetRow(Text2, 3);
             Grid.SetColumn(Text2, 6);

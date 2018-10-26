@@ -17,7 +17,8 @@ namespace MemoryGame
         private Grid grid;
         Button newgame = new Button();
         public static int aantalSpelers;
-
+        public static int windowstate;
+        public static int windowstyle;
         public object Children { get; internal set; }
 
         /// <summary>
@@ -25,7 +26,16 @@ namespace MemoryGame
         /// </summary>
         /// <param name="grid"></param>
         public MainClass(MainMenuWindow window, Grid grid)
-        {
+        {  //settings//
+            if (MainClass.windowstyle == 2)
+            { window.WindowStyle = WindowStyle.None; }
+            else
+            { window.WindowStyle = WindowStyle.SingleBorderWindow; }
+            if (MainClass.windowstate == 2)
+            { window.WindowState = WindowState.Maximized; }
+            else
+            { window.WindowState = WindowState.Normal; }
+            //end//
             this.window = window;
             this.grid = grid;
 
@@ -39,6 +49,7 @@ namespace MemoryGame
             AddLoadGame();
             AddHighScores();
             AddCredits();
+            AddQuit();
 
 
         }
@@ -211,7 +222,34 @@ namespace MemoryGame
 
 
         }
+        public void AddQuit()
+        {
+            Button Quit = new Button
+            {
+                Content = "Quit",
+                FontSize = 60,
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(3),
+                FontFamily = new FontFamily("Bahnschrift"),
+                Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
+            };
 
+            Grid.SetRow(Quit, 18);
+            Grid.SetColumn(Quit, 5);
+            Grid.SetColumnSpan(Quit, 1);
+            Grid.SetRowSpan(Quit, 2);
+            grid.Children.Add(Quit);
+
+            Quit.Click += new RoutedEventHandler(Quit_click);
+
+
+        }
+
+        void Quit_click(object sender, RoutedEventArgs e)
+        {
+
+            Application.Current.Shutdown();
+        }
 
         public void Newgame_click(object sender, RoutedEventArgs e)
         {
@@ -222,21 +260,21 @@ namespace MemoryGame
         public void Newgame1_click(object sender, RoutedEventArgs e)
         {
             aantalSpelers = 1;
-            var SelectScherm = new SelectOptions(aantalSpelers); //create your new form.
+            var SelectScherm = new SelectOptions(aantalSpelers,windowstate,windowstyle); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
         }
         public void Newgame2_click(object sender, RoutedEventArgs e)
         {
             aantalSpelers = 2; 
-            var SelectScherm = new SelectOptions(aantalSpelers); //create your new form.
+            var SelectScherm = new SelectOptions(aantalSpelers,windowstate, windowstyle); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
         }
 
         public void Loadgame_click(object sender, RoutedEventArgs e)
         {
-            var Loading = new LoadScreen(); //create your new form.
+            var Loading = new LoadScreen(windowstate); //create your new form.
             Loading.Show(); //show the new form.
             window.Close();
 

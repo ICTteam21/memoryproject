@@ -17,10 +17,10 @@ namespace MemoryGame
         public const int NIET_KLAAR_COLS = 4;
         GameGrid grid;
 
-        public GameWindow(string thema, int diff)
+        public GameWindow(string thema, int diff, int windowstate, int windowstyle)
         {
             InitializeComponent();
-            grid = new GameGrid(this, GameGrid, NIET_KLAAR_COLS, NIET_KLAAR_ROWS, thema, diff);
+            grid = new GameGrid(this, GameGrid, NIET_KLAAR_COLS, NIET_KLAAR_ROWS, thema, diff, windowstate,windowstyle);
             //WindowState = WindowState.Maximized;
         }
         
