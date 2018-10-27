@@ -87,7 +87,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameGrid.cs" />
+    <Compile Include="C:\Users\Maurice\Desktop\GameGrid.cs">
+      <Link>GameGrid.cs</Link>
+    </Compile>
     <Compile Include="GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

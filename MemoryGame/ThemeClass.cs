@@ -117,20 +117,20 @@ namespace MemoryGame
 
 
 
-        private string n;
+        private static string thema;
 
         public void btnSelectThema(object sender, RoutedEventArgs e)
         {
             
             if (sender == logo)
             {
-                n = "logos";
+                thema = "logos";
             }else if (sender == gebouwen)
             {
-                n = "gebouwen"; 
+                thema = "gebouwen"; 
             }else if(sender == disney)
             {
-                n = "disney";
+                thema = "disney";
             }
             var nieuwSpel = new GameWindow( n , SelectClass.diff,MainClass.windowstate, MainClass.windowstyle ); //create your new form.
             nieuwSpel.Show(); //show the new form.

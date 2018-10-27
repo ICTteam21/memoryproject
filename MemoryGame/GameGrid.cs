@@ -8,12 +8,7 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Input;
-using System.Security.Cryptography;
-using System.Threading;
 using System.IO;
-using System.Reflection;
-using System.Windows.Shapes;
-using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Timers;
 
@@ -34,7 +29,7 @@ namespace MemoryGame
         Label Player2Score = new Label();
         Button SaveGameandClose = new Button();
         Button BacktoMain = new Button();
-        private static System.Timers.Timer aTimer; 
+        private static Timer aTimer; 
 
         string Player1Name; 
         string Player2Name; 
@@ -62,7 +57,7 @@ namespace MemoryGame
             this.window = window; 
             this.grid = grid;
             InitializeGameGrid(cols, rows);
-            AddImages(diff, thema, cols, rows);
+            AddImages(thema, cols, rows);
             paaaaaaad();
             Playerstats(MainClass.aantalSpelers);
             padnaarstatistics();
@@ -133,7 +128,7 @@ namespace MemoryGame
         /// <param name="rows"></param>
         /// <param name="cols"></param>
         
-        private void AddImages(int diff, string thema, int rows, int cols)
+        private void AddImages(string thema, int rows, int cols)
         {
             // get lists
             List<ImageSource> images = GetImagesList(thema);
@@ -207,7 +202,7 @@ namespace MemoryGame
             else
             {
                 MessageBox.Show("Druk op ok om de tijd te starten", "Het spel gaat beginnen!");
-                SetTimer(diff);
+                SetTimer();
             }
 
 
@@ -416,33 +411,70 @@ namespace MemoryGame
         /// Resetten of gwn klaar etc.
         /// </summary>
         /// <param name="diff"> diff is de "globale" parameter dei gelijk staat aan de moeilijkheidsgraad </param>
-        private void SetTimer(int diff)
+        private void SetTimer()
         {
-            if (diff.Equals(0))
+            if (MainClass.aantalSpelers.Equals(1))
             {
+                if (SelectClass.diff.Equals(0))
+                {
 
-            }else if (diff.Equals(1))
+                }
+                else if (SelectClass.diff.Equals(1))
+                {
+                    aTimer = new System.Timers.Timer(60000);
+                    aTimer.Elapsed += OnTimedEvent;
+                    aTimer.Enabled = true;
+                }
+                else if (SelectClass.diff.Equals(2))
+                {
+                    aTimer = new System.Timers.Timer(30000);
+                    aTimer.Elapsed += OnTimedEvent;
+                    aTimer.Enabled = true;
+                }
+                else if (SelectClass.diff.Equals(3))
+                {
+                    aTimer = new System.Timers.Timer(10000);
+                    aTimer.Elapsed += OnTimedEvent;
+                    aTimer.Enabled = true;
+                }
+                else if (SelectClass.diff.Equals(4))
+                {
+                    aTimer = new System.Timers.Timer(5000);
+                    aTimer.Elapsed += OnTimedEvent;
+                    aTimer.Enabled = true;
+                }
+            }
+            if (MainClass.aantalSpelers.Equals(2))
             {
-                aTimer = new System.Timers.Timer(600000);
-                aTimer.Elapsed += OnTimedEvent;
-                aTimer.Enabled = true;
-            }
-            else if(diff.Equals(2)){
-                aTimer = new System.Timers.Timer(300000);
-                aTimer.Elapsed += OnTimedEvent;
-                aTimer.Enabled = true;
-            }
-            else if (diff.Equals(3)){
-                aTimer = new System.Timers.Timer(120000);
-                aTimer.Elapsed += OnTimedEvent;
-                aTimer.Enabled = true;
-            }
-            else if (diff.Equals(4)){
-                aTimer = new System.Timers.Timer(30000);
-                aTimer.Elapsed += OnTimedEvent;
-                aTimer.Enabled = true;
-            }
+                if (SelectClass.diff.Equals(0))
+                {
 
+                }
+                else if (SelectClass.diff.Equals(1))
+                {
+                    aTimer = new System.Timers.Timer(600000);
+                    aTimer.Elapsed += OnTimedEvent;
+                    aTimer.Enabled = true;
+                }
+                else if (SelectClass.diff.Equals(2))
+                {
+                    aTimer = new System.Timers.Timer(300000);
+                    aTimer.Elapsed += OnTimedEvent;
+                    aTimer.Enabled = true;
+                }
+                else if (SelectClass.diff.Equals(3))
+                {
+                    aTimer = new System.Timers.Timer(120000);
+                    aTimer.Elapsed += OnTimedEvent;
+                    aTimer.Enabled = true;
+                }
+                else if (SelectClass.diff.Equals(4))
+                {
+                    aTimer = new System.Timers.Timer(30000);
+                    aTimer.Elapsed += OnTimedEvent;
+                    aTimer.Enabled = true;
+                }
+            }
         }
         /// <summary>
         /// event handler voor de setTimer
@@ -452,10 +484,30 @@ namespace MemoryGame
         /// <param name="e"></param>
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            MessageBox.Show("De tijd is op! ","Klik om terug te gaan");
-            var eindeSpelDoorTimer = new HighScores();
-            eindeSpelDoorTimer.Show();
-            window.Close();
+            if (MainClass.aantalSpelers.Equals(1))
+            {
+                MessageBox.Show("De tijd is op! ", "Klik om terug te gaan");
+                var eindeSpelDoorTimer = new HighScores();
+                eindeSpelDoorTimer.Show();
+                window.Close();
+            }
+            if (MainClass.aantalSpelers.Equals(2))
+            {
+                if (aandebeurt.Equals(1))
+                {
+                    aandebeurt = 2;
+
+                    Player2name.Background = Brushes.Green;
+                    Player1name.Background = Brushes.Orange;
+                }
+                else if (aandebeurt.Equals(2))
+                {
+                    aandebeurt = 1;
+                    Player1name.Background = Brushes.Green;
+                    Player2name.Background = Brushes.Orange;
+                }
+            }
+
 
         }
         Label timer = new Label();
@@ -550,7 +602,6 @@ namespace MemoryGame
                 Grid.SetColumn(Player2Score, 5);
                 grid.Children.Add(Player2Score);
             }  
-
         }
 
 

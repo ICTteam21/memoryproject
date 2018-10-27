@@ -157,6 +157,7 @@ namespace MemoryGame
         /// </summary>
         public void AddCheck1()
         {
+
             Check1.Content = "Difficulty 1";
             Check1.FontSize = 40;
             Check1.BorderBrush = Brushes.Black;
@@ -262,13 +263,14 @@ namespace MemoryGame
             Grid.SetColumn(size, 6);
             Grid.SetColumnSpan(size, 7);
             Grid.SetRowSpan(size, 2);
-
-            if (Check1.IsChecked == true)
+            if (MainClass.aantalSpelers.Equals(1))
             {
-                //Remove and Add Image//
+                if (Check1.IsChecked == true)
+                {
+                    //Remove and Add Image//
 
-                grid.Children.Remove(preview2);
-                grid.Children.Add(preview2);
+                    grid.Children.Remove(preview2);
+                    grid.Children.Add(preview2);
 
                 // label 2//
                 size.Content = "10 minute time limit";
@@ -279,13 +281,13 @@ namespace MemoryGame
                 diff = 1;
                 return;
 
-            }
-            else if (Check2.IsChecked == true)
-            {
+                }
+                else if (Check2.IsChecked == true)
+                {
 
-                //Remove and Add Image//
-                grid.Children.Remove(preview2);
-                grid.Children.Add(preview2);
+                    //Remove and Add Image//
+                    grid.Children.Remove(preview2);
+                    grid.Children.Add(preview2);
 
                 // label 1//
                 size.Content = "5 minute time limit";
@@ -311,11 +313,11 @@ namespace MemoryGame
                 diff = 3;
                 return;
             }
-            else if (Check4.IsChecked == true)
+            else if (MainClass.aantalSpelers.Equals(2))
             {
-                //Remove and Add Image//
-                grid.Children.Remove(preview2);
-                grid.Children.Add(preview2);
+                if (Check1.IsChecked == true)
+                {
+                    //Remove and Add Image//
 
                 // label 4//
                 size.Content = "1 minute time limit";
@@ -326,6 +328,7 @@ namespace MemoryGame
                 diff = 4;
                 return;
             }
+
 
         }
 
