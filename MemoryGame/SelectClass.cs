@@ -120,7 +120,7 @@ namespace MemoryGame
             };
 
             Grid.SetRow(Continue, 18);
-            Grid.SetColumn(Continue, 7);
+            Grid.SetColumn(Continue, 8);
             Grid.SetColumnSpan(Continue, 1);
             Grid.SetRowSpan(Continue, 2);
             grid.Children.Add(Continue);
@@ -153,7 +153,7 @@ namespace MemoryGame
                 Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
             };
             Grid.SetRow(Back, 18);
-            Grid.SetColumn(Back, 8);
+            Grid.SetColumn(Back, 7);
             Grid.SetColumnSpan(Back, 1);
             Grid.SetRowSpan(Back, 2);
             grid.Children.Add(Back);
