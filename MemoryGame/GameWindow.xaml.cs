@@ -17,7 +17,7 @@ namespace MemoryGame
         public const int NIET_KLAAR_COLS = 4;
         GameGrid grid;
 
-        public GameWindow(string thema, int windowstate, int windowstyle)
+        public GameWindow(string thema)
         {
             InitializeComponent();
             grid = new GameGrid(this, GameGrid,  NIET_KLAAR_COLS, NIET_KLAAR_ROWS, thema);

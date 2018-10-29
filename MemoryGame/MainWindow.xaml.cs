@@ -19,7 +19,7 @@ namespace MemoryGame
             InitializeComponent();
 
             grid = new MainClass(this, StartScherm);
-            //WindowState = WindowState.Maximized;
+            
 
         }
 

@@ -18,7 +18,7 @@ namespace MemoryGame
 
         private Settings window;
         public SettingsClass(Settings window, Grid grid, int kolommen, int rijen)
-        {
+        {   //settings//
             if (MainClass.windowstyle == 2)
             { window.WindowStyle = WindowStyle.None; }
             else
@@ -30,16 +30,13 @@ namespace MemoryGame
             this.window = window;
             this.grid = grid;
 
-
             InitializeMain(kolommen, rijen);
             AddTitle();
             Addback();
             Resize();
             Resize2();
             Resize3();
-
-
-            //LightMode();
+           
 
         }
         public void InitializeMain(int kolommen, int rijen)
@@ -92,7 +89,7 @@ namespace MemoryGame
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            
+
             var SelectScherm = new MainMenuWindow(); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
@@ -153,7 +150,7 @@ namespace MemoryGame
 
             window.WindowState = WindowState.Maximized;
 
-            window.WindowStyle = WindowStyle.None;
+            window.WindowStyle = WindowStyle.SingleBorderWindow;
         }
         public void Resize3()
         {
@@ -184,5 +181,6 @@ namespace MemoryGame
             window.WindowStyle = WindowStyle.SingleBorderWindow;
 
         }
+
     }
 }
