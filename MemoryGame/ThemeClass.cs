@@ -155,10 +155,10 @@ namespace MemoryGame
                 Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
             };
 
-            Grid.SetRow(Back, 13);
-            Grid.SetColumn(Back, 5);
+            Grid.SetRow(Back, 18);
+            Grid.SetRowSpan(Back, 1);
+            Grid.SetColumn(Back, 8);
             Grid.SetColumnSpan(Back, 1);
-            Grid.SetRowSpan(Back, 2);
             grid.Children.Add(Back);
             Back.Click += Back_Click1;
         }
