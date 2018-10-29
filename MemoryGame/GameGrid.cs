@@ -28,6 +28,7 @@ namespace MemoryGame
         Label Score2 = new Label();
         Label Player2Score = new Label();
         Button SaveGameandClose = new Button();
+        Button BackToMain = new Button();
         private static Timer aTimer; 
 
         string Player1Name; 
@@ -44,7 +45,16 @@ namespace MemoryGame
         string statspath;
 
         public GameGrid(Window window, Grid grid, int cols, int rows, string thema)
-        {
+        {   //settings//
+            if (MainClass.windowstyle == 2)
+            { window.WindowStyle = WindowStyle.None; }
+            else
+            { window.WindowStyle = WindowStyle.SingleBorderWindow; }
+            if (MainClass.windowstate == 2)
+            { window.WindowState = WindowState.Maximized; }
+            else
+            { window.WindowState = WindowState.Normal; }
+
             this.window = window; 
             this.grid = grid;
             InitializeGameGrid(cols, rows);
@@ -53,6 +63,7 @@ namespace MemoryGame
             Playerstats(MainClass.aantalSpelers);
             padnaarstatistics();
             Savegameandclosebutton();
+            MainmenuButton();
             
 
             fileCount = (from file in Directory.EnumerateFiles(path2, "*", SearchOption.AllDirectories)
@@ -360,13 +371,13 @@ namespace MemoryGame
                     {
                         aandebeurt = 2;
                         Player2name.Background = Brushes.Green;
-                        Player1name.Background = Brushes.Orange;
+                        Player1name.Background = Brushes.LightGray;
                     }
                     else
                     {
                         aandebeurt = 1;
                         Player1name.Background = Brushes.Green;
-                        Player2name.Background = Brushes.Orange;
+                        Player2name.Background = Brushes.LightGray;
                     }
                 }
                 if (pairs.Equals(8)) // als er iemand alle plaatjes heeft gewonnen, ga naar highscores
@@ -491,16 +502,15 @@ namespace MemoryGame
                 {
                     aandebeurt = 2;
 
-                    Player1name.Background = Brushes.Orange;
                     Player2name.Background = Brushes.Green;
-
+                    Player1name.Background = Brushes.LightGray;
                 }
                 else if (aandebeurt.Equals(2))
                 {
                     aandebeurt = 1;
 
                     Player1name.Background = Brushes.Green;
-                    Player2name.Background = Brushes.Orange;
+                    Player2name.Background = Brushes.LightGray;
                 }
             }
 
@@ -573,7 +583,7 @@ namespace MemoryGame
                 Grid.SetColumn(Player1Score, 5);
                 grid.Children.Add(Player1Score);
 
-                Player2name.Background = Brushes.Orange;
+                Player2name.Background = Brushes.LightGray;
                 Player2name.Content = Player2Name;
                 Player2name.FontSize = 30;
                 Player2name.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -636,7 +646,25 @@ namespace MemoryGame
             System.IO.File.WriteAllLines(path3 + naam, lines);
         }
 
+        public void MainmenuButton()
+        {
+            BackToMain.Content = "Main Menu";
+            BackToMain.FontSize = 30;
 
+            Grid.SetRow(BackToMain, 4);
+            Grid.SetColumn(BackToMain, 4);
+
+            BackToMain.Click += BackToMain_Click;
+            grid.Children.Add(BackToMain);
+
+        }
+
+        private void BackToMain_Click(object sender, RoutedEventArgs e)
+        {
+            var SelectScherm = new MainMenuWindow(); //create your new form.
+            SelectScherm.Show(); //show the new form.
+            window.Close();
+        }
 
         /// <summary>
         /// Deze methode moet opgeroepen worden wanneer een spel klaar is.
