@@ -9,28 +9,36 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 
+
 namespace MemoryGame
 {
     class SelectClass
     {
         private Grid grid;
-        
+
         private SelectOptions window;
 
-    
+
         RadioButton Check1 = new RadioButton();
         RadioButton Check2 = new RadioButton();
         RadioButton Check3 = new RadioButton();
         RadioButton Check4 = new RadioButton();
         TextBox Text1 = new TextBox();
         TextBox Text2 = new TextBox();
-        Button resize = new Button();
+
         Label size = new Label();
         public static int diff = 0;
 
-        public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen, int aantalSpelers)
+        public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen, int aantalSpelers, int windowstate, int windowstyle)
         {
-
+            if (MainClass.windowstyle == 2)
+            { window.WindowStyle = WindowStyle.None; }
+            else
+            { window.WindowStyle = WindowStyle.SingleBorderWindow; }
+            if (MainClass.windowstate == 2)
+            { window.WindowState = WindowState.Maximized; }
+            else
+            { window.WindowState = WindowState.Normal; }
             this.window = window;
             this.grid = grid;
             InitializeMain(kolommen, rijen);
@@ -41,9 +49,9 @@ namespace MemoryGame
             AddCheck2();
             AddCheck3();
             AddCheck4();
-            Resize();
 
-            if(aantalSpelers == 1)
+
+            if (aantalSpelers == 1)
             {
                 AddText1();
                 AddName1();
@@ -110,8 +118,9 @@ namespace MemoryGame
 
         public void Continue_Click(object sender, RoutedEventArgs e)
         {
+
             Transferdata();
-            var Themes = new Themas(); //create your new form.
+            var Themes = new Themas(MainClass.windowstate, MainClass.windowstyle); //create your new form.
             Themes.Show(); //show the new form.
             window.Close();
         }
@@ -134,7 +143,7 @@ namespace MemoryGame
             Grid.SetRowSpan(Back, 2);
             grid.Children.Add(Back);
             Back.Click += Back_Click1;
-                }
+        }
 
         public void Back_Click1(object sender, RoutedEventArgs e)
         {
@@ -148,6 +157,7 @@ namespace MemoryGame
         /// </summary>
         public void AddCheck1()
         {
+
             Check1.Content = "Difficulty 1";
             Check1.FontSize = 40;
             Check1.BorderBrush = Brushes.Black;
@@ -161,7 +171,7 @@ namespace MemoryGame
             Grid.SetRowSpan(Check1, 2);
             grid.Children.Add(Check1);
             Check1.Checked += RadioButtonClicked;
- 
+
         }
         /// <summary>
         ///  Diffuculty 2 radiobutton
@@ -206,7 +216,7 @@ namespace MemoryGame
             Grid.SetRowSpan(Check3, 2);
             grid.Children.Add(Check3);
             Check3.Checked += RadioButtonClicked;
- 
+
         }
 
         /// <summary>
@@ -253,108 +263,95 @@ namespace MemoryGame
             Grid.SetColumn(size, 6);
             Grid.SetColumnSpan(size, 7);
             Grid.SetRowSpan(size, 2);
-
-            if (Check1.IsChecked == true)
+            if (MainClass.aantalSpelers.Equals(1))
             {
-                //Remove and Add Image//
+                if (Check1.IsChecked == true)
+                {
+                    //Remove and Add Image//
 
-                grid.Children.Remove(preview2);
-                grid.Children.Add(preview2);
+                    grid.Children.Remove(preview2);
+                    grid.Children.Add(preview2);
 
-                // label 2//
-                size.Content = "10 minute time limit";
-                size.FontSize = 25;
-                size.FontFamily = new FontFamily("Bahnschrift");
-                grid.Children.Remove(size);
-                grid.Children.Add(size);
-                diff = 1;
-                return;
+                    // label 2//
+                    size.Content = "10 minute time limit";
+                    size.FontSize = 25;
+                    size.FontFamily = new FontFamily("Bahnschrift");
+                    grid.Children.Remove(size);
+                    grid.Children.Add(size);
+                    diff = 1;
+                    return;
 
-            }
-            else if (Check2.IsChecked == true)
-            {
+                }
+                else if (Check2.IsChecked == true)
+                {
 
-                //Remove and Add Image//
-                grid.Children.Remove(preview2);
-                grid.Children.Add(preview2);
+                    //Remove and Add Image//
+                    grid.Children.Remove(preview2);
+                    grid.Children.Add(preview2);
 
-                // label 1//
-                size.Content = "5 minute time limit";
-                size.FontSize = 25;
-                size.FontFamily = new FontFamily("Bahnschrift");
-                grid.Children.Remove(size);
-                grid.Children.Add(size);
-                diff = 2;
-                return;
-            }
-            else if (Check3.IsChecked == true)
-            {
-                //Remove and Add Image//
-                grid.Children.Remove(preview2);
-                grid.Children.Add(preview2);
+                    // label 1//
+                    size.Content = "5 minute time limit";
+                    size.FontSize = 25;
+                    size.FontFamily = new FontFamily("Bahnschrift");
+                    grid.Children.Remove(size);
+                    grid.Children.Add(size);
+                    diff = 2;
+                    return;
+                }
+                else if (Check3.IsChecked == true)
+                {
+                    //Remove and Add Image//
+                    grid.Children.Remove(preview2);
+                    grid.Children.Add(preview2);
 
-                // label 3//
-                size.Content = "2 minute time limit";
-                size.FontSize = 25;
-                size.FontFamily = new FontFamily("Bahnschrift");
-                grid.Children.Remove(size);
-                grid.Children.Add(size);
-                diff = 3;
-                return;
-            }
-            else if (Check4.IsChecked == true)
-            {
-                //Remove and Add Image//
-                grid.Children.Remove(preview2);
-                grid.Children.Add(preview2);
+                    // label 3//
+                    size.Content = "2 minute time limit";
+                    size.FontSize = 25;
+                    size.FontFamily = new FontFamily("Bahnschrift");
+                    grid.Children.Remove(size);
+                    grid.Children.Add(size);
+                    diff = 3;
+                    return;
+                }
+                else if (MainClass.aantalSpelers.Equals(2))
+                {
+                    if (Check1.IsChecked == true)
+                    {
+                        //Remove and Add Image//
 
-                // label 4//
-                size.Content = "1 minute time limit";
-                size.FontSize = 25;
-                size.FontFamily = new FontFamily("Bahnschrift");
-                grid.Children.Remove(size);
-                grid.Children.Add(size);
-                diff = 4;
-                return;
-            }
+                        // label 4//
+                        size.Content = "1 minute time limit";
+                        size.FontSize = 25;
+                        size.FontFamily = new FontFamily("Bahnschrift");
+                        grid.Children.Remove(size);
+                        grid.Children.Add(size);
+                        diff = 4;
+                        return;
+                    }
+
+
+                }
+            } 
+
 
         }
-
-        public void Resize()
-        {
-            
-            resize.Content = "resize";
-            resize.FontSize = 40;
-            resize.BorderBrush = Brushes.Black;
-            resize.BorderThickness = new Thickness(3);
-            resize.FontFamily = new FontFamily("Bahnschrift");
-            resize.Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue);
-            resize.Click += Resize_Click;
-            grid.Children.Add(resize);
-        }
-
-        private void Resize_Click(object sender, RoutedEventArgs e)
-        {
-            window.WindowState = WindowState.Maximized;
-        }
-
 
         //Name box 1//
         public void AddText1()
         {
-            
+        
             Text1.FontSize = 40;
             Text1.BorderBrush = Brushes.Black;
             Text1.BorderThickness = new Thickness(3);
             Text1.FontFamily = new FontFamily("Bahnschrift");
-
+        
             Grid.SetRow(Text1, 3);
             Grid.SetColumn(Text1, 2);
             Grid.SetColumnSpan(Text1, 1);
             Grid.SetRowSpan(Text1, 1);
             grid.Children.Add(Text1);
-            
-           
+        
+        
         }
         //Name box 2//
         public void AddText2()
@@ -371,7 +368,7 @@ namespace MemoryGame
             Grid.SetColumnSpan(Text2, 1);
             Grid.SetRowSpan(Text2, 1);
             grid.Children.Add(Text2);
-
+        
         }
         //Label player//
         public void AddName1()
@@ -380,14 +377,14 @@ namespace MemoryGame
             Name1.Content = "Name Player 1 : ";
             Name1.FontSize = 25;
             Name1.FontFamily = new FontFamily("Bahnschrift");
-
-
+        
+        
             Grid.SetRow(Name1, 3);
             Grid.SetColumn(Name1, 1);
             Grid.SetColumnSpan(Name1, 1);
-            Grid.SetRowSpan(Name1, 2 );
+            Grid.SetRowSpan(Name1, 2);
             grid.Children.Add(Name1);
-
+        
         }
         //label player 2//
         public void AddName2()
@@ -396,14 +393,14 @@ namespace MemoryGame
             Name2.Content = "Name Player 2 : ";
             Name2.FontSize = 25;
             Name2.FontFamily = new FontFamily("Bahnschrift");
-
+        
             Grid.SetRow(Name2, 3);
             Grid.SetColumn(Name2, 5);
             Grid.SetColumnSpan(Name2, 1);
             Grid.SetRowSpan(Name2, 2);
             grid.Children.Add(Name2);
         }
-
+        
         public void Transferdata()
         {
             string[] lines = { Text1.Text, Text2.Text, };
@@ -412,10 +409,13 @@ namespace MemoryGame
             pathing = System.AppDomain.CurrentDomain.BaseDirectory;
             path2 = pathing.Replace("bin", "Textdocs");
             path2 = path2.Replace("Debug", "NewGame");
-
+        
             System.IO.File.WriteAllLines(path2 + "New.txt", lines);
-            
+        
         }
 
+       
+        
     }
-}
+
+} 

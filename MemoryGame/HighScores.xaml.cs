@@ -27,8 +27,7 @@ namespace MemoryGame
         public HighScores()
         {
             InitializeComponent();
-            grid = new HighScoresClass(this, HighScoresScreen, kolommen, rijen);
-            
+            grid = new HighScoresClass(this, HighScoresScreen, kolommen, rijen );            
         }
 
 

@@ -23,11 +23,11 @@ namespace MemoryGame
         private const int kolommen = 9;
         private const int rijen = 20;
 
-        public LoadScreen()
+        public LoadScreen(int windowstate)
         {
 
             InitializeComponent();
-            grid = new LoadClass(this, LoadingScreen, kolommen, rijen);
+            grid = new LoadClass(this, LoadingScreen, kolommen, rijen, windowstate);
         }
     }
 }
