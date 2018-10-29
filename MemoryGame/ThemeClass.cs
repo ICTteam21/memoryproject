@@ -145,10 +145,15 @@ namespace MemoryGame
         //Back button (to select)//
         public void AddBack()
         {
-            Button Back = new Button();
-            Back.Content = "Back";
-            Back.FontSize = 18;
-            //startgame.HorizontalAlignment = HorizontalAlignment.Center;
+            Button Back = new Button
+            {
+                Content = "Back",
+                FontSize = 40,
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(3),
+                FontFamily = new FontFamily("Bahnschrift"),
+                Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
+            };
 
             Grid.SetRow(Back, 13);
             Grid.SetColumn(Back, 5);
