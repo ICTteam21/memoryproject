@@ -28,7 +28,6 @@ namespace MemoryGame
         Label Score2 = new Label();
         Label Player2Score = new Label();
         Button SaveGameandClose = new Button();
-        Button BacktoMain = new Button();
         private static Timer aTimer; 
 
         string Player1Name; 
@@ -44,16 +43,8 @@ namespace MemoryGame
         string path3;
         string statspath;
 
-        public GameGrid(Window window, Grid grid, int cols, int rows, string thema, int diff, int windowstate, int windowstyle)
+        public GameGrid(Window window, Grid grid, int cols, int rows, string thema)
         {
-            if (MainClass.windowstyle == 2)
-            { window.WindowStyle = WindowStyle.None; }
-            else
-            { window.WindowStyle = WindowStyle.SingleBorderWindow; }
-            if (MainClass.windowstate == 2)
-            { window.WindowState = WindowState.Maximized; }
-            else
-            { window.WindowState = WindowState.Normal; }
             this.window = window; 
             this.grid = grid;
             InitializeGameGrid(cols, rows);
@@ -62,8 +53,7 @@ namespace MemoryGame
             Playerstats(MainClass.aantalSpelers);
             padnaarstatistics();
             Savegameandclosebutton();
-            BacktoMainMenuButton();
-
+            
 
             fileCount = (from file in Directory.EnumerateFiles(path2, "*", SearchOption.AllDirectories)
                          select file).Count();
@@ -616,25 +606,6 @@ namespace MemoryGame
 
             SaveGameandClose.Click += new RoutedEventHandler(SaveGame_Click);
             grid.Children.Add(SaveGameandClose);
-        }
-
-        public void BacktoMainMenuButton()
-        {
-            BacktoMain.Content = "Main Menu";
-            BacktoMain.FontSize = 30;
-
-            Grid.SetRow(BacktoMain, 4);
-            Grid.SetColumn(BacktoMain, 4);
-
-            BacktoMain.Click += BacktoMain_Click;
-            grid.Children.Add(BacktoMain);
-        }
-
-        private void BacktoMain_Click(object sender, RoutedEventArgs e)
-        {
-            var BacktoMain = new MainMenuWindow(); //create your new form.
-            BacktoMain.Show(); //show the new form.
-            window.Close();
         }
 
 
