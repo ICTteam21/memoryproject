@@ -356,13 +356,13 @@ namespace MemoryGame
                     {
                         aandebeurt = 2;
                         Player2name.Background = Brushes.Green;
-                        Player1name.Background = Brushes.Orange;
+                        Player1name.Background = Brushes.LightGray;
                     }
                     else
                     {
                         aandebeurt = 1;
                         Player1name.Background = Brushes.Green;
-                        Player2name.Background = Brushes.Orange;
+                        Player2name.Background = Brushes.LightGray;
                     }
                 }
                 if (pairs.Equals(8)) // als er iemand alle plaatjes heeft gewonnen, ga naar highscores
@@ -488,13 +488,13 @@ namespace MemoryGame
                     aandebeurt = 2;
 
                     Player2name.Background = Brushes.Green;
-                    Player1name.Background = Brushes.Orange;
+                    Player1name.Background = Brushes.LightGray;
                 }
                 else if (aandebeurt.Equals(2))
                 {
                     aandebeurt = 1;
                     Player1name.Background = Brushes.Green;
-                    Player2name.Background = Brushes.Orange;
+                    Player2name.Background = Brushes.LightGray;
                 }
             }
 
@@ -567,7 +567,7 @@ namespace MemoryGame
                 Grid.SetColumn(Player1Score, 5);
                 grid.Children.Add(Player1Score);
 
-                Player2name.Background = Brushes.Orange;
+                Player2name.Background = Brushes.LightGray;
                 Player2name.Content = Player2Name;
                 Player2name.FontSize = 30;
                 Player2name.HorizontalContentAlignment = HorizontalAlignment.Center;

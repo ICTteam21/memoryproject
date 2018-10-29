@@ -20,6 +20,7 @@ namespace MemoryGame
         public static int windowstate;
         public static int windowstyle;
         public object Children { get; internal set; }
+        
 
         /// <summary>
         /// Het hoofdgrid.
@@ -48,7 +49,7 @@ namespace MemoryGame
             AddNewGame();
             AddLoadGame();
             AddHighScores();
-            AddCredits();
+            AddSettings();
             AddQuit();
 
 
@@ -200,11 +201,11 @@ namespace MemoryGame
 
         }
 
-        public void AddCredits()
+        public void AddSettings()
         {
-            Button credits = new Button
+            Button settings = new Button
             {
-                Content = "Credits",
+                Content = "Settings",
                 FontSize = 60,
                 BorderBrush = Brushes.Black,
                 BorderThickness = new Thickness(3),
@@ -212,13 +213,13 @@ namespace MemoryGame
                 Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
             };
 
-            Grid.SetRow(credits, 16);
-            Grid.SetColumn(credits, 2);
-            Grid.SetColumnSpan(credits, 2);
-            Grid.SetRowSpan(credits, 2);
-            grid.Children.Add(credits);
+            Grid.SetRow(settings, 16);
+            Grid.SetColumn(settings, 2);
+            Grid.SetColumnSpan(settings, 2);
+            Grid.SetRowSpan(settings, 2);
+            grid.Children.Add(settings);
 
-            credits.Click += new RoutedEventHandler(Credits_click);
+            settings.Click += new RoutedEventHandler(settings_click);
 
 
         }
@@ -293,7 +294,7 @@ namespace MemoryGame
 
         // to test need to remove
         
-        void Credits_click(object sender, RoutedEventArgs e)
+        void settings_click(object sender, RoutedEventArgs e)
         {
 
             var SelectScherm = new Settings(); //create your new form.

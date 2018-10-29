@@ -75,9 +75,15 @@ namespace MemoryGame
         /// </summary>
         public void AddBack()
         {
-            Button Back = new Button();
-            Back.Content = "Back";
-            Back.FontSize = 18;
+            Button Back = new Button
+            {
+                Content = "Back",
+                FontSize = 40,
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(3),
+                FontFamily = new FontFamily("Bahnschrift"),
+                Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
+            };
             //startgame.HorizontalAlignment = HorizontalAlignment.Center;
 
             Grid.SetRow(Back, 8);
@@ -106,13 +112,10 @@ namespace MemoryGame
         private void labelhighscores()
         {
             highscoretitle.Content = "Highscores";
-            highscoretitle.FontSize = 40;
-            highscoretitle.BorderThickness = new Thickness(2);
-            highscoretitle.BorderBrush = Brushes.Black;
+            highscoretitle.FontSize = 80;
+            highscoretitle.FontFamily = new FontFamily("Bahnschrift");
             highscoretitle.HorizontalContentAlignment = HorizontalAlignment.Center;
             highscoretitle.VerticalContentAlignment = VerticalAlignment.Center;
-
-
 
             Grid.SetRow(highscoretitle, 0);
             Grid.SetColumn(highscoretitle, 3);
@@ -127,7 +130,7 @@ namespace MemoryGame
         public void sp()
         {
             //subgrid1
-            Grid.SetRow(highscores1, 2);
+            Grid.SetRow(highscores1, 1);
             Grid.SetColumn(highscores1, 1);
             Grid.SetRowSpan(highscores1, 3);
             for (int i = 0; i < 7; i++)
@@ -141,7 +144,7 @@ namespace MemoryGame
             grid.Children.Add(highscores1);
 
 
-            Grid.SetRow(highscores2, 2);
+            Grid.SetRow(highscores2, 1);
             Grid.SetColumn(highscores2, 3);
             Grid.SetRowSpan(highscores2, 3);
             for (int i = 0; i < 7; i++)
@@ -154,7 +157,7 @@ namespace MemoryGame
             }
             grid.Children.Add(highscores2);
 
-            Grid.SetRow(highscores3, 2);
+            Grid.SetRow(highscores3, 1);
             Grid.SetColumn(highscores3, 5);
             Grid.SetRowSpan(highscores3, 3);
             for (int i = 0; i < 7; i++)
@@ -167,7 +170,7 @@ namespace MemoryGame
             }
             grid.Children.Add(highscores3);
 
-            Grid.SetRow(highscores4, 2);
+            Grid.SetRow(highscores4, 1);
             Grid.SetColumn(highscores4, 7);
             Grid.SetRowSpan(highscores4, 3);
             for (int i = 0; i < 7; i++)
@@ -231,6 +234,15 @@ namespace MemoryGame
                 highscores8.ColumnDefinitions.Add(new ColumnDefinition());
             }
             grid.Children.Add(highscores8);
+
+            highscores1.Background = new LinearGradientBrush(Colors.DarkGray, Colors.LightGray, 0.1);
+            highscores2.Background = new LinearGradientBrush(Colors.DarkGray, Colors.LightGray, 0.1);
+            highscores3.Background = new LinearGradientBrush(Colors.DarkGray, Colors.LightGray, 0.1);
+            highscores4.Background = new LinearGradientBrush(Colors.DarkGray, Colors.LightGray, 0.1);
+            highscores5.Background = new LinearGradientBrush(Colors.DarkGray, Colors.LightGray, 0.1);
+            highscores6.Background = new LinearGradientBrush(Colors.DarkGray, Colors.LightGray, 0.1);
+            highscores7.Background = new LinearGradientBrush(Colors.DarkGray, Colors.LightGray, 0.1);
+            highscores8.Background = new LinearGradientBrush(Colors.DarkGray, Colors.LightGray, 0.1);
 
         }
 
@@ -362,8 +374,10 @@ namespace MemoryGame
             Grid.SetColumnSpan(categorie, 2);
             categorie.BorderThickness = new Thickness(1);
             categorie.BorderBrush = Brushes.Black;
+            categorie.Background = Brushes.LightGray;   
             categorie.HorizontalContentAlignment = HorizontalAlignment.Center;
             categorie.VerticalContentAlignment = VerticalAlignment.Center;
+            categorie.FontFamily = new FontFamily("Bahnschrift");
 
             switch (sheetnr)
             {

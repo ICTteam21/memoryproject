@@ -84,7 +84,7 @@ namespace MemoryGame
             Label title = new Label
             {
                 Content = "New Game Selector",
-                FontSize = 30,
+                FontSize = 80,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 FontFamily = new FontFamily("Bahnschrift"),
             };
@@ -138,7 +138,7 @@ namespace MemoryGame
                 Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
             };
             Grid.SetRow(Back, 18);
-            Grid.SetColumn(Back, 5);
+            Grid.SetColumn(Back, 8);
             Grid.SetColumnSpan(Back, 1);
             Grid.SetRowSpan(Back, 2);
             grid.Children.Add(Back);
@@ -357,10 +357,10 @@ namespace MemoryGame
         public void AddText2()
         {
 
-            Text1.FontSize = 40;
-            Text1.BorderBrush = Brushes.Black;
-            Text1.BorderThickness = new Thickness(3);
-            Text1.FontFamily = new FontFamily("Bahnschrift");
+            Text2.FontSize = 40;
+            Text2.BorderBrush = Brushes.Black;
+            Text2.BorderThickness = new Thickness(3);
+            Text2.FontFamily = new FontFamily("Bahnschrift");
 
 
             Grid.SetRow(Text2, 3);

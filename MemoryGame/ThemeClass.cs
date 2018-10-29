@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -15,9 +16,9 @@ namespace MemoryGame
     {
         private Themas window;
         private Grid grid;
-        Button logo = new Button();
-        Button gebouwen = new Button();
-        Button disney = new Button();
+        Image logo = new Image();
+        Image gebouwen = new Image();
+        Image disney = new Image();
 
 
 
@@ -73,45 +74,39 @@ namespace MemoryGame
             grid.Children.Add(title);
         }
 
-
         private void Theme1()
         {
-            disney.Content = "Disney";
-            disney.FontSize = 20;
-
+            disney.Source = new BitmapImage(new Uri("Images/banners/disneybanner.jpg", UriKind.Relative));
+            disney.MouseDown += new MouseButtonEventHandler(SelectThema);
             Grid.SetRow(disney, 3);
             Grid.SetColumn(disney, 1);
             Grid.SetColumnSpan(disney, 3);
             Grid.SetRowSpan(disney, 2);
             grid.Children.Add(disney);
-            disney.Click += btnSelectThema;
 
         }
-
-
+        
         private void Theme2()
         {
-            gebouwen.Content = "Gebouwen";
-            gebouwen.FontSize = 20;
+            gebouwen.Source = new BitmapImage(new Uri("Images/banners/gebouwenbanner.jpg", UriKind.Relative));
+            gebouwen.MouseDown += new MouseButtonEventHandler(SelectThema);
             Grid.SetRow(gebouwen, 6);
             Grid.SetColumn(gebouwen, 1);
             Grid.SetColumnSpan(gebouwen, 3);
             Grid.SetRowSpan(gebouwen, 2);
             grid.Children.Add(gebouwen);
-            gebouwen.Click += btnSelectThema;
         }
 
 
         private void Theme3()
         {
-            logo.Content = "Logo's";
-            logo.FontSize = 20;
+            logo.Source = new BitmapImage(new Uri("Images/banners/logobanner.jpg", UriKind.Relative));
+            logo.MouseDown += new MouseButtonEventHandler(SelectThema);
             Grid.SetRow(logo, 9);
             Grid.SetColumn(logo, 1);
             Grid.SetColumnSpan(logo, 3);
             Grid.SetRowSpan(logo, 2);
             grid.Children.Add(logo);
-            logo.Click += btnSelectThema;
         }
 
 
@@ -119,7 +114,7 @@ namespace MemoryGame
 
         private static string thema;
 
-        public void btnSelectThema(object sender, RoutedEventArgs e)
+        public void SelectThema(object sender, RoutedEventArgs e)
         {
             
             if (sender == logo)
@@ -135,11 +130,6 @@ namespace MemoryGame
             var nieuwSpel = new GameWindow( thema ,MainClass.windowstate, MainClass.windowstyle ); //create your new form.
             nieuwSpel.Show(); //show the new form.
             window.Close();  //only if you want to close the current form.
-
         }
-
-
-      
-
     }
 }
