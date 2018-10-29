@@ -274,5 +274,15 @@
     <Resource Include="Images\cardbacks\logobackcard.png" />
     <Resource Include="Images\cardbacks\shapescardback.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\planeten\1.png" />
+    <Resource Include="Images\planeten\2.png" />
+    <Resource Include="Images\planeten\3.png" />
+    <Resource Include="Images\planeten\4.png" />
+    <Resource Include="Images\planeten\5.png" />
+    <Resource Include="Images\planeten\6.png" />
+    <Resource Include="Images\planeten\7.png" />
+    <Resource Include="Images\planeten\8.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
