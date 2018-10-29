@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GameGrid.cs" />
     <Compile Include="HighScores.xaml.cs">
       <DependentUpon>HighScores.xaml</DependentUpon>
     </Compile>
@@ -86,9 +87,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="C:\Users\Maurice\Desktop\GameGrid.cs">
-      <Link>GameGrid.cs</Link>
     </Compile>
     <Compile Include="GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
