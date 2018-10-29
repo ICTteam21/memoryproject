@@ -21,8 +21,8 @@ namespace MemoryGame
     public partial class HighScores : Window
     {
         HighScoresClass grid;
-        private const int kolommen = 9;
-        private const int rijen = 9;
+        private const int kolommen = 13;
+        private const int rijen = 10;
 
         public HighScores()
         {

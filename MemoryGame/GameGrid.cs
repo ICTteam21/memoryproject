@@ -40,9 +40,15 @@ namespace MemoryGame
         private string themanaamsave;
         private int fileCount;
         string pathing;
-        string path2;
         string path3;
         string statspath;
+
+        TimeSpan starttijd;
+        TimeSpan eindtijd;
+        string totaletijd;
+
+        public List<string> plaatjesvolgorde = new List<string>();
+
 
         public GameGrid(Window window, Grid grid, int cols, int rows, string thema)
         {   //settings//
@@ -63,26 +69,30 @@ namespace MemoryGame
             Playerstats(MainClass.aantalSpelers);
             padnaarstatistics();
             Savegameandclosebutton();
+            starttijd = DateTime.Now.TimeOfDay;
             MainmenuButton();
             
 
-            fileCount = (from file in Directory.EnumerateFiles(path2, "*", SearchOption.AllDirectories)
+            fileCount = (from file in Directory.EnumerateFiles(path3, "*", SearchOption.AllDirectories)
                          select file).Count();
-
 
         }
 
         public void paaaaaaad()
         {
             pathing = System.AppDomain.CurrentDomain.BaseDirectory;
-            path2 = pathing.Replace("bin","Textdocs");
-            path2 = path2.Replace("Debug", "NewGame");
+            //path2 = pathing.Replace("bin", "Textdocs");
+            //path2 = path2.Replace("Debug", "NewGame");
 
-            path3 = pathing.Replace("bin","Textdocs");
+            path3 = pathing.Replace("bin", "Textdocs");
             path3 = path3.Replace("Debug", "SavedGames");
 
-            Player1Name = File.ReadLines(path2 + "New.txt").Skip(0).Take(1).First();
-            Player2Name = File.ReadLines(path2 + "New.txt").Skip(1).Take(1).First();
+            //Player1Name = File.ReadLines(path2 + "New.txt").Skip(0).Take(1).First();
+            //Player2Name = File.ReadLines(path2 + "New.txt").Skip(1).Take(1).First();
+            Player1Name = SelectClass.spelernaam1;
+            Player2Name = SelectClass.spelernaam2;
+
+
         }
         
         private void InitializeGameGrid(int cols, int rows)
@@ -105,11 +115,13 @@ namespace MemoryGame
         /// </summary>
         /// <returns></returns>
         /// 
+        public List<ImageSource> imagesList = new List<ImageSource>();
+
         private List<ImageSource> GetImagesList(string thema)
         {
 
 
-            List<ImageSource> imagesList = new List<ImageSource>();
+
             for (int i = 0; i < 16; i++)
             {
                 int imageNr = i % 8 + 1;
@@ -123,6 +135,7 @@ namespace MemoryGame
 
         }
 
+
         /// <summary>
         /// Voegt de plaatjes aan de grid 
         /// </summary>
@@ -133,7 +146,7 @@ namespace MemoryGame
         {
             // get lists
             List<ImageSource> images = GetImagesList(thema);
-           
+
             // logic
             if (thema.Equals("logos"))
             {
@@ -146,7 +159,9 @@ namespace MemoryGame
                         {
                             Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
                             Tag = images.First()
+
                         };
+                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
                         images.RemoveAt(0);
                         backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
                         Grid.SetColumn(backgroudImage, column);
@@ -167,6 +182,7 @@ namespace MemoryGame
                             Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
                             Tag = images.First()
                         };
+                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
                         images.RemoveAt(0);
                         backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
                         Grid.SetColumn(backgroudImage, column);
@@ -188,6 +204,7 @@ namespace MemoryGame
                             Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
                             Tag = images.First()
                         };
+                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
                         images.RemoveAt(0);
                         backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
                         Grid.SetColumn(backgroudImage, column);
@@ -205,7 +222,6 @@ namespace MemoryGame
                 MessageBox.Show("Druk op ok om de tijd te starten", "Het spel gaat beginnen!");
                 SetTimer();
             }
-
 
         }
 
@@ -278,9 +294,13 @@ namespace MemoryGame
 
             IsTaskRunning = true;
             await Task.Delay(300);
-            
+            string Card1 = tag1.Substring(tag1.Length - 5);
+            string Card2 = tag2.Substring(tag2.Length - 5);
 
-            if (tag2.Contains(tag1) && !pos1.Equals(pos2)) // win 
+            bool CardsEqual = Card1.Equals(Card2);
+            bool PosEqual = pos1.Equals(pos2);
+
+            if (CardsEqual && !PosEqual) // win 
             {
                 win = true;
                 pairs++;
@@ -292,7 +312,7 @@ namespace MemoryGame
                 imgCardTwo = null;
                 
             }
-            else if (!tag2.Contains(tag1) && !pos1.Equals(pos2) ) // lose
+            else if (!CardsEqual && !PosEqual) // lose
             {
                 win = false;
                 imgCardOne.Source = back;
@@ -302,7 +322,7 @@ namespace MemoryGame
                 imgCardOne = null;
                 imgCardTwo = null;
             }
-            if (tag1.Equals(tag2) || pos1.Equals(pos2)) // op hetzelfde kaartje geklikt
+            if (CardsEqual || PosEqual) // op hetzelfde kaartje geklikt
             {
                 imgCardTwo = null;
                 
@@ -328,6 +348,10 @@ namespace MemoryGame
                 }
                 if (pairs.Equals(8) && !SelectClass.diff.Equals(0)) 
                 {
+                    eindtijd = DateTime.Now.TimeOfDay;
+                    var diff = eindtijd.Subtract(starttijd);
+                    totaletijd = String.Format("{0}:{1}:{2}", diff.Hours, diff.Minutes, diff.Seconds);
+
                     MessageBox.Show("Goed gedaan! Je hebt binnen de tijd alle paren gevonden!", "Klik op ok om de highscores te zien");
                     thegameisdone(1, 1);
                     var highscoresWindow = new HighScores();
@@ -337,6 +361,10 @@ namespace MemoryGame
 
                 }else if (pairs.Equals(8))
                 {
+                    eindtijd = DateTime.Now.TimeOfDay;
+                    var diff = eindtijd.Subtract(starttijd);
+                    totaletijd = String.Format("{0}:{1}:{2}", diff.Hours, diff.Minutes, diff.Seconds);
+
                     MessageBox.Show("Goed gedaan! Je hebt alle paren gevonden!", "Klik op ok om de highscores te zien");
                     thegameisdone(1, 1);
                     var highscoresWindow = new HighScores();
@@ -381,7 +409,12 @@ namespace MemoryGame
                     if (P1Points > P2Points)
                     {
                         int pDiff = P1Points - P2Points;
-                        MessageBox.Show("Speler " + Player1Name + " heeft gewonnen! \n" + Player1Name + " heeft met " + pDiff + " punten meer gewonnen!", "Klik op ok om je highscores te zien");
+
+                        eindtijd = DateTime.Now.TimeOfDay;
+                        var diff = eindtijd.Subtract(starttijd);
+                        totaletijd = String.Format("{0}:{1}:{2}",diff.Hours,diff.Minutes, diff.Seconds);
+
+                        MessageBox.Show("Speler " + Player1Name + " heeft gewonnen! \n" + Player1Name + " heeft met " + pDiff + " punten meer gewonnen! het duurde: " + totaletijd, "Klik op ok om je highscores te zien");
                         thegameisdone(1, 2);
                         var highscoresWindow = new HighScores();
                         window.Close();
@@ -389,7 +422,12 @@ namespace MemoryGame
                     }
                     else if ( P1Points < P2Points){
                         int pDiff = P2Points - P1Points;
-                        MessageBox.Show("Speler " + Player2Name + " heeft gewonnen! \n" + Player2Name + " heeft met " + pDiff + " punten meer gewonnen!", "Klik op ok om je highscores te zien");
+
+                        eindtijd = DateTime.Now.TimeOfDay;
+                        var diff = eindtijd.Subtract(starttijd);
+                        totaletijd = String.Format("{0}:{1}:{2}", diff.Hours, diff.Minutes, diff.Seconds);
+
+                        MessageBox.Show("Speler " + Player2Name + " heeft gewonnen! \n" + Player2Name + " heeft met " + pDiff + " punten meer gewonnen! het duurde: " + totaletijd, "Klik op ok om je highscores te zien");
                         thegameisdone(1, 2);
                         var highscoresWindow = new HighScores();
                         window.Close();
@@ -397,7 +435,11 @@ namespace MemoryGame
                     }
                     else if (P1Points.Equals(P2Points))
                     {
-                        MessageBox.Show( Player1Name + " en " + Player2Name + " jullie zijn erg aan elkaar gewaagt !\n  " + "Probeer het nog een keer!", "Klik op ok om je highscores te zien");
+                        eindtijd = DateTime.Now.TimeOfDay;
+                        var diff = eindtijd.Subtract(starttijd);
+                        totaletijd = String.Format("{0}:{1}:{2}", diff.Hours, diff.Minutes, diff.Seconds);
+
+                        MessageBox.Show( Player1Name + " en " + Player2Name + " jullie zijn erg aan elkaar gewaagt !\n  " + "Probeer het nog een keer! het duurde: " + totaletijd, "Klik op ok om je highscores te zien");
                         thegameisdone(1, 2);
                         var highscoresWindow = new HighScores();
                         window.Close();
@@ -422,25 +464,25 @@ namespace MemoryGame
                 }
                 else if (SelectClass.diff.Equals(1))
                 {
-                    aTimer = new System.Timers.Timer(60000);
+                    aTimer = new Timer(6000000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
                 else if (SelectClass.diff.Equals(2))
                 {
-                    aTimer = new System.Timers.Timer(30000);
+                    aTimer = new Timer(3000000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
                 else if (SelectClass.diff.Equals(3))
                 {
-                    aTimer = new System.Timers.Timer(10000);
+                    aTimer = new Timer(120000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
                 else if (SelectClass.diff.Equals(4))
                 {
-                    aTimer = new System.Timers.Timer(5000);
+                    aTimer = new Timer(60000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
@@ -453,25 +495,25 @@ namespace MemoryGame
                 }
                 else if (SelectClass.diff.Equals(1))
                 {
-                    aTimer = new System.Timers.Timer(600000);
+                    aTimer = new Timer(45000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
                 else if (SelectClass.diff.Equals(2))
                 {
-                    aTimer = new System.Timers.Timer(300000);
+                    aTimer = new Timer(20000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
                 else if (SelectClass.diff.Equals(3))
                 {
-                    aTimer = new System.Timers.Timer(120000);
+                    aTimer = new Timer(10000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
                 else if (SelectClass.diff.Equals(4))
                 {
-                    aTimer = new System.Timers.Timer(30000);
+                    aTimer = new Timer(5000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
@@ -504,6 +546,7 @@ namespace MemoryGame
                 else if (aandebeurt.Equals(2))
                 {
                     aandebeurt = 1;
+
                     Player1name.Background = Brushes.Green;
                     Player2name.Background = Brushes.LightGray;
                 }
@@ -511,7 +554,7 @@ namespace MemoryGame
 
 
         }
-        Label timer = new Label();
+       
 
         public void Playerstats(int aantalSpelers)
         {
@@ -609,6 +652,7 @@ namespace MemoryGame
 
         public void Savegameandclosebutton()
         {
+           
             SaveGameandClose.Content = "Save Game";
             SaveGameandClose.FontSize = 30;
 
@@ -635,10 +679,14 @@ namespace MemoryGame
             {
                 naamaandebeurt = Player2Name;
             }
+ 
+            string pathing;
+            string path2;
+            pathing = System.AppDomain.CurrentDomain.BaseDirectory;
+            path2 = pathing.Replace("bin", "Textdocs");
+            path2 = path2.Replace("Debug", "NewGame");
+            System.IO.File.WriteAllLines(path2 + "WUT.txt", plaatjesvolgorde);
 
-            string[] lines = { Convert.ToString(aandebeurt), Player1Name, Convert.ToString(P1Points), Player2Name, Convert.ToString(P2Points) };
-            string naam = (fileCount + 1) + " " + themanaamsave + " - " + "P1 " + Player1Name + " Points-" + Convert.ToString(P1Points) + " P2 " + Player2Name + " Points-" + Convert.ToString(P2Points) + " Turn-" + naamaandebeurt + ".txt";
-            System.IO.File.WriteAllLines(path3 + naam, lines);
         }
 
         public void MainmenuButton()
@@ -701,16 +749,19 @@ namespace MemoryGame
             {
                 xlWorkSheet.Cells[rij + 1, 1] = Player1Name;
                 xlWorkSheet.Cells[rij + 1, 2] = P1Points;
+                xlWorkSheet.Cells[rij + 1, 3] = totaletijd;
             }
             else
             {
                 xlWorkSheet.Cells[rij + 1, 1] = Player1Name;
                 xlWorkSheet.Cells[rij + 1, 2] = P1Points;
+                xlWorkSheet.Cells[rij + 1, 3] = totaletijd;
                 xlWorkSheet.Cells[rij + 2, 1] = Player2Name;
                 xlWorkSheet.Cells[rij + 2, 2] = P2Points;
+                xlWorkSheet.Cells[rij + 2, 3] = totaletijd;
             }
             //dit pakt alle cellen met daarin scores en namen en sorteerd deze.
-            range = xlWorkSheet.Range[xlWorkSheet.Cells[3, 1], xlWorkSheet.Cells[rij + 2, 2]];
+            range = xlWorkSheet.Range[xlWorkSheet.Cells[3, 1], xlWorkSheet.Cells[rij + 2, 3]];
             range.Sort(range.Columns[2], Excel.XlSortOrder.xlDescending);
 
             xlWorkBook.Save();

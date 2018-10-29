@@ -37,6 +37,8 @@ namespace MemoryGame
 
 
         private HighScores window;
+
+
         public HighScoresClass(HighScores window, Grid grid, int kolommen, int rijen)
         {   //settings//
             if (MainClass.windowstyle == 2)
@@ -50,11 +52,17 @@ namespace MemoryGame
 
             this.window = window;
             this.grid = grid;
+
             InitializeMain(kolommen, rijen);
+
             padnaarscores(); //roept een methode op die de huidige locatie van het document ophaalt en aanpast.
+
             AddBack(); //voegt een back button toe.
+
             labelhighscores(); //voegt een title toe.
+
             sp(); //maakt 8 grids aan.
+
             exceldata();
         }
 
@@ -91,9 +99,9 @@ namespace MemoryGame
             };
             //startgame.HorizontalAlignment = HorizontalAlignment.Center;
 
-            Grid.SetRow(Back, 8);
-            Grid.SetColumn(Back, 8);
-            Grid.SetColumnSpan(Back, 1);
+            Grid.SetRow(Back, 9);
+            Grid.SetColumn(Back, 9);
+            Grid.SetColumnSpan(Back, 2);
             Grid.SetRowSpan(Back, 1);
             grid.Children.Add(Back);
             Back.Click += Back_Click1;
@@ -123,8 +131,8 @@ namespace MemoryGame
             highscoretitle.VerticalContentAlignment = VerticalAlignment.Center;
 
             Grid.SetRow(highscoretitle, 0);
-            Grid.SetColumn(highscoretitle, 3);
-            Grid.SetColumnSpan(highscoretitle, 3);
+            Grid.SetColumn(highscoretitle, 2);
+            Grid.SetColumnSpan(highscoretitle, 9);
             grid.Children.Add(highscoretitle);
 
         }
@@ -134,107 +142,123 @@ namespace MemoryGame
         /// </summary>
         public void sp()
         {
-            //subgrid1
-            Grid.SetRow(highscores1, 1);
+
+            Grid.SetRow(highscores1, 2);
             Grid.SetColumn(highscores1, 1);
             Grid.SetRowSpan(highscores1, 3);
+            Grid.SetColumnSpan(highscores1, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores1.RowDefinitions.Add(new RowDefinition());
             }
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 highscores1.ColumnDefinitions.Add(new ColumnDefinition());
             }
             grid.Children.Add(highscores1);
 
 
-            Grid.SetRow(highscores2, 1);
-            Grid.SetColumn(highscores2, 3);
+            Grid.SetRow(highscores2, 2);
+            Grid.SetColumn(highscores2, 4);
             Grid.SetRowSpan(highscores2, 3);
+            Grid.SetColumnSpan(highscores2, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores2.RowDefinitions.Add(new RowDefinition());
             }
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 highscores2.ColumnDefinitions.Add(new ColumnDefinition());
             }
             grid.Children.Add(highscores2);
 
-            Grid.SetRow(highscores3, 1);
-            Grid.SetColumn(highscores3, 5);
+            Grid.SetRow(highscores3, 2);
+            Grid.SetColumn(highscores3, 7);
             Grid.SetRowSpan(highscores3, 3);
+            Grid.SetColumnSpan(highscores3, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores3.RowDefinitions.Add(new RowDefinition());
             }
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 highscores3.ColumnDefinitions.Add(new ColumnDefinition());
             }
             grid.Children.Add(highscores3);
 
-            Grid.SetRow(highscores4, 1);
-            Grid.SetColumn(highscores4, 7);
+            Grid.SetRow(highscores4, 2);
+            Grid.SetColumn(highscores4, 10);
             Grid.SetRowSpan(highscores4, 3);
+            Grid.SetColumnSpan(highscores4, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores4.RowDefinitions.Add(new RowDefinition());
             }
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 highscores4.ColumnDefinitions.Add(new ColumnDefinition());
             }
             grid.Children.Add(highscores4);
 
-            Grid.SetRow(highscores5, 5);
+            Grid.SetRow(highscores5, 6);
             Grid.SetColumn(highscores5, 1);
             Grid.SetRowSpan(highscores5, 3);
+            Grid.SetColumnSpan(highscores5, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores5.RowDefinitions.Add(new RowDefinition());
             }
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 highscores5.ColumnDefinitions.Add(new ColumnDefinition());
             }
             grid.Children.Add(highscores5);
 
-            Grid.SetRow(highscores6, 5);
-            Grid.SetColumn(highscores6, 3);
+            Grid.SetRow(highscores6, 6);
+            Grid.SetColumn(highscores6, 4);
             Grid.SetRowSpan(highscores6, 3);
+            Grid.SetColumnSpan(highscores6, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores6.RowDefinitions.Add(new RowDefinition());
             }
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 highscores6.ColumnDefinitions.Add(new ColumnDefinition());
             }
             grid.Children.Add(highscores6);
 
-            Grid.SetRow(highscores7, 5);
-            Grid.SetColumn(highscores7, 5);
+            Grid.SetRow(highscores7, 6);
+            Grid.SetColumn(highscores7, 7);
             Grid.SetRowSpan(highscores7, 3);
+            Grid.SetColumnSpan(highscores7, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores7.RowDefinitions.Add(new RowDefinition());
             }
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 highscores7.ColumnDefinitions.Add(new ColumnDefinition());
             }
             grid.Children.Add(highscores7);
 
-            Grid.SetRow(highscores8, 5);
-            Grid.SetColumn(highscores8, 7);
+            Grid.SetRow(highscores8, 6);
+            Grid.SetColumn(highscores8, 10);
             Grid.SetRowSpan(highscores8, 3);
+            Grid.SetColumnSpan(highscores8, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores8.RowDefinitions.Add(new RowDefinition());
             }
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 highscores8.ColumnDefinitions.Add(new ColumnDefinition());
             }
@@ -259,7 +283,7 @@ namespace MemoryGame
         /// <param name="size"></param>     Is de fontsize
         /// <param name="score"></param>    Is de score
         /// <param name="nummer"></param>   Is het rijnummer
-        public void labelspdata(string naam,int sheetnr,int size,double score,int nummer)
+        public void labelspdata(string naam,int sheetnr,int size,double score,int nummer,string tijdsduur)
         {
             Label speler = new Label();
             speler.Content = naam;
@@ -272,98 +296,130 @@ namespace MemoryGame
             puntjes.HorizontalContentAlignment = HorizontalAlignment.Center;
             puntjes.VerticalContentAlignment = VerticalAlignment.Top;
 
+            Label tijdsduratie = new Label();
+            tijdsduratie.Content = tijdsduur;
+            tijdsduratie.FontSize = size;
+            tijdsduratie.HorizontalContentAlignment = HorizontalAlignment.Center;
+            tijdsduratie.VerticalContentAlignment = VerticalAlignment.Top;
+
             Grid.SetRow(speler, nummer);
             Grid.SetColumn(speler, 0);
             Grid.SetRow(puntjes, nummer);
             Grid.SetColumn(puntjes, 1);
+            Grid.SetRow(tijdsduratie, nummer);
+            Grid.SetColumn(tijdsduratie, 2);
+
 
             switch (sheetnr)
             {
                 case 1:
                     highscores1.Children.Add(speler);
                     highscores1.Children.Add(puntjes);
+                    highscores1.Children.Add(tijdsduratie);
                     break;
                 case 2:
                     highscores2.Children.Add(speler);
                     highscores2.Children.Add(puntjes);
+                    highscores2.Children.Add(tijdsduratie);
                     break;
                 case 3:
                     highscores3.Children.Add(speler);
                     highscores3.Children.Add(puntjes);
+                    highscores3.Children.Add(tijdsduratie);
                     break;
                 case 4:
                     highscores4.Children.Add(speler);
                     highscores4.Children.Add(puntjes);
+                    highscores4.Children.Add(tijdsduratie);
                     break;
                 case 5:
                     highscores5.Children.Add(speler);
                     highscores5.Children.Add(puntjes);
+                    highscores5.Children.Add(tijdsduratie);
                     break;
                 case 6:
                     highscores6.Children.Add(speler);
                     highscores6.Children.Add(puntjes);
+                    highscores6.Children.Add(tijdsduratie);
                     break;
                 case 7:
                     highscores7.Children.Add(speler);
                     highscores7.Children.Add(puntjes);
+                    highscores7.Children.Add(tijdsduratie);
                     break;
                 case 8:
                     highscores8.Children.Add(speler);
                     highscores8.Children.Add(puntjes);
+                    highscores8.Children.Add(tijdsduratie);
                     break;
             }
         }
 
         //Voegt in de grid de rij toe met Naam en Punten.
-        public void labelsptitles2(string naam, int sheetnr, int size, string punten, int nummer)
+        public void labelsptitles2(string naam, int sheetnr, int size, string punten, int nummer,string tijdsduur)
         {
             Label speler = new Label();
             speler.Content = naam;
             speler.FontSize = size;
+
             Label puntjes = new Label();
             puntjes.Content = punten;
             puntjes.FontSize = size;
             puntjes.HorizontalContentAlignment = HorizontalAlignment.Center;
 
+            Label tijdsduratie = new Label();
+            tijdsduratie.Content = tijdsduur;
+            tijdsduratie.FontSize = size;
+            tijdsduratie.HorizontalContentAlignment = HorizontalAlignment.Center;
+
             Grid.SetRow(speler, nummer);
             Grid.SetColumn(speler, 0);
             Grid.SetRow(puntjes, nummer);
             Grid.SetColumn(puntjes, 1);
-
+            Grid.SetRow(tijdsduratie, nummer);
+            Grid.SetColumn(tijdsduratie, 2);
 
             switch (sheetnr)
             {
                 case 1:
                     highscores1.Children.Add(speler);
                     highscores1.Children.Add(puntjes);
+                    highscores1.Children.Add(tijdsduratie);
                     break;
                 case 2:
                     highscores2.Children.Add(speler);
                     highscores2.Children.Add(puntjes);
+                    highscores2.Children.Add(tijdsduratie);
                     break;
                 case 3:
                     highscores3.Children.Add(speler);
                     highscores3.Children.Add(puntjes);
+                    highscores3.Children.Add(tijdsduratie);
                     break;
                 case 4:
                     highscores4.Children.Add(speler);
                     highscores4.Children.Add(puntjes);
+                    highscores4.Children.Add(tijdsduratie);
                     break;
                 case 5:
                     highscores5.Children.Add(speler);
                     highscores5.Children.Add(puntjes);
+                    highscores5.Children.Add(tijdsduratie);
                     break;
                 case 6:
                     highscores6.Children.Add(speler);
                     highscores6.Children.Add(puntjes);
+                    highscores6.Children.Add(tijdsduratie);
                     break;
                 case 7:
                     highscores7.Children.Add(speler);
                     highscores7.Children.Add(puntjes);
+                    highscores7.Children.Add(tijdsduratie);
                     break;
                 case 8:
                     highscores8.Children.Add(speler);
                     highscores8.Children.Add(puntjes);
+                    highscores8.Children.Add(tijdsduratie);
                     break;
             }
         }
@@ -376,7 +432,7 @@ namespace MemoryGame
             categorie.FontSize = size;
             Grid.SetRow(categorie, nummer);
             Grid.SetColumn(categorie, 0);
-            Grid.SetColumnSpan(categorie, 2);
+            Grid.SetColumnSpan(categorie, 3);
             categorie.BorderThickness = new Thickness(1);
             categorie.BorderBrush = Brushes.Black;
             categorie.Background = Brushes.LightGray;   
@@ -426,7 +482,8 @@ namespace MemoryGame
 
             string naam;
             double punten;
-
+            double tijdsduur2;
+            string tijdsduur;
             int rCnt;
 
             //Dit stukje opent een nieuwe excel app.
@@ -465,16 +522,24 @@ namespace MemoryGame
                 //voegt tabelkopjes toe aan een stackpanel.
                 sptitle = (string)(range.Cells[2, 1] as Excel.Range).Value2;
                 naam = (string)(range.Cells[2, 2] as Excel.Range).Value2;
-                labelsptitles2(sptitle , i, 16, naam , 1);
+                tijdsduur = (string)(range.Cells[2, 3] as Excel.Range).Value2;
+
+                labelsptitles2(sptitle , i, 16, naam , 1, tijdsduur);
 
                 //Loop die stackpanels vult met highscores.
                 for (rCnt = 3; rCnt <= rw; rCnt++)
                 {
                     int rij = rCnt - 1;
 
-                    naam = (string)(range.Cells[rCnt, 1] as Excel.Range).Value2;
+                    naam = (string)(range.Cells[rCnt, 1] as Excel.Range).Text;
                     punten = (double)(range.Cells[rCnt, 2] as Excel.Range).Value2;
-                    labelspdata(naam, i, 16, punten, rij);
+                    tijdsduur2 = (double)(range.Cells[rCnt, 3] as Excel.Range).Value2;
+
+                    string sDate = (range.Cells[rCnt, 3] as Excel.Range).Value2.ToString();
+                    double date = double.Parse(sDate);
+                    var dateTime = DateTime.FromOADate(date).ToLongTimeString();
+
+                    labelspdata(naam, i, 16, punten, rij, dateTime);
 
                 }
                 Marshal.ReleaseComObject(xlWorkSheet);
