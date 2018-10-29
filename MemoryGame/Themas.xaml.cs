@@ -23,11 +23,12 @@ namespace MemoryGame
         private const int rijen = 14;
         ThemaClass grid;
 
-        public Themas(int windowstate, int windowstyle)
+        public Themas()
         {
            
             InitializeComponent();
-            grid = new ThemaClass(this, ThemaWindow , kolommen , rijen ,windowstate,windowstyle);
+            grid = new ThemaClass(this, ThemaWindow, kolommen, rijen) ;
+            
         }
 
 

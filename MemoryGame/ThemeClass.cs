@@ -21,12 +21,12 @@ namespace MemoryGame
         
         
 
-<<<<<<< Updated upstream
 
 
-        public ThemaClass(Themas window, Grid grid, int kolommen, int rijen, int windowstate, int windowstyle)
+
+        public ThemaClass(Themas window, Grid grid, int kolommen, int rijen)
         {
-
+            //settings//
             if (MainClass.windowstyle == 2)
             { window.WindowStyle = WindowStyle.None; }
             else
@@ -35,6 +35,7 @@ namespace MemoryGame
             { window.WindowState = WindowState.Maximized; }
             else
             { window.WindowState = WindowState.Normal; }
+
             this.window = window;
             this.grid = grid;
 
@@ -43,13 +44,13 @@ namespace MemoryGame
             Theme1();
             Theme2();
             Theme3();
-<<<<<<< Updated upstream
+
             
-=======
+
             AddBack();
             
            
->>>>>>> Stashed changes
+
         }
         //Grid
         private void InitializeMain(int kolommen, int rijen)
@@ -141,16 +142,14 @@ namespace MemoryGame
             {
                 thema = "disney";
             }
-            var nieuwSpel = new GameWindow( thema ,MainClass.windowstate, MainClass.windowstyle ); //create your new form.
+            var nieuwSpel = new GameWindow( thema  ); //create your new form.
             nieuwSpel.Show(); //show the new form.
             window.Close();  //only if you want to close the current form.
 
         }
 
 
-<<<<<<< Updated upstream
-      
-=======
+
         //Back button (to select)//
         public void AddBack()
         {
@@ -169,7 +168,7 @@ namespace MemoryGame
 
         public void Back_Click1(object sender, RoutedEventArgs e)
         {
-            var SelectScherm = new SelectOptions(2,2); //create your new form.
+            var SelectScherm = new SelectOptions(MainClass.aantalSpelers); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
         }
@@ -220,7 +219,6 @@ namespace MemoryGame
         }
 
 
->>>>>>> Stashed changes
 
     }
 }

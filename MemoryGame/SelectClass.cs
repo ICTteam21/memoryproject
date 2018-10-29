@@ -18,7 +18,7 @@ namespace MemoryGame
         private Grid grid;
 
         private SelectOptions window;
-<<<<<<< Updated upstream
+
 
     
         RadioButton Check1 = new RadioButton();
@@ -33,8 +33,8 @@ namespace MemoryGame
         public static string spelernaam1;
         public static string spelernaam2;
 
-        public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen, int aantalSpelers, int windowstate, int windowstyle)
-        {
+        public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen, int aantalSpelers)
+        {   //settings//
             if (MainClass.windowstyle == 2)
             { window.WindowStyle = WindowStyle.None; }
             else
@@ -485,12 +485,8 @@ namespace MemoryGame
             
           
         }
->>>>>>> Stashed changes
 
 
-        /// <summary>
-        /// Dit verplaatst text naar een txt.documentje.
-        /// </summary>
         public void Transferdata()
         {
             string[] lines = { Text1.Text, Text2.Text,};

@@ -20,7 +20,7 @@ namespace MemoryGame
 
         private Settings window;
         public SettingsClass(Settings window, Grid grid, int kolommen, int rijen)
-        {
+        {   //settings//
             if (MainClass.windowstyle == 2)
             { window.WindowStyle = WindowStyle.None; }
             else
@@ -33,13 +33,12 @@ namespace MemoryGame
             this.grid = grid;
 
             InitializeMain(kolommen, rijen);
-            
+
             Addback();
             Resize();
             Resize2();
             Resize3();
-            DarkMode();
-            //LightMode();
+           
 
         }
         public void InitializeMain(int kolommen, int rijen)
@@ -53,7 +52,7 @@ namespace MemoryGame
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
             }
         }
-      
+
         public void Addback()
         {
             Button Back = new Button();
@@ -69,7 +68,7 @@ namespace MemoryGame
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            
+
             var SelectScherm = new MainMenuWindow(); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
@@ -124,7 +123,7 @@ namespace MemoryGame
 
             window.WindowState = WindowState.Maximized;
 
-            window.WindowStyle = WindowStyle.None;
+            window.WindowStyle = WindowStyle.SingleBorderWindow;
         }
         public void Resize3()
         {
@@ -152,26 +151,6 @@ namespace MemoryGame
             window.WindowStyle = WindowStyle.SingleBorderWindow;
 
         }
-        public void DarkMode()
-        {
 
-            Darkmode.Content = "resize3";
-            Darkmode.FontSize = 40;
-            Grid.SetRow(Darkmode, 8);
-            Darkmode.BorderBrush = Brushes.Black;
-            Darkmode.BorderThickness = new Thickness(3);
-            Darkmode.FontFamily = new FontFamily("Bahnschrift");
-            Darkmode.Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue);
-            Darkmode.Checked += Darkmode_Checked;
-            grid.Children.Add(Darkmode);
-        }
-
-        private void Darkmode_Checked(object sender, RoutedEventArgs e)
-        {
-           
-            window.Background = Brushes.DarkGray;
-
-        }
     }
-    
 }

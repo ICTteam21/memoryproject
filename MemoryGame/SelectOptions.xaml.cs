@@ -24,11 +24,11 @@ namespace MemoryGame
         private const int kolommen = 9;
         private const int rijen = 20;
 
-        public SelectOptions(int AantalSpelers,int windowstate,int windowstyle )
+        public SelectOptions(int AantalSpelers )
         {
             InitializeComponent();
 
-            grid = new SelectClass(this, SelectOpties ,kolommen , rijen, AantalSpelers, windowstate,windowstyle );
+            grid = new SelectClass(this, SelectOpties ,kolommen , rijen, AantalSpelers);
         }
        
 
