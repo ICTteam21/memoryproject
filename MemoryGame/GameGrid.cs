@@ -43,6 +43,10 @@ namespace MemoryGame
         string path3;
         string statspath;
 
+        TimeSpan starttijd;
+        TimeSpan eindtijd;
+        string totaletijd;
+
         public GameGrid(Window window, Grid grid, int cols, int rows, string thema)
         {
             this.window = window; 
@@ -53,25 +57,28 @@ namespace MemoryGame
             Playerstats(MainClass.aantalSpelers);
             padnaarstatistics();
             Savegameandclosebutton();
-            
+            starttijd = DateTime.Now.TimeOfDay;
 
-            fileCount = (from file in Directory.EnumerateFiles(path2, "*", SearchOption.AllDirectories)
+            fileCount = (from file in Directory.EnumerateFiles(path3, "*", SearchOption.AllDirectories)
                          select file).Count();
-
 
         }
 
         public void paaaaaaad()
         {
             pathing = System.AppDomain.CurrentDomain.BaseDirectory;
-            path2 = pathing.Replace("bin","Textdocs");
-            path2 = path2.Replace("Debug", "NewGame");
+            //path2 = pathing.Replace("bin", "Textdocs");
+            //path2 = path2.Replace("Debug", "NewGame");
 
-            path3 = pathing.Replace("bin","Textdocs");
+            path3 = pathing.Replace("bin", "Textdocs");
             path3 = path3.Replace("Debug", "SavedGames");
 
-            Player1Name = File.ReadLines(path2 + "New.txt").Skip(0).Take(1).First();
-            Player2Name = File.ReadLines(path2 + "New.txt").Skip(1).Take(1).First();
+            //Player1Name = File.ReadLines(path2 + "New.txt").Skip(0).Take(1).First();
+            //Player2Name = File.ReadLines(path2 + "New.txt").Skip(1).Take(1).First();
+            Player1Name = SelectClass.spelernaam1;
+            Player2Name = SelectClass.spelernaam2;
+
+
         }
         
         private void InitializeGameGrid(int cols, int rows)
@@ -317,6 +324,10 @@ namespace MemoryGame
                 }
                 if (pairs.Equals(8) && !SelectClass.diff.Equals(0)) 
                 {
+                    eindtijd = DateTime.Now.TimeOfDay;
+                    var diff = eindtijd.Subtract(starttijd);
+                    totaletijd = String.Format("{0}:{1}:{2}", diff.Hours, diff.Minutes, diff.Seconds);
+
                     MessageBox.Show("Goed gedaan! Je hebt binnen de tijd alle paren gevonden!", "Klik op ok om de highscores te zien");
                     thegameisdone(1, 1);
                     var highscoresWindow = new HighScores();
@@ -326,6 +337,10 @@ namespace MemoryGame
 
                 }else if (pairs.Equals(8))
                 {
+                    eindtijd = DateTime.Now.TimeOfDay;
+                    var diff = eindtijd.Subtract(starttijd);
+                    totaletijd = String.Format("{0}:{1}:{2}", diff.Hours, diff.Minutes, diff.Seconds);
+
                     MessageBox.Show("Goed gedaan! Je hebt alle paren gevonden!", "Klik op ok om de highscores te zien");
                     thegameisdone(1, 1);
                     var highscoresWindow = new HighScores();
@@ -370,7 +385,12 @@ namespace MemoryGame
                     if (P1Points > P2Points)
                     {
                         int pDiff = P1Points - P2Points;
-                        MessageBox.Show("Speler " + Player1Name + " heeft gewonnen! \n" + Player1Name + " heeft met " + pDiff + " punten meer gewonnen!", "Klik op ok om je highscores te zien");
+
+                        eindtijd = DateTime.Now.TimeOfDay;
+                        var diff = eindtijd.Subtract(starttijd);
+                        totaletijd = String.Format("{0}:{1}:{2}", diff.Hours, diff.Minutes, diff.Seconds);
+
+                        MessageBox.Show("Speler " + Player1Name + " heeft gewonnen! \n" + Player1Name + " heeft met " + pDiff + " punten meer gewonnen! het duurde: " + totaletijd, "Klik op ok om je highscores te zien");
                         thegameisdone(1, 2);
                         var highscoresWindow = new HighScores();
                         window.Close();
@@ -378,7 +398,12 @@ namespace MemoryGame
                     }
                     else if ( P1Points < P2Points){
                         int pDiff = P2Points - P1Points;
-                        MessageBox.Show("Speler " + Player2Name + " heeft gewonnen! \n" + Player2Name + " heeft met " + pDiff + " punten meer gewonnen!", "Klik op ok om je highscores te zien");
+
+                        eindtijd = DateTime.Now.TimeOfDay;
+                        var diff = eindtijd.Subtract(starttijd);
+                        totaletijd = String.Format("{0}:{1}:{2}", diff.Hours, diff.Minutes, diff.Seconds);
+
+                        MessageBox.Show("Speler " + Player2Name + " heeft gewonnen! \n" + Player2Name + " heeft met " + pDiff + " punten meer gewonnen! het duurde: " + totaletijd, "Klik op ok om je highscores te zien");
                         thegameisdone(1, 2);
                         var highscoresWindow = new HighScores();
                         window.Close();
@@ -386,7 +411,11 @@ namespace MemoryGame
                     }
                     else if (P1Points.Equals(P2Points))
                     {
-                        MessageBox.Show( Player1Name + " en " + Player2Name + " jullie zijn erg aan elkaar gewaagt !\n  " + "Probeer het nog een keer!", "Klik op ok om je highscores te zien");
+                        eindtijd = DateTime.Now.TimeOfDay;
+                        var diff = eindtijd.Subtract(starttijd);
+                        totaletijd = String.Format("{0}:{1}:{2}", diff.Hours, diff.Minutes, diff.Seconds);
+
+                        MessageBox.Show( Player1Name + " en " + Player2Name + " jullie zijn erg aan elkaar gewaagt !\n  " + "Probeer het nog een keer! het duurde: " + totaletijd, "Klik op ok om je highscores te zien");
                         thegameisdone(1, 2);
                         var highscoresWindow = new HighScores();
                         window.Close();
@@ -672,13 +701,16 @@ namespace MemoryGame
             {
                 xlWorkSheet.Cells[rij + 1, 1] = Player1Name;
                 xlWorkSheet.Cells[rij + 1, 2] = P1Points;
+                xlWorkSheet.Cells[rij + 1, 3] = totaletijd;
             }
             else
             {
                 xlWorkSheet.Cells[rij + 1, 1] = Player1Name;
                 xlWorkSheet.Cells[rij + 1, 2] = P1Points;
+                xlWorkSheet.Cells[rij + 1, 3] = totaletijd;
                 xlWorkSheet.Cells[rij + 2, 1] = Player2Name;
                 xlWorkSheet.Cells[rij + 2, 2] = P2Points;
+                xlWorkSheet.Cells[rij + 2, 3] = totaletijd;
             }
             //dit pakt alle cellen met daarin scores en namen en sorteerd deze.
             range = xlWorkSheet.Range[xlWorkSheet.Cells[3, 1], xlWorkSheet.Cells[rij + 2, 2]];

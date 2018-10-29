@@ -28,6 +28,8 @@ namespace MemoryGame
 
         Label size = new Label();
         public static int diff = 0;
+        public static string spelernaam1;
+        public static string spelernaam2;
 
         public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen, int aantalSpelers, int windowstate, int windowstyle)
         {
@@ -39,6 +41,7 @@ namespace MemoryGame
             { window.WindowState = WindowState.Maximized; }
             else
             { window.WindowState = WindowState.Normal; }
+
             this.window = window;
             this.grid = grid;
             InitializeMain(kolommen, rijen);
@@ -77,6 +80,7 @@ namespace MemoryGame
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
             }
         }
+
 
         //Title//
         public void AddTitle2()
@@ -119,7 +123,11 @@ namespace MemoryGame
         public void Continue_Click(object sender, RoutedEventArgs e)
         {
 
-            Transferdata();
+
+            //Transferdata();
+            spelernaam1 = Text1.Text;
+            spelernaam2 = Text2.Text;
+
             var Themes = new Themas(MainClass.windowstate, MainClass.windowstyle); //create your new form.
             Themes.Show(); //show the new form.
             window.Close();
@@ -328,12 +336,8 @@ namespace MemoryGame
                         diff = 4;
                         return;
                     }
-
-
                 }
             } 
-
-
         }
 
         //Name box 1//
@@ -356,10 +360,12 @@ namespace MemoryGame
         //Name box 2//
         public void AddText2()
         {
-        
-            Text2.FontSize = 13;
-        
-        
+
+            Text2.FontSize = 40;
+            Text2.BorderBrush = Brushes.Black;
+            Text2.BorderThickness = new Thickness(3);
+            Text2.FontFamily = new FontFamily("Bahnschrift");
+
             Grid.SetRow(Text2, 3);
             Grid.SetColumn(Text2, 6);
             Grid.SetColumnSpan(Text2, 1);
@@ -398,6 +404,10 @@ namespace MemoryGame
             grid.Children.Add(Name2);
         }
         
+
+        /// <summary>
+        /// Dit verplaatst text naar een txt.documentje.
+        /// </summary>
         public void Transferdata()
         {
             string[] lines = { Text1.Text, Text2.Text, };
