@@ -18,7 +18,7 @@ namespace MemoryGame
         private Grid grid;
 
         private SelectOptions window;
-<<<<<<< Updated upstream
+
 
     
         RadioButton Check1 = new RadioButton();
@@ -31,8 +31,8 @@ namespace MemoryGame
         Label size = new Label();
         public static int diff = 0;
 
-        public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen, int aantalSpelers, int windowstate, int windowstyle)
-        {
+        public SelectClass(SelectOptions window, Grid grid, int kolommen, int rijen, int aantalSpelers)
+        {   //settings//
             if (MainClass.windowstyle == 2)
             { window.WindowStyle = WindowStyle.None; }
             else
@@ -126,7 +126,7 @@ namespace MemoryGame
         public void Continue_Click(object sender, RoutedEventArgs e)
         {
             Transferdata();
-            var Themes = new Themas(MainClass.windowstate, MainClass.windowstyle); //create your new form.
+            var Themes = new Themas(); //create your new form.
             Themes.Show(); //show the new form.
             window.Close();
         }
@@ -478,7 +478,7 @@ namespace MemoryGame
             
           
         }
->>>>>>> Stashed changes
+
 
         public void Transferdata()
         {

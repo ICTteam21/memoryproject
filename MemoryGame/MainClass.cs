@@ -202,7 +202,7 @@ namespace MemoryGame
         {
             Button credits = new Button
             {
-                Content = "Credits",
+                Content = "Settings",
                 FontSize = 60,
                 BorderBrush = Brushes.Black,
                 BorderThickness = new Thickness(3),
@@ -258,26 +258,26 @@ namespace MemoryGame
         public void Newgame1_click(object sender, RoutedEventArgs e)
         {
             aantalSpelers = 1;
-            var SelectScherm = new SelectOptions(aantalSpelers,windowstate,windowstyle); //create your new form.
+            var SelectScherm = new SelectOptions(aantalSpelers); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
         }
         public void Newgame2_click(object sender, RoutedEventArgs e)
         {
             aantalSpelers = 2; 
-            var SelectScherm = new SelectOptions(aantalSpelers,windowstate, windowstyle); //create your new form.
+            var SelectScherm = new SelectOptions(aantalSpelers); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
         }
 
         public void Loadgame_click(object sender, RoutedEventArgs e)
         {
-            var Loading = new LoadScreen(windowstate); //create your new form.
+            var Loading = new LoadScreen(); //create your new form.
             Loading.Show(); //show the new form.
             window.Close();
 
         }
-
+        
         public void Highscores_click(object sender, RoutedEventArgs e)
         {
             var HighScores = new HighScores(); //create your new form.
@@ -296,7 +296,7 @@ namespace MemoryGame
 
             var SelectScherm = new Settings(); //create your new form.
             SelectScherm.Show(); //show the new form.
-            
+            window.Close();
         }
 
     }
