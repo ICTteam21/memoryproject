@@ -20,6 +20,7 @@ namespace MemoryGame
     public partial class SelectOptions : Window
     {
         SelectClass grid;
+
         private const int kolommen = 9;
         private const int rijen = 20;
 
@@ -29,5 +30,7 @@ namespace MemoryGame
 
             grid = new SelectClass(this, SelectOpties ,kolommen , rijen, AantalSpelers, windowstate,windowstyle );
         }
+       
+
     }
 }

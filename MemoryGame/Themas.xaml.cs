@@ -25,6 +25,7 @@ namespace MemoryGame
 
         public Themas(int windowstate, int windowstyle)
         {
+           
             InitializeComponent();
             grid = new ThemaClass(this, ThemaWindow , kolommen , rijen ,windowstate,windowstyle);
         }

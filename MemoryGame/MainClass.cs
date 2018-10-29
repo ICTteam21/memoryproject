@@ -50,8 +50,6 @@ namespace MemoryGame
             AddHighScores();
             AddCredits();
             AddQuit();
-
-
         }
          
         public void InitializeMain(int kolommen, int rijen)
@@ -298,7 +296,7 @@ namespace MemoryGame
 
             var SelectScherm = new Settings(); //create your new form.
             SelectScherm.Show(); //show the new form.
-            window.Close();
+            
         }
 
     }

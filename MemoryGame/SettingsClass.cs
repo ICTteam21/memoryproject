@@ -31,6 +31,7 @@ namespace MemoryGame
             { window.WindowState = WindowState.Normal; }
             this.window = window;
             this.grid = grid;
+
             InitializeMain(kolommen, rijen);
             
             Addback();
@@ -172,4 +173,5 @@ namespace MemoryGame
 
         }
     }
+    
 }

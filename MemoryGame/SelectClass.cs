@@ -11,21 +11,23 @@ using System.Windows.Media.Imaging;
 
 
 namespace MemoryGame
-{
+{ 
     class SelectClass
     {
+
         private Grid grid;
 
         private SelectOptions window;
+<<<<<<< Updated upstream
 
-
+    
         RadioButton Check1 = new RadioButton();
         RadioButton Check2 = new RadioButton();
         RadioButton Check3 = new RadioButton();
         RadioButton Check4 = new RadioButton();
         TextBox Text1 = new TextBox();
         TextBox Text2 = new TextBox();
-
+        Button resize = new Button();
         Label size = new Label();
         public static int diff = 0;
         public static string spelernaam1;
@@ -44,6 +46,8 @@ namespace MemoryGame
 
             this.window = window;
             this.grid = grid;
+           
+            
             InitializeMain(kolommen, rijen);
             AddTitle2();
             AddContinue();
@@ -66,8 +70,10 @@ namespace MemoryGame
                 AddText1();
                 AddText2();
             }
-
+            
         }
+
+        
 
         public void InitializeMain(int kolommen, int rijen)
         {
@@ -80,6 +86,7 @@ namespace MemoryGame
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
             }
         }
+       
 
 
         //Title//
@@ -405,12 +412,88 @@ namespace MemoryGame
         }
         
 
+        public void labelenplaatjenieuw()
+        {   //Image setup//
+            Image preview2 = new Image();
+            preview2.Source = new BitmapImage(new Uri("Images/4x4 preview.png", UriKind.Relative));
+            Grid.SetRow(preview2, 7);
+            Grid.SetColumn(preview2, 5);
+            Grid.SetColumnSpan(preview2, 7);
+            Grid.SetRowSpan(preview2, 7);
+            //Label setup//
+            size.FontSize = 12;
+            Grid.SetRow(size, 5);
+            Grid.SetColumn(size, 6);
+            Grid.SetColumnSpan(size, 7);
+            Grid.SetRowSpan(size, 2);
+            
+            if (Check2.IsChecked == true)
+            {
+                //Remove and Add Image//
+
+                grid.Children.Remove(preview2);
+                grid.Children.Add(preview2);
+
+                // label 2//
+                size.Content = "4x4 + 30 seconds time limit";
+                grid.Children.Remove(size);
+                grid.Children.Add(size);
+
+                return;
+
+            }
+            else if (Check1.IsChecked == true)
+            {
+
+                //Remove and Add Image//
+                grid.Children.Remove(preview2);
+                grid.Children.Add(preview2);
+
+
+
+                // label 1//
+                size.Content = "4x4 + No time limit";
+                grid.Children.Remove(size);
+                grid.Children.Add(size); 
+                return;
+            }
+            else if (Check3.IsChecked == true)
+            {
+                //Remove and Add Image//
+                grid.Children.Remove(preview2);
+                grid.Children.Add(preview2);
+
+                // label 3//
+                size.Content = "4x4 10 seconds time limit";
+                grid.Children.Remove(size);
+                grid.Children.Add(size); 
+                return;
+            }
+            else if (Check4.IsChecked == true)
+            {
+               //Remove and Add Image//
+                grid.Children.Remove(preview2);
+                grid.Children.Add(preview2);
+
+                // label 4//
+                size.Content = "4x4 + 5 seconds time limit";
+                grid.Children.Remove(size);
+                grid.Children.Add(size);
+                return;
+            }
+
+            
+          
+        }
+>>>>>>> Stashed changes
+
+
         /// <summary>
         /// Dit verplaatst text naar een txt.documentje.
         /// </summary>
         public void Transferdata()
         {
-            string[] lines = { Text1.Text, Text2.Text, };
+            string[] lines = { Text1.Text, Text2.Text,};
             string pathing;
             string path2;
             pathing = System.AppDomain.CurrentDomain.BaseDirectory;
@@ -418,11 +501,11 @@ namespace MemoryGame
             path2 = path2.Replace("Debug", "NewGame");
         
             System.IO.File.WriteAllLines(path2 + "New.txt", lines);
-        
+            
         }
+       
 
        
         
     }
-
-} 
+}
