@@ -124,7 +124,7 @@ namespace MemoryGame
                 imagesList.Add(source);
             }
 
-            imagesList.Shuffle();
+            //imagesList.Shuffle();
             return imagesList;
 
 
@@ -285,9 +285,13 @@ namespace MemoryGame
 
             IsTaskRunning = true;
             await Task.Delay(300);
-            
+            string Card1 = tag1.Substring(tag1.Length - 5);
+            string Card2 = tag2.Substring(tag2.Length - 5);
 
-            if (tag2.Contains(tag1) && !pos1.Equals(pos2)) // win 
+            bool CardsEqual = Card1.Equals(Card2);
+            bool PosEqual = pos1.Equals(pos2);
+
+            if (CardsEqual && !PosEqual) // win 
             {
                 win = true;
                 pairs++;
@@ -299,7 +303,7 @@ namespace MemoryGame
                 imgCardTwo = null;
                 
             }
-            else if (!tag2.Contains(tag1) && !pos1.Equals(pos2) ) // lose
+            else if (!CardsEqual && !PosEqual) // lose
             {
                 win = false;
                 imgCardOne.Source = back;
@@ -309,7 +313,7 @@ namespace MemoryGame
                 imgCardOne = null;
                 imgCardTwo = null;
             }
-            if (tag1.Equals(tag2) || pos1.Equals(pos2)) // op hetzelfde kaartje geklikt
+            if (CardsEqual || PosEqual) // op hetzelfde kaartje geklikt
             {
                 imgCardTwo = null;
                 
@@ -382,13 +386,13 @@ namespace MemoryGame
                     {
                         aandebeurt = 2;
                         Player2name.Background = Brushes.Green;
-                        Player1name.Background = Brushes.Orange;
+                        Player1name.Background = Brushes.LightGray;
                     }
                     else
                     {
                         aandebeurt = 1;
                         Player1name.Background = Brushes.Green;
-                        Player2name.Background = Brushes.Orange;
+                        Player2name.Background = Brushes.LightGray;
                     }
                 }
                 if (pairs.Equals(8)) // als er iemand alle plaatjes heeft gewonnen, ga naar highscores
@@ -451,25 +455,25 @@ namespace MemoryGame
                 }
                 else if (SelectClass.diff.Equals(1))
                 {
-                    aTimer = new System.Timers.Timer(60000);
+                    aTimer = new Timer(6000000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
                 else if (SelectClass.diff.Equals(2))
                 {
-                    aTimer = new System.Timers.Timer(30000);
+                    aTimer = new Timer(3000000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
                 else if (SelectClass.diff.Equals(3))
                 {
-                    aTimer = new System.Timers.Timer(10000);
+                    aTimer = new Timer(120000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
                 else if (SelectClass.diff.Equals(4))
                 {
-                    aTimer = new System.Timers.Timer(5000);
+                    aTimer = new Timer(60000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
@@ -482,25 +486,25 @@ namespace MemoryGame
                 }
                 else if (SelectClass.diff.Equals(1))
                 {
-                    aTimer = new System.Timers.Timer(600000);
+                    aTimer = new Timer(45000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
                 else if (SelectClass.diff.Equals(2))
                 {
-                    aTimer = new System.Timers.Timer(300000);
+                    aTimer = new Timer(20000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
                 else if (SelectClass.diff.Equals(3))
                 {
-                    aTimer = new System.Timers.Timer(120000);
+                    aTimer = new Timer(10000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
                 else if (SelectClass.diff.Equals(4))
                 {
-                    aTimer = new System.Timers.Timer(30000);
+                    aTimer = new Timer(5000);
                     aTimer.Elapsed += OnTimedEvent;
                     aTimer.Enabled = true;
                 }
@@ -528,19 +532,20 @@ namespace MemoryGame
                     aandebeurt = 2;
 
                     Player2name.Background = Brushes.Green;
-                    Player1name.Background = Brushes.Orange;
+                    Player1name.Background = Brushes.LightGray;
                 }
                 else if (aandebeurt.Equals(2))
                 {
                     aandebeurt = 1;
+
                     Player1name.Background = Brushes.Green;
-                    Player2name.Background = Brushes.Orange;
+                    Player2name.Background = Brushes.LightGray;
                 }
             }
 
 
         }
-        Label timer = new Label();
+       
 
         public void Playerstats(int aantalSpelers)
         {
@@ -607,7 +612,7 @@ namespace MemoryGame
                 Grid.SetColumn(Player1Score, 5);
                 grid.Children.Add(Player1Score);
 
-                Player2name.Background = Brushes.Orange;
+                Player2name.Background = Brushes.LightGray;
                 Player2name.Content = Player2Name;
                 Player2name.FontSize = 30;
                 Player2name.HorizontalContentAlignment = HorizontalAlignment.Center;
