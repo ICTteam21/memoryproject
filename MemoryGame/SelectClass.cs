@@ -135,7 +135,7 @@ namespace MemoryGame
             spelernaam1 = Text1.Text;
             spelernaam2 = Text2.Text;
 
-            var Themes = new Themas(MainClass.windowstate, MainClass.windowstyle); //create your new form.
+            var Themes = new Themas(); //create your new form.
             Themes.Show(); //show the new form.
             window.Close();
         }

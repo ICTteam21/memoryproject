@@ -40,7 +40,6 @@ namespace MemoryGame
         private string themanaamsave;
         private int fileCount;
         string pathing;
-        string path2;
         string path3;
         string statspath;
 
@@ -400,7 +399,7 @@ namespace MemoryGame
 
                         eindtijd = DateTime.Now.TimeOfDay;
                         var diff = eindtijd.Subtract(starttijd);
-                        totaletijd = String.Format("{0}:{1}:{2}", diff.Hours, diff.Minutes, diff.Seconds);
+                        totaletijd = String.Format("{0}:{1}:{2}",diff.Hours,diff.Minutes, diff.Seconds);
 
                         MessageBox.Show("Speler " + Player1Name + " heeft gewonnen! \n" + Player1Name + " heeft met " + pDiff + " punten meer gewonnen! het duurde: " + totaletijd, "Klik op ok om je highscores te zien");
                         thegameisdone(1, 2);

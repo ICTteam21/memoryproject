@@ -128,7 +128,7 @@ namespace MemoryGame
 
             Grid.SetRow(highscoretitle, 0);
             Grid.SetColumn(highscoretitle, 2);
-            Grid.SetColumnSpan(highscoretitle, 5);
+            Grid.SetColumnSpan(highscoretitle, 9);
             grid.Children.Add(highscoretitle);
 
         }
@@ -142,6 +142,8 @@ namespace MemoryGame
             Grid.SetRow(highscores1, 2);
             Grid.SetColumn(highscores1, 1);
             Grid.SetRowSpan(highscores1, 3);
+            Grid.SetColumnSpan(highscores1, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores1.RowDefinitions.Add(new RowDefinition());
@@ -154,8 +156,10 @@ namespace MemoryGame
 
 
             Grid.SetRow(highscores2, 2);
-            Grid.SetColumn(highscores2, 3);
+            Grid.SetColumn(highscores2, 4);
             Grid.SetRowSpan(highscores2, 3);
+            Grid.SetColumnSpan(highscores2, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores2.RowDefinitions.Add(new RowDefinition());
@@ -167,8 +171,10 @@ namespace MemoryGame
             grid.Children.Add(highscores2);
 
             Grid.SetRow(highscores3, 2);
-            Grid.SetColumn(highscores3, 5);
+            Grid.SetColumn(highscores3, 7);
             Grid.SetRowSpan(highscores3, 3);
+            Grid.SetColumnSpan(highscores3, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores3.RowDefinitions.Add(new RowDefinition());
@@ -180,8 +186,10 @@ namespace MemoryGame
             grid.Children.Add(highscores3);
 
             Grid.SetRow(highscores4, 2);
-            Grid.SetColumn(highscores4, 7);
+            Grid.SetColumn(highscores4, 10);
             Grid.SetRowSpan(highscores4, 3);
+            Grid.SetColumnSpan(highscores4, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores4.RowDefinitions.Add(new RowDefinition());
@@ -195,6 +203,8 @@ namespace MemoryGame
             Grid.SetRow(highscores5, 5);
             Grid.SetColumn(highscores5, 1);
             Grid.SetRowSpan(highscores5, 3);
+            Grid.SetColumnSpan(highscores5, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores5.RowDefinitions.Add(new RowDefinition());
@@ -206,8 +216,10 @@ namespace MemoryGame
             grid.Children.Add(highscores5);
 
             Grid.SetRow(highscores6, 5);
-            Grid.SetColumn(highscores6, 3);
+            Grid.SetColumn(highscores6, 4);
             Grid.SetRowSpan(highscores6, 3);
+            Grid.SetColumnSpan(highscores6, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores6.RowDefinitions.Add(new RowDefinition());
@@ -219,8 +231,10 @@ namespace MemoryGame
             grid.Children.Add(highscores6);
 
             Grid.SetRow(highscores7, 5);
-            Grid.SetColumn(highscores7, 5);
+            Grid.SetColumn(highscores7, 7);
             Grid.SetRowSpan(highscores7, 3);
+            Grid.SetColumnSpan(highscores7, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores7.RowDefinitions.Add(new RowDefinition());
@@ -232,8 +246,10 @@ namespace MemoryGame
             grid.Children.Add(highscores7);
 
             Grid.SetRow(highscores8, 5);
-            Grid.SetColumn(highscores8, 7);
+            Grid.SetColumn(highscores8, 10);
             Grid.SetRowSpan(highscores8, 3);
+            Grid.SetColumnSpan(highscores8, 2);
+
             for (int i = 0; i < 7; i++)
             {
                 highscores8.RowDefinitions.Add(new RowDefinition());
