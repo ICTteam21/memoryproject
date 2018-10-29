@@ -22,7 +22,7 @@ namespace MemoryGame
     {
         HighScoresClass grid;
         private const int kolommen = 13;
-        private const int rijen = 9;
+        private const int rijen = 10;
 
         public HighScores()
         {

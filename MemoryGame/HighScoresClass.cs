@@ -204,7 +204,7 @@ namespace MemoryGame
             }
             grid.Children.Add(highscores4);
 
-            Grid.SetRow(highscores5, 5);
+            Grid.SetRow(highscores5, 6);
             Grid.SetColumn(highscores5, 1);
             Grid.SetRowSpan(highscores5, 3);
             Grid.SetColumnSpan(highscores5, 2);
@@ -219,7 +219,7 @@ namespace MemoryGame
             }
             grid.Children.Add(highscores5);
 
-            Grid.SetRow(highscores6, 5);
+            Grid.SetRow(highscores6, 6);
             Grid.SetColumn(highscores6, 4);
             Grid.SetRowSpan(highscores6, 3);
             Grid.SetColumnSpan(highscores6, 2);
@@ -234,7 +234,7 @@ namespace MemoryGame
             }
             grid.Children.Add(highscores6);
 
-            Grid.SetRow(highscores7, 5);
+            Grid.SetRow(highscores7, 6);
             Grid.SetColumn(highscores7, 7);
             Grid.SetRowSpan(highscores7, 3);
             Grid.SetColumnSpan(highscores7, 2);
@@ -249,7 +249,7 @@ namespace MemoryGame
             }
             grid.Children.Add(highscores7);
 
-            Grid.SetRow(highscores8, 5);
+            Grid.SetRow(highscores8, 6);
             Grid.SetColumn(highscores8, 10);
             Grid.SetRowSpan(highscores8, 3);
             Grid.SetColumnSpan(highscores8, 2);

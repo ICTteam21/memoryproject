@@ -47,6 +47,9 @@ namespace MemoryGame
         TimeSpan eindtijd;
         string totaletijd;
 
+        public List<string> plaatjesvolgorde = new List<string>();
+
+
         public GameGrid(Window window, Grid grid, int cols, int rows, string thema)
         {   //settings//
             if (MainClass.windowstyle == 2)
@@ -112,11 +115,13 @@ namespace MemoryGame
         /// </summary>
         /// <returns></returns>
         /// 
+        public List<ImageSource> imagesList = new List<ImageSource>();
+
         private List<ImageSource> GetImagesList(string thema)
         {
 
 
-            List<ImageSource> imagesList = new List<ImageSource>();
+
             for (int i = 0; i < 16; i++)
             {
                 int imageNr = i % 8 + 1;
@@ -124,11 +129,12 @@ namespace MemoryGame
                 imagesList.Add(source);
             }
 
-            //imagesList.Shuffle();
+            imagesList.Shuffle();
             return imagesList;
 
 
         }
+
 
         /// <summary>
         /// Voegt de plaatjes aan de grid 
@@ -140,7 +146,7 @@ namespace MemoryGame
         {
             // get lists
             List<ImageSource> images = GetImagesList(thema);
-           
+
             // logic
             if (thema.Equals("logos"))
             {
@@ -153,7 +159,9 @@ namespace MemoryGame
                         {
                             Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
                             Tag = images.First()
+
                         };
+                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
                         images.RemoveAt(0);
                         backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
                         Grid.SetColumn(backgroudImage, column);
@@ -174,6 +182,7 @@ namespace MemoryGame
                             Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
                             Tag = images.First()
                         };
+                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
                         images.RemoveAt(0);
                         backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
                         Grid.SetColumn(backgroudImage, column);
@@ -195,6 +204,7 @@ namespace MemoryGame
                             Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
                             Tag = images.First()
                         };
+                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
                         images.RemoveAt(0);
                         backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
                         Grid.SetColumn(backgroudImage, column);
@@ -212,7 +222,6 @@ namespace MemoryGame
                 MessageBox.Show("Druk op ok om de tijd te starten", "Het spel gaat beginnen!");
                 SetTimer();
             }
-
 
         }
 
@@ -643,6 +652,7 @@ namespace MemoryGame
 
         public void Savegameandclosebutton()
         {
+           
             SaveGameandClose.Content = "Save Game";
             SaveGameandClose.FontSize = 30;
 
@@ -669,10 +679,14 @@ namespace MemoryGame
             {
                 naamaandebeurt = Player2Name;
             }
+ 
+            string pathing;
+            string path2;
+            pathing = System.AppDomain.CurrentDomain.BaseDirectory;
+            path2 = pathing.Replace("bin", "Textdocs");
+            path2 = path2.Replace("Debug", "NewGame");
+            System.IO.File.WriteAllLines(path2 + "WUT.txt", plaatjesvolgorde);
 
-            string[] lines = { Convert.ToString(aandebeurt), Player1Name, Convert.ToString(P1Points), Player2Name, Convert.ToString(P2Points) };
-            string naam = (fileCount + 1) + " " + themanaamsave + " - " + "P1 " + Player1Name + " Points-" + Convert.ToString(P1Points) + " P2 " + Player2Name + " Points-" + Convert.ToString(P2Points) + " Turn-" + naamaandebeurt + ".txt";
-            System.IO.File.WriteAllLines(path3 + naam, lines);
         }
 
         public void MainmenuButton()
@@ -747,7 +761,7 @@ namespace MemoryGame
                 xlWorkSheet.Cells[rij + 2, 3] = totaletijd;
             }
             //dit pakt alle cellen met daarin scores en namen en sorteerd deze.
-            range = xlWorkSheet.Range[xlWorkSheet.Cells[3, 1], xlWorkSheet.Cells[rij + 2, 2]];
+            range = xlWorkSheet.Range[xlWorkSheet.Cells[3, 1], xlWorkSheet.Cells[rij + 2, 3]];
             range.Sort(range.Columns[2], Excel.XlSortOrder.xlDescending);
 
             xlWorkBook.Save();
