@@ -273,7 +273,7 @@ namespace MemoryGame
                     grid.Children.Add(preview2);
 
                     // label 2//
-                    size.Content = "10 minute time limit";
+                    size.Content = "10 minuten per spel";
                     size.FontSize = 25;
                     size.FontFamily = new FontFamily("Bahnschrift");
                     grid.Children.Remove(size);
@@ -290,7 +290,7 @@ namespace MemoryGame
                     grid.Children.Add(preview2);
 
                     // label 1//
-                    size.Content = "5 minute time limit";
+                    size.Content = "5 minuten per spel";
                     size.FontSize = 25;
                     size.FontFamily = new FontFamily("Bahnschrift");
                     grid.Children.Remove(size);
@@ -305,7 +305,7 @@ namespace MemoryGame
                     grid.Children.Add(preview2);
 
                     // label 3//
-                    size.Content = "2 minute time limit";
+                    size.Content = "2 minuten per spel";
                     size.FontSize = 25;
                     size.FontFamily = new FontFamily("Bahnschrift");
                     grid.Children.Remove(size);
@@ -313,25 +313,121 @@ namespace MemoryGame
                     diff = 3;
                     return;
                 }
-                else if (MainClass.aantalSpelers.Equals(2))
+                else if (Check4.IsChecked == true)
                 {
-                    if (Check1.IsChecked == true)
-                    {
-                        //Remove and Add Image//
+                    //Remove and Add Image//
+                    grid.Children.Remove(preview2);
+                    grid.Children.Add(preview2);
 
-                        // label 4//
-                        size.Content = "1 minute time limit";
-                        size.FontSize = 25;
-                        size.FontFamily = new FontFamily("Bahnschrift");
-                        grid.Children.Remove(size);
-                        grid.Children.Add(size);
-                        diff = 4;
-                        return;
-                    }
+                    // label 3//
+                    size.Content = "1 minuut per spel";
+                    size.FontSize = 25;
+                    size.FontFamily = new FontFamily("Bahnschrift");
+                    grid.Children.Remove(size);
+                    grid.Children.Add(size);
+                    diff = 3;
+                    return;
+                }
+                else
+                {
+                    //Remove and Add Image//
+                    grid.Children.Remove(preview2);
+                    grid.Children.Add(preview2);
 
+                    // label 3//
+                    size.Content = "Geen diffuculty geselecteerd oneindig veel tijd voor het spel";
+                    size.FontSize = 25;
+                    size.FontFamily = new FontFamily("Bahnschrift");
+                    grid.Children.Remove(size);
+                    grid.Children.Add(size);
+                    diff = 3;
+                    return;
+                }
+
+            }
+            else if (MainClass.aantalSpelers.Equals(2))
+            {
+                if (Check1.IsChecked == true)
+                {
+                    //Remove and Add Image//
+
+                    grid.Children.Remove(preview2);
+                    grid.Children.Add(preview2);
+
+                    // label 2//
+                    size.Content = "45 seconden per beurt";
+                    size.FontSize = 25;
+                    size.FontFamily = new FontFamily("Bahnschrift");
+                    grid.Children.Remove(size);
+                    grid.Children.Add(size);
+                    diff = 1;
+                    return;
 
                 }
-            } 
+                else if (Check2.IsChecked == true)
+                {
+
+                    //Remove and Add Image//
+                    grid.Children.Remove(preview2);
+                    grid.Children.Add(preview2);
+
+                    // label 1//
+                    size.Content = "20 seconden per beurt";
+                    size.FontSize = 25;
+                    size.FontFamily = new FontFamily("Bahnschrift");
+                    grid.Children.Remove(size);
+                    grid.Children.Add(size);
+                    diff = 2;
+                    return;
+                }
+                else if (Check3.IsChecked == true)
+                {
+                    //Remove and Add Image//
+                    grid.Children.Remove(preview2);
+                    grid.Children.Add(preview2);
+
+                    // label 3//
+                    size.Content = "10 seconden per beurt";
+                    size.FontSize = 25;
+                    size.FontFamily = new FontFamily("Bahnschrift");
+                    grid.Children.Remove(size);
+                    grid.Children.Add(size);
+                    diff = 3;
+                    return;
+                }
+                else if (Check4.IsChecked == true)
+                {
+                    //Remove and Add Image//
+                    grid.Children.Remove(preview2);
+                    grid.Children.Add(preview2);
+
+                    // label 3//
+                    size.Content = "5 seconden per beurt";
+                    size.FontSize = 25;
+                    size.FontFamily = new FontFamily("Bahnschrift");
+                    grid.Children.Remove(size);
+                    grid.Children.Add(size);
+                    diff = 3;
+                    return;
+                }
+                else
+                {
+                    //Remove and Add Image//
+                    grid.Children.Remove(preview2);
+                    grid.Children.Add(preview2);
+
+                    // label 3//
+                    size.Content = "Geen diffuculty geselecteerd oneindig veel tijd per beurt";
+                    size.FontSize = 25;
+                    size.FontFamily = new FontFamily("Bahnschrift");
+                    grid.Children.Remove(size);
+                    grid.Children.Add(size);
+                    diff = 3;
+                    return;
+                }
+
+
+            }
 
 
         }
