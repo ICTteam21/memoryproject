@@ -244,9 +244,6 @@
     <Resource Include="Images\logos\9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\cardbacks\disneycardback.png" />
-    <Resource Include="Images\cardbacks\gebouwcardback.png" />
-    <Resource Include="Images\cardbacks\shapescardback.png" />
     <Resource Include="Images\shapes\1.png" />
     <Resource Include="Images\shapes\2.png" />
     <Resource Include="Images\shapes\3.png" />
