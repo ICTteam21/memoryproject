@@ -81,7 +81,7 @@ namespace MemoryGame
             Grid.SetRowSpan(title, 2);
             grid.Children.Add(title);
         }
-
+        // thema 1 = disney
         private void Theme1()
         {
             disney.Source = new BitmapImage(new Uri("Images/banners/disneybanner.jpg", UriKind.Relative));
@@ -93,7 +93,7 @@ namespace MemoryGame
             grid.Children.Add(disney);
 
         }
-        
+        // thema 2 = gebouwen
         private void Theme2()
         {
             gebouwen.Source = new BitmapImage(new Uri("Images/banners/gebouwenbanner.jpg", UriKind.Relative));
@@ -105,7 +105,7 @@ namespace MemoryGame
             grid.Children.Add(gebouwen);
         }
 
-
+        // thema 3 = logo
         private void Theme3()
         {
             logo.Source = new BitmapImage(new Uri("Images/banners/logobanner.jpg", UriKind.Relative));
@@ -119,7 +119,9 @@ namespace MemoryGame
 
 
 
-
+        /// <summary>
+        /// hier wordt gekeken welke optie je hebt aangedrukt en welke thema hij dus moet laden
+        /// </summary>
         private static string thema;
 
         public void SelectThema(object sender, RoutedEventArgs e)
@@ -164,7 +166,7 @@ namespace MemoryGame
         }
 
         public void Back_Click1(object sender, RoutedEventArgs e)
-        {
+        { // functie om naar de vorige pagina te gaan
             var SelectScherm = new SelectOptions(MainClass.aantalSpelers); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();

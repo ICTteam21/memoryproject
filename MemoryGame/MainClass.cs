@@ -65,7 +65,9 @@ namespace MemoryGame
             }
         }
 
-
+        /// <summary>
+        /// Hier wordt de titel van de pagina aangemaakt
+        /// </summary>
         public void AddTitle()
         {
             Label title = new Label
@@ -84,7 +86,9 @@ namespace MemoryGame
             grid.Children.Add(title);
 
         }
-
+        /// <summary>
+        /// Deze button zorgt ervoor dat je een nieuw spel kan starten met de opties 1 of 2 spelers
+        /// </summary>
         public void AddNewGame()
         {
             Button newgame = new Button
@@ -108,6 +112,10 @@ namespace MemoryGame
             newgame.Click += new RoutedEventHandler(Newgame_click);
 
         }
+
+        /// <summary>
+        /// Dit is de button om het spel met 2 spelers te laden
+        /// </summary>
         public void AddNewGame2()
         {
             Button newgame2 = new Button
@@ -130,7 +138,9 @@ namespace MemoryGame
 
 
         }
-
+        /// <summary>
+        /// dit is de button om het spel met 1 speler te laden
+        /// </summary>
         public void AddNewGame1()
         {
             Button newgame1 = new Button
@@ -154,7 +164,9 @@ namespace MemoryGame
 
         }
 
-
+        /// <summary>
+        /// deze button verwijst je naar het loadgame scherm waar je je spel kan inladen
+        /// </summary>
         public void AddLoadGame()
         {
             Button loadgame = new Button
@@ -176,7 +188,9 @@ namespace MemoryGame
             loadgame.Click += new RoutedEventHandler(Loadgame_click);
 
         }
-
+        /// <summary>
+        /// deze button verwijst je naar het highscores menu waar de highscores kan bekijken
+        /// </summary>
         public void AddHighScores()
         {
             Button highscores = new Button
@@ -198,7 +212,9 @@ namespace MemoryGame
             highscores.Click += new RoutedEventHandler(Highscores_click);
 
         }
-
+        /// <summary>
+        /// deze button verwijst je naar het settings menu waar je enkele settings kan aanpassen
+        /// </summary>
         public void AddSettings()
         {
             Button settings = new Button
@@ -221,6 +237,9 @@ namespace MemoryGame
 
 
         }
+        /// <summary>
+        /// deze button sluit de hele applicatie
+        /// </summary>
         public void AddQuit()
         {
             Button Quit = new Button
@@ -243,28 +262,28 @@ namespace MemoryGame
 
 
         }
-
-        void Quit_click(object sender, RoutedEventArgs e)
-        {
+        
+        void Quit_click(object sender, RoutedEventArgs e) 
+        {// functie van de quit button, sluit de hele applicatie
 
             Application.Current.Shutdown();
         }
 
-        public void Newgame_click(object sender, RoutedEventArgs e)
-        {
+        public void Newgame_click(object sender, RoutedEventArgs e) 
+        {// functie van de newgame buttons, 1 of 2 spelers worden hier door ingeladen
             AddNewGame1();
             AddNewGame2();
         }
 
         public void Newgame1_click(object sender, RoutedEventArgs e)
-        {
+        { // dit is de functie voor 1 speler, laadt het spel voor 1 speler
             aantalSpelers = 1;
             var SelectScherm = new SelectOptions(aantalSpelers); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
         }
         public void Newgame2_click(object sender, RoutedEventArgs e)
-        {
+        {// dit is de functie voor 2 spelers, laadt het spel voor 2 spelers
             aantalSpelers = 2; 
             var SelectScherm = new SelectOptions(aantalSpelers); //create your new form.
             SelectScherm.Show(); //show the new form.
@@ -272,7 +291,7 @@ namespace MemoryGame
         }
 
         public void Loadgame_click(object sender, RoutedEventArgs e)
-        {
+        { // dit is de functie om je naar het loadgame scherm te sturen
             var Loading = new LoadScreen(); //create your new form.
             Loading.Show(); //show the new form.
             window.Close();
@@ -280,7 +299,7 @@ namespace MemoryGame
         }
         
         public void Highscores_click(object sender, RoutedEventArgs e)
-        {
+        { // dit is de functie van de highscores button die je verwijst naar het highscores scherm
             var HighScores = new HighScores(); //create your new form.
             HighScores.Show(); //show the new form.
             window.Close();
@@ -293,7 +312,7 @@ namespace MemoryGame
         // to test need to remove
         
         void settings_click(object sender, RoutedEventArgs e)
-        {
+        { // dit is de functie van de settings button om je naar het settings scherm te verwijzen
 
             var SelectScherm = new Settings(); //create your new form.
             SelectScherm.Show(); //show the new form.

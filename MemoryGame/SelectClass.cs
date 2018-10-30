@@ -57,7 +57,8 @@ namespace MemoryGame
             AddCheck3();
             AddCheck4();
 
-
+            // hier wordt gekeken of je het spel met 1 of 2 spelers speelt en laadt daarbij de juiste dingen in
+           
             if (aantalSpelers == 1)
             {
                 AddText1();
@@ -168,7 +169,7 @@ namespace MemoryGame
         }
 
         /// <summary>
-        ///  Diffuculty 1 radiobutton
+        ///  Difficulty 1 radiobutton
         /// </summary>
         public void AddCheck1()
         {
@@ -587,7 +588,7 @@ namespace MemoryGame
           
         }
 
-
+        // data transfer om je ingevoerde data op te slaan > excel
         public void Transferdata()
         {
             string[] lines = { Text1.Text, Text2.Text,};
