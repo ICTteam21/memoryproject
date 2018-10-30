@@ -135,7 +135,7 @@ namespace MemoryGame
             {
                 thema = "disney";
             }
-            var nieuwSpel = new GameWindow( thema  ); //create your new form.
+            var nieuwSpel = new GameWindow( thema,1  ); //create your new form.
             nieuwSpel.Show(); //show the new form.
             window.Close();  //only if you want to close the current form.
         }

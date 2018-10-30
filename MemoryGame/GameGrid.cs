@@ -32,16 +32,21 @@ namespace MemoryGame
         private static Timer aTimer; 
 
         string Player1Name; 
-        string Player2Name; 
-
+        string Player2Name;
+        int newofloadteller;
+        int regel = 0;
         int aandebeurt = 1;
         int P1Points = 0;
         int P2Points = 0;
+        private int pairs = 0;
+
         private string themanaamsave;
         private int fileCount;
         string pathing;
         string path3;
         string statspath;
+        string padnaarsave;
+        string tijdelijkestring;
 
         TimeSpan starttijd;
         TimeSpan eindtijd;
@@ -50,35 +55,100 @@ namespace MemoryGame
         public List<string> plaatjesvolgorde = new List<string>();
 
 
-        public GameGrid(Window window, Grid grid, int cols, int rows, string thema)
+        public GameGrid(Window window, Grid grid, int cols, int rows, string thema, int newofload)
         {   //settings//
-            if (MainClass.windowstyle == 2)
-            { window.WindowStyle = WindowStyle.None; }
-            else
-            { window.WindowStyle = WindowStyle.SingleBorderWindow; }
-            if (MainClass.windowstate == 2)
-            { window.WindowState = WindowState.Maximized; }
-            else
-            { window.WindowState = WindowState.Normal; }
 
-            this.window = window; 
-            this.grid = grid;
-            InitializeGameGrid(cols, rows);
-            AddImages(thema, cols, rows);
-            paaaaaaad();
-            Playerstats(MainClass.aantalSpelers);
-            padnaarstatistics();
-            Savegameandclosebutton();
-            starttijd = DateTime.Now.TimeOfDay;
-            MainmenuButton();
-            
+            if (newofload == 1)
+            {
+                newofloadteller = 1;
+                if (MainClass.windowstyle == 2)
+                { window.WindowStyle = WindowStyle.None; }
+                else
+                { window.WindowStyle = WindowStyle.SingleBorderWindow; }
+                if (MainClass.windowstate == 2)
+                { window.WindowState = WindowState.Maximized; }
+                else
+                { window.WindowState = WindowState.Normal; }
 
-            fileCount = (from file in Directory.EnumerateFiles(path3, "*", SearchOption.AllDirectories)
-                         select file).Count();
+                this.window = window;
+                this.grid = grid;
+                InitializeGameGrid(cols, rows);
+                AddImages(thema, cols, rows);
+                Savedgamesfolderlocatie();
+                Playerstats(MainClass.aantalSpelers);
+                padnaarstatistics();
+                Savegameandclosebutton();
+                starttijd = DateTime.Now.TimeOfDay;
+                MainmenuButton();
 
+
+                fileCount = (from file in Directory.EnumerateFiles(path3, "*", SearchOption.AllDirectories)
+                             select file).Count();
+
+            }
+            else if(newofload == 2)
+            {
+                newofloadteller = 2;
+                padnaarsave = thema;
+                if (MainClass.windowstyle == 2)
+                { window.WindowStyle = WindowStyle.None; }
+                else
+                { window.WindowStyle = WindowStyle.SingleBorderWindow; }
+                if (MainClass.windowstate == 2)
+                { window.WindowState = WindowState.Maximized; }
+                else
+                { window.WindowState = WindowState.Normal; }
+
+                this.window = window;
+                this.grid = grid;
+                InitializeGameGrid(cols, rows);
+                addimagesload(cols,rows,thema);
+                Savedgamesfolderlocatie();
+
+                if (Convert.ToInt32(File.ReadLines(thema).Skip(16).Take(1).First()) == 1)
+                {
+                    Player1Name = File.ReadLines(thema).Skip(17).Take(1).First();
+                    P1Points = Convert.ToInt32(File.ReadLines(thema).Skip(16).Take(1).First());
+
+                } else
+                {
+                    Player1Name = File.ReadLines(thema).Skip(17).Take(1).First();
+                    Player2Name = File.ReadLines(thema).Skip(18).Take(1).First();
+                    aandebeurt = Convert.ToInt32(File.ReadLines(thema).Skip(19).Take(1).First());
+
+
+
+                    P1Points = Convert.ToInt32(File.ReadLines(thema).Skip(20).Take(1).First());
+                    P2Points = Convert.ToInt32(File.ReadLines(thema).Skip(21).Take(1).First());
+                }
+
+                pairs = Convert.ToInt32(File.ReadLines(thema).Skip(22).Take(1).First());
+                Playerstats(Convert.ToInt32(File.ReadLines(thema).Skip(16).Take(1).First()));
+
+                if (aandebeurt == 1)
+                {
+                    Player1name.Background = Brushes.Green;
+                    Player2name.Background = Brushes.LightGray;
+                }
+                else
+                {
+                    Player2name.Background = Brushes.Green;
+                    Player1name.Background = Brushes.LightGray;
+                }
+
+                padnaarstatistics();
+                Savegameandclosebutton();
+                starttijd = DateTime.Now.TimeOfDay;
+                MainmenuButton();
+
+                
+                fileCount = (from file in Directory.EnumerateFiles(path3, "*", SearchOption.AllDirectories)
+                             select file).Count();
+
+            }
         }
 
-        public void paaaaaaad()
+        public void Savedgamesfolderlocatie()
         {
             pathing = System.AppDomain.CurrentDomain.BaseDirectory;
             //path2 = pathing.Replace("bin", "Textdocs");
@@ -129,7 +199,7 @@ namespace MemoryGame
                 imagesList.Add(source);
             }
 
-            imagesList.Shuffle();
+           // imagesList.Shuffle();
             return imagesList;
 
 
@@ -161,7 +231,8 @@ namespace MemoryGame
                             Tag = images.First()
 
                         };
-                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
+                        tijdelijkestring = Convert.ToString(backgroudImage.Tag);
+                        plaatjesvolgorde.Add(tijdelijkestring);
                         images.RemoveAt(0);
                         backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
                         Grid.SetColumn(backgroudImage, column);
@@ -182,7 +253,8 @@ namespace MemoryGame
                             Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
                             Tag = images.First()
                         };
-                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
+                        tijdelijkestring = Convert.ToString(backgroudImage.Tag);
+                        plaatjesvolgorde.Add(tijdelijkestring);
                         images.RemoveAt(0);
                         backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
                         Grid.SetColumn(backgroudImage, column);
@@ -204,7 +276,8 @@ namespace MemoryGame
                             Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
                             Tag = images.First()
                         };
-                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
+                        tijdelijkestring = Convert.ToString(backgroudImage.Tag);
+                        plaatjesvolgorde.Add(tijdelijkestring);
                         images.RemoveAt(0);
                         backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
                         Grid.SetColumn(backgroudImage, column);
@@ -225,7 +298,70 @@ namespace MemoryGame
 
         }
 
+        private void addimagesload(int rows, int cols,string pad)
+        {
 
+            plaatjesvolgorde.Clear();
+
+            for (int row = 0; row < rows; row++)
+            {
+                for (int column = 0; column < cols; column++)
+                {
+                    ImageSource sourceplaatje = new BitmapImage(new Uri(File.ReadLines(pad).Skip(regel).Take(1).First(), UriKind.Relative));
+                    if (File.ReadLines(pad).Skip(regel).Take(1).First() == "nulll")
+                    {
+                        sourceplaatje = null;
+                    }
+                    
+
+                    Image backgroudImage = new Image
+                    {
+                        Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                        Tag = sourceplaatje
+                    };
+
+                    tijdelijkestring = Convert.ToString(backgroudImage.Tag);
+                    if(sourceplaatje == null)
+                    { plaatjesvolgorde.Add("nulll"); }
+                    else
+                    { plaatjesvolgorde.Add(tijdelijkestring); }
+                    
+                    
+
+                    backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
+                    Grid.SetColumn(backgroudImage, column);
+                    Grid.SetRow(backgroudImage, row);
+                    if (File.ReadLines(pad).Skip(regel).Take(1).First() == "nulll")
+                    {
+
+                    }
+                    else
+                    {
+                        grid.Children.Add(backgroudImage);
+                    } 
+                    regel++;
+                }
+            }
+
+
+
+
+
+
+
+
+            if (SelectClass.diff.Equals(0))
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("Druk op ok om de tijd te starten", "Het spel gaat beginnen!");
+                SetTimer();
+            }
+
+
+        }
         /// <summary>
         /// Is de functie die bepaald wat er gebeurt als je op een kaart klikt
         /// </summary>
@@ -238,7 +374,6 @@ namespace MemoryGame
         private string xyOne;
         private string tagOne;
         private string tagTwo;
-        private int pairs = 0;
 
 
         /// <summary>
@@ -310,7 +445,21 @@ namespace MemoryGame
 
                 imgCardOne = null;
                 imgCardTwo = null;
-                
+
+                for (int i = 0; i < plaatjesvolgorde.Count; i++)
+                {
+                    if (plaatjesvolgorde[i] == "nulll")
+                    {  }
+                    else
+                    {
+                        string plaatje = plaatjesvolgorde[i].Substring(plaatjesvolgorde[i].Length - 5);
+                        if (plaatje == Card1)
+                        {
+                            plaatjesvolgorde[i] = plaatjesvolgorde[i].Replace(plaatjesvolgorde[i], "nulll");
+                        }
+                    }
+                }
+
             }
             else if (!CardsEqual && !PosEqual) // lose
             {
@@ -355,7 +504,7 @@ namespace MemoryGame
                     MessageBox.Show("Goed gedaan! Je hebt binnen de tijd alle paren gevonden!", "Klik op ok om de highscores te zien");
                     thegameisdone(1, 1);
                     var highscoresWindow = new HighScores();
-
+                    Deletesave();
                     window.Close();
                     highscoresWindow.Show();
 
@@ -368,6 +517,7 @@ namespace MemoryGame
                     MessageBox.Show("Goed gedaan! Je hebt alle paren gevonden!", "Klik op ok om de highscores te zien");
                     thegameisdone(1, 1);
                     var highscoresWindow = new HighScores();
+                    Deletesave();
                     window.Close();
                     highscoresWindow.Show();
 
@@ -417,6 +567,7 @@ namespace MemoryGame
                         MessageBox.Show("Speler " + Player1Name + " heeft gewonnen! \n" + Player1Name + " heeft met " + pDiff + " punten meer gewonnen! het duurde: " + totaletijd, "Klik op ok om je highscores te zien");
                         thegameisdone(1, 2);
                         var highscoresWindow = new HighScores();
+                        Deletesave();
                         window.Close();
                         highscoresWindow.Show();
                     }
@@ -430,6 +581,7 @@ namespace MemoryGame
                         MessageBox.Show("Speler " + Player2Name + " heeft gewonnen! \n" + Player2Name + " heeft met " + pDiff + " punten meer gewonnen! het duurde: " + totaletijd, "Klik op ok om je highscores te zien");
                         thegameisdone(1, 2);
                         var highscoresWindow = new HighScores();
+                        Deletesave();
                         window.Close();
                         highscoresWindow.Show();
                     }
@@ -442,6 +594,7 @@ namespace MemoryGame
                         MessageBox.Show( Player1Name + " en " + Player2Name + " jullie zijn erg aan elkaar gewaagt !\n  " + "Probeer het nog een keer! het duurde: " + totaletijd, "Klik op ok om je highscores te zien");
                         thegameisdone(1, 2);
                         var highscoresWindow = new HighScores();
+                        Deletesave();
                         window.Close();
                         highscoresWindow.Show();
                     }
@@ -531,6 +684,7 @@ namespace MemoryGame
             {
                 MessageBox.Show("De tijd is op! ", "Klik om terug te gaan");
                 var eindeSpelDoorTimer = new HighScores();
+                Deletesave();
                 eindeSpelDoorTimer.Show();
                 window.Close();
             }
@@ -582,7 +736,7 @@ namespace MemoryGame
                 Grid.SetColumn(Score1, 4);
                 grid.Children.Add(Score1);
 
-                Player1Score.Content = 0;
+                Player1Score.Content = P1Points;
                 Player1Score.FontSize = 30;
                 Player1Score.HorizontalContentAlignment = HorizontalAlignment.Center;
                 Player1Score.VerticalContentAlignment = VerticalAlignment.Center;
@@ -613,7 +767,7 @@ namespace MemoryGame
                 Grid.SetColumn(Score1, 4);
                 grid.Children.Add(Score1);
 
-                Player1Score.Content = 0;
+                Player1Score.Content = P1Points;
                 Player1Score.FontSize = 30;
                 Player1Score.HorizontalContentAlignment = HorizontalAlignment.Center;
                 Player1Score.VerticalContentAlignment = VerticalAlignment.Center;
@@ -638,7 +792,7 @@ namespace MemoryGame
                 Grid.SetColumn(Score2, 4);
                 grid.Children.Add(Score2);
 
-                Player2Score.Content = 0;
+                Player2Score.Content = P2Points;
                 Player2Score.FontSize = 30;
                 Player2Score.HorizontalContentAlignment = HorizontalAlignment.Center;
                 Player2Score.VerticalContentAlignment = VerticalAlignment.Center;
@@ -671,22 +825,35 @@ namespace MemoryGame
         /// <param name="e"></param>
         public void SaveGame_Click(Object sender, RoutedEventArgs e)
         {
-            string naamaandebeurt;
-            if(aandebeurt == 1)
-            {
-                naamaandebeurt = Player1Name;
-            }else
-            {
-                naamaandebeurt = Player2Name;
-            }
- 
+
             string pathing;
             string path2;
             pathing = System.AppDomain.CurrentDomain.BaseDirectory;
             path2 = pathing.Replace("bin", "Textdocs");
-            path2 = path2.Replace("Debug", "NewGame");
-            System.IO.File.WriteAllLines(path2 + "WUT.txt", plaatjesvolgorde);
+            path2 = path2.Replace("Debug", "SavedGames");
+            if (newofloadteller == 1)
+            {
+                plaatjesvolgorde.Add(Convert.ToString(MainClass.aantalSpelers));
+            }
+            else
+            {
+                plaatjesvolgorde.Add(File.ReadLines(padnaarsave).Skip(16).Take(1).First());
+            }
 
+            plaatjesvolgorde.Add(Player1Name);
+            plaatjesvolgorde.Add(Player2Name);
+            plaatjesvolgorde.Add(Convert.ToString(aandebeurt));
+            plaatjesvolgorde.Add(Convert.ToString(P1Points));
+            plaatjesvolgorde.Add(Convert.ToString(P2Points));
+            plaatjesvolgorde.Add(Convert.ToString(pairs));
+
+            if (newofloadteller == 2)
+            { File.Delete(padnaarsave); }
+
+            System.IO.File.WriteAllLines(path3 + fileCount + " save.txt", plaatjesvolgorde);
+            var SelectScherm = new MainMenuWindow(); //create your new form.
+            SelectScherm.Show(); //show the new form.
+            window.Close();
         }
 
         public void MainmenuButton()
@@ -769,6 +936,11 @@ namespace MemoryGame
 
         }
 
+        public void Deletesave()
+        {
+            if (newofloadteller == 2)
+            { File.Delete(padnaarsave); }
+        }
         /// <summary>
         /// Haalt het pad op voor de methode die naar excel schrijft.
         /// </summary>

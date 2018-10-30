@@ -20,8 +20,9 @@ namespace MemoryGame
     public partial class LoadScreen : Window
     {
         LoadClass grid;
-        private const int kolommen = 9;
-        private const int rijen = 20;
+        private const int kolommen = 3;
+        private const int rijen = 10;
+
 
         public LoadScreen()
         {
