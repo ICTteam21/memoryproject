@@ -19,8 +19,9 @@ namespace MemoryGame
 
         private SelectOptions window;
 
+        
 
-    
+        RadioButton Check = new RadioButton();
         RadioButton Check1 = new RadioButton();
         RadioButton Check2 = new RadioButton();
         RadioButton Check3 = new RadioButton();
@@ -52,6 +53,7 @@ namespace MemoryGame
             AddTitle2();
             AddContinue();
             AddBack();
+            AddCheck();
             AddCheck1();
             AddCheck2();
             AddCheck3();
@@ -167,9 +169,46 @@ namespace MemoryGame
             SelectScherm.Show(); //show the new form.
             window.Close();
         }
+        public void AddCheck()
+        {
+            Image preview2 = new Image
+            {
+                Source = new BitmapImage(new Uri("Images/4x4 preview.png", UriKind.Relative)),
+            };
+            Check.Content = "Difficulty 0";
+            Check.FontSize = 40;
+            Check.BorderBrush = Brushes.Black;
+            Check.BorderThickness = new Thickness(3);
+            Check.FontFamily = new FontFamily("Bahnschrift");
+            Check.Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue);
+
+            Grid.SetRow(Check, 5);
+            Grid.SetColumn(Check, 1);
+            Grid.SetColumnSpan(Check, 2);
+            Grid.SetRowSpan(Check, 2);
+            grid.Children.Add(Check);
+            Check.IsChecked = true;
+
+            Grid.SetRow(preview2, 7);
+            Grid.SetColumn(preview2, 5);
+            Grid.SetColumnSpan(preview2, 7);
+            Grid.SetRowSpan(preview2, 7);
+            grid.Children.Add(preview2);
+
+            size.Content = "No time limit";
+            size.FontSize = 25;
+            size.FontFamily = new FontFamily("Bahnschrift");
+            Grid.SetRow(size, 5);
+            Grid.SetColumn(size, 6);
+            Grid.SetColumnSpan(size, 7);
+            Grid.SetRowSpan(size, 2);
+            grid.Children.Add(size);
+            Check.Checked += RadioButtonChecked;
+        }
 
         /// <summary>
-        ///  Difficulty 1 radiobutton
+        ///  Difficulty 1 radio
+        ///  button
         /// </summary>
         public void AddCheck1()
         {
@@ -186,7 +225,7 @@ namespace MemoryGame
             Grid.SetColumnSpan(Check1, 2);
             Grid.SetRowSpan(Check1, 2);
             grid.Children.Add(Check1);
-            Check1.Checked += RadioButtonClicked;
+            Check1.Checked += RadioButtonChecked;
 
         }
         /// <summary>
@@ -208,7 +247,7 @@ namespace MemoryGame
             Grid.SetColumnSpan(Check2, 2);
             Grid.SetRowSpan(Check2, 2);
             grid.Children.Add(Check2);
-            Check2.Checked += RadioButtonClicked;
+            Check2.Checked += RadioButtonChecked;
 
         }
 
@@ -231,7 +270,7 @@ namespace MemoryGame
             Grid.SetColumnSpan(Check3, 2);
             Grid.SetRowSpan(Check3, 2);
             grid.Children.Add(Check3);
-            Check3.Checked += RadioButtonClicked;
+            Check3.Checked += RadioButtonChecked;
 
         }
 
@@ -254,7 +293,7 @@ namespace MemoryGame
             Grid.SetColumnSpan(Check4, 2);
             Grid.SetRowSpan(Check4, 2);
             grid.Children.Add(Check4);
-            Check4.Checked += RadioButtonClicked;
+            Check4.Checked += RadioButtonChecked;
 
         }
 
@@ -263,7 +302,7 @@ namespace MemoryGame
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void RadioButtonClicked(object sender, RoutedEventArgs e)
+        public void RadioButtonChecked(object sender, RoutedEventArgs e)
         {
             Image preview2 = new Image
             {
@@ -273,12 +312,14 @@ namespace MemoryGame
             Grid.SetColumn(preview2, 5);
             Grid.SetColumnSpan(preview2, 7);
             Grid.SetRowSpan(preview2, 7);
+            
             //Label setup//
             size.FontSize = 12;
             Grid.SetRow(size, 5);
             Grid.SetColumn(size, 6);
             Grid.SetColumnSpan(size, 7);
             Grid.SetRowSpan(size, 2);
+            
             if (MainClass.aantalSpelers.Equals(1))
             {
                 if (Check1.IsChecked == true)
@@ -344,6 +385,20 @@ namespace MemoryGame
                     diff = 3;
                     return;
                 }
+                else if (Check.IsChecked == true)
+                {
+                    
+                    grid.Children.Add(preview2);
+
+                    // label 3//
+                    size.Content = "No Time Limit";
+                    size.FontSize = 25;
+                    size.FontFamily = new FontFamily("Bahnschrift");
+                    grid.Children.Remove(size);
+                    grid.Children.Add(size);
+                    diff = 0;
+                    return;
+                }
                 else
                 {
                     //Remove and Add Image//
@@ -394,7 +449,7 @@ namespace MemoryGame
                     grid.Children.Remove(size);
                     grid.Children.Add(size);
                     diff = 2;
-                    return;
+                    
                 }
                 else if (Check3.IsChecked == true)
                 {
@@ -409,7 +464,7 @@ namespace MemoryGame
                     grid.Children.Remove(size);
                     grid.Children.Add(size);
                     diff = 3;
-                    return;
+                    
                 }
                 else if (Check4.IsChecked == true)
                 {
@@ -424,11 +479,10 @@ namespace MemoryGame
                     grid.Children.Remove(size);
                     grid.Children.Add(size);
                     diff = 3;
-                    return;
+                    
                 }
-                else
+                else if (Check.IsChecked == true)
                 {
-                    //Remove and Add Image//
                     grid.Children.Remove(preview2);
                     grid.Children.Add(preview2);
 
@@ -438,9 +492,24 @@ namespace MemoryGame
                     size.FontFamily = new FontFamily("Bahnschrift");
                     grid.Children.Remove(size);
                     grid.Children.Add(size);
-                    diff = 3;
-                    return;
+                    diff = 0;
+                  
                 }
+                //else
+                //{
+                //    //Remove and Add Image//
+                //    grid.Children.Remove(preview2);
+                //    grid.Children.Add(preview2);
+
+                //    // label 3//
+                //    size.Content = "Geen diffuculty geselecteerd oneindig veel tijd per beurt";
+                //    size.FontSize = 25;
+                //    size.FontFamily = new FontFamily("Bahnschrift");
+                //    grid.Children.Remove(size);
+                //    grid.Children.Add(size);
+                //    diff = 3;
+                //    return;
+                //}
 
 
             }
