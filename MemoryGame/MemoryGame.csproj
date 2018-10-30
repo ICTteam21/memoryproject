@@ -246,7 +246,6 @@
   <ItemGroup>
     <Resource Include="Images\cardbacks\disneycardback.png" />
     <Resource Include="Images\cardbacks\gebouwcardback.png" />
-    <Resource Include="Images\cardbacks\logobackcard.png" />
     <Resource Include="Images\cardbacks\shapescardback.png" />
   </ItemGroup>
   <ItemGroup>
@@ -294,6 +293,9 @@
     <Resource Include="Images\shapes\7.png" />
     <Resource Include="Images\shapes\8.png" />
     <Resource Include="Images\shapes\9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cardbacks\logocardback.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
