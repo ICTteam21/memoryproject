@@ -50,7 +50,9 @@ namespace MemoryGame
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
             }
         }
-
+        /// <summary>
+        /// Hier wordt de titel van het scherm weergegeven
+        /// </summary>
         public void AddTitle()
         {
             Label title = new Label
@@ -66,7 +68,9 @@ namespace MemoryGame
             Grid.SetColumnSpan(title, 3);
             grid.Children.Add(title);
         }
-
+        /// <summary>
+        /// met deze knop kan je weer terug naar het vorige window
+        /// </summary>
         public void Addback()
         {
             Button Back = new Button
@@ -88,13 +92,16 @@ namespace MemoryGame
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
-        {
+        {// functie om weer terug te gaan naar het vorige window 
 
             var SelectScherm = new MainMenuWindow(); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
 
         }
+        /// <summary>
+        /// button om het scherm full screen te krijgen
+        /// </summary>
         public void Resize()
         {
 
@@ -115,7 +122,7 @@ namespace MemoryGame
         }
 
         private void Resize_Checked(object sender, RoutedEventArgs e)
-        {
+        { // functie om het scherm full screen te maken
             MainClass.windowstyle = 2;
             MainClass.windowstate = 2;
 
@@ -123,7 +130,9 @@ namespace MemoryGame
 
             window.WindowStyle = WindowStyle.None;
         }
-
+        /// <summary>
+        /// button om het scherm te resizen naar maximized + top bar
+        /// </summary>
         public void Resize2()
         {
 
@@ -144,7 +153,7 @@ namespace MemoryGame
         }
 
         private void Resize2_Checked(object sender, RoutedEventArgs e)
-        {
+        { // functie om het scherm te maken als bij resize2
             MainClass.windowstyle = 1;
             MainClass.windowstate = 2;
 
@@ -152,6 +161,9 @@ namespace MemoryGame
 
             window.WindowStyle = WindowStyle.SingleBorderWindow;
         }
+        /// <summary>
+        /// button om het scherm normale grote te maken met de top bar
+        /// </summary>
         public void Resize3()
         {
 
@@ -172,7 +184,7 @@ namespace MemoryGame
         }
 
         private void Resize3_Checked(object sender, RoutedEventArgs e)
-        {
+        { // functie om het scherm normale grote te maken met de top bar
             MainClass.windowstyle = 1;
             MainClass.windowstate = 1;
 
