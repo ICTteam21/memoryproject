@@ -12,12 +12,13 @@ using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Timers;
 using System.Media;
+using System.Windows.Threading;
 
 namespace MemoryGame
 {
     class GameGrid
     {
-        
+        private int time; 
         private Window window;
         private Grid grid;
         private bool IsTaskRunning = false;
@@ -29,7 +30,8 @@ namespace MemoryGame
         Label Player2Score = new Label();
         Button SaveGameandClose = new Button();
         Button BackToMain = new Button();
-        private static Timer aTimer; 
+        private DispatcherTimer aTimer;
+        Label TimerDisplay = new Label();
 
         string Player1Name; 
         string Player2Name;
@@ -81,8 +83,11 @@ namespace MemoryGame
                 Savegameandclosebutton();
                 starttijd = DateTime.Now.TimeOfDay;
                 MainmenuButton();
-            
 
+                aTimer = new DispatcherTimer();
+                aTimer.Interval = new TimeSpan(0, 0, 1);
+                aTimer.Tick += OnTimedEvent;
+                aTimer.Start();
 
                 fileCount = (from file in Directory.EnumerateFiles(path3, "*", SearchOption.AllDirectories)
                              select file).Count();
@@ -201,7 +206,7 @@ namespace MemoryGame
                 imagesList.Add(source);
             }
 
-           // imagesList.Shuffle();
+           imagesList.Shuffle();
             return imagesList;
 
 
@@ -600,11 +605,13 @@ namespace MemoryGame
                     {
                         P1Points += 50;
                         Player1Score.Content = P1Points;
+                        SetTimer();
                     }
                     else
                     {
                         P2Points += 50;
                         Player2Score.Content = P2Points;
+                        SetTimer();
                     }
                 }
                 else if (win.Equals(false)) // als er niet een paar is gevonden ga dan naar de volgende speler
@@ -614,16 +621,19 @@ namespace MemoryGame
                         aandebeurt = 2;
                         Player2name.Background = Brushes.Green;
                         Player1name.Background = Brushes.LightGray;
+                        SetTimer();
                     }
                     else
                     {
                         aandebeurt = 1;
                         Player1name.Background = Brushes.Green;
                         Player2name.Background = Brushes.LightGray;
+                        SetTimer();
                     }
                 }
                 if (pairs.Equals(8)) // als er iemand alle plaatjes heeft gewonnen, ga naar highscores
                 {
+                    aTimer.Stop();
                     if (P1Points > P2Points) // hier heeft speler 1 gewonnen
                     {
                         int pDiff = P1Points - P2Points;
@@ -683,29 +693,21 @@ namespace MemoryGame
                 {
 
                 }
-                else if (SelectClass.diff.Equals(1))
+                else if (SelectClass.diff.Equals(1)) // 10minuten
                 {
-                    aTimer = new Timer(6000000);
-                    aTimer.Elapsed += OnTimedEvent;
-                    aTimer.Enabled = true;
+                    time = 600;
                 }
-                else if (SelectClass.diff.Equals(2))
+                else if (SelectClass.diff.Equals(2)) // 5 minuten
                 {
-                    aTimer = new Timer(3000000);
-                    aTimer.Elapsed += OnTimedEvent;
-                    aTimer.Enabled = true;
+                    time = 300;
                 }
-                else if (SelectClass.diff.Equals(3))
+                else if (SelectClass.diff.Equals(3))// 2 minuten
                 {
-                    aTimer = new Timer(120000);
-                    aTimer.Elapsed += OnTimedEvent;
-                    aTimer.Enabled = true;
+                    time = 120;
                 }
-                else if (SelectClass.diff.Equals(4))
+                else if (SelectClass.diff.Equals(4)) // 1 minuut
                 {
-                    aTimer = new Timer(60000);
-                    aTimer.Elapsed += OnTimedEvent;
-                    aTimer.Enabled = true;
+                    time = 60;
                 }
             }
             if (MainClass.aantalSpelers.Equals(2)) // 2 spelers + de timer daarbij
@@ -714,29 +716,21 @@ namespace MemoryGame
                 {
 
                 }
-                else if (SelectClass.diff.Equals(1))
+                else if (SelectClass.diff.Equals(1)) // 45
                 {
-                    aTimer = new Timer(45000);
-                    aTimer.Elapsed += OnTimedEvent;
-                    aTimer.Enabled = true;
+                    time = 45;
                 }
-                else if (SelectClass.diff.Equals(2))
+                else if (SelectClass.diff.Equals(2)) // 5 minuten
                 {
-                    aTimer = new Timer(20000);
-                    aTimer.Elapsed += OnTimedEvent;
-                    aTimer.Enabled = true;
+                    time = 20;
                 }
-                else if (SelectClass.diff.Equals(3))
+                else if (SelectClass.diff.Equals(3))// 2 minuten
                 {
-                    aTimer = new Timer(10000);
-                    aTimer.Elapsed += OnTimedEvent;
-                    aTimer.Enabled = true;
+                    time = 10;
                 }
-                else if (SelectClass.diff.Equals(4))
+                else if (SelectClass.diff.Equals(4)) // 1 minuut
                 {
-                    aTimer = new Timer(5000);
-                    aTimer.Elapsed += OnTimedEvent;
-                    aTimer.Enabled = true;
+                    time = 5;
                 }
             }
         }
@@ -746,37 +740,45 @@ namespace MemoryGame
         /// </summary>
         /// <param name="source"></param>
         /// <param name="e"></param>
-        private void OnTimedEvent(object source, ElapsedEventArgs e)
+        private void OnTimedEvent(object source, EventArgs e)
         {
-            if (MainClass.aantalSpelers.Equals(1))
+            time--;
+            TimerDisplay.Content = String.Format("00:0{0}:{1}", time / 60, time % 60);
+            if (time.Equals(0))
             {
-                MessageBox.Show("De tijd is op! ", "Klik om terug te gaan");
-                var eindeSpelDoorTimer = new HighScores();
-                Deletesave();
-                eindeSpelDoorTimer.Show();
-                window.Close();
-            }
-            if (MainClass.aantalSpelers.Equals(2))
-            {
-                if (aandebeurt.Equals(1)) //hier wordt de achtegrond kleur van de persoon groen/grijs gekleurd om te zien wie er aan de beurt is
+                if (MainClass.aantalSpelers.Equals(1))
                 {
-                    aandebeurt = 2;
-
-                    Player2name.Background = Brushes.Green; // aan de beurt
-                    Player1name.Background = Brushes.LightGray;
+                    MessageBox.Show("De tijd is op! ", "Klik om terug te gaan");
+                    var eindeSpelDoorTimer = new HighScores();
+                    Deletesave();
+                    eindeSpelDoorTimer.Show();
+                    window.Close();
                 }
-                else
+                if (MainClass.aantalSpelers.Equals(2))
                 {
-                    aandebeurt = 1;
+                    if (aandebeurt.Equals(1)) //hier wordt de achtegrond kleur van de persoon groen/grijs gekleurd om te zien wie er aan de beurt is
+                    {
+                        aandebeurt = 2;
 
-                    Player1name.Background = Brushes.Green; // aan de beurt
-                    Player2name.Background = Brushes.LightGray;
+                        Player2name.Background = Brushes.Green; // aan de beurt
+                        Player1name.Background = Brushes.LightGray;
+                        SetTimer();
+                    }
+                    else
+                    {
+                        aandebeurt = 1;
+
+                        Player1name.Background = Brushes.Green; // aan de beurt
+                        Player2name.Background = Brushes.LightGray;
+                        SetTimer();
+                    }
                 }
             }
 
+            
 
         }
-       
+
         /// <summary>
         /// hieronder wordt gekeken of je singleplayer of multiplayer speelt en laadt daarbij de benodigdheden bij
         /// </summary>
@@ -788,7 +790,19 @@ namespace MemoryGame
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
 
+
                 // door de code hieronder komt het scoreboard + naam van player 1 in beeld
+                if(SelectClass.diff > 0)
+                {
+                    TimerDisplay.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    TimerDisplay.VerticalContentAlignment = VerticalAlignment.Center;
+                    TimerDisplay.Background = Brushes.LightGray;
+                    TimerDisplay.FontSize = 30;
+                    Grid.SetRow(TimerDisplay, 1);
+                    Grid.SetColumn(TimerDisplay, 4);
+                    Grid.SetColumnSpan(TimerDisplay, 2);
+                    grid.Children.Add(TimerDisplay);
+                }
 
                 Player1name.Background = Brushes.Green;
                 Player1name.Content = Player1Name;
@@ -820,6 +834,18 @@ namespace MemoryGame
             {
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
+
+                if (SelectClass.diff > 0)
+                {
+                    TimerDisplay.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    TimerDisplay.VerticalContentAlignment = VerticalAlignment.Center;
+                    TimerDisplay.Background = Brushes.LightGray;
+                    TimerDisplay.FontSize = 30;
+                    Grid.SetRow(TimerDisplay, 1);
+                    Grid.SetColumn(TimerDisplay, 4);
+                    Grid.SetColumnSpan(TimerDisplay, 2);
+                    grid.Children.Add(TimerDisplay);
+                }
 
                 Player1name.Background = Brushes.Green;
                 Player1name.Content = Player1Name;
@@ -871,6 +897,9 @@ namespace MemoryGame
                 Grid.SetRow(Player2Score, 2);
                 Grid.SetColumn(Player2Score, 5);
                 grid.Children.Add(Player2Score);
+
+
+
             }  
         }
 
