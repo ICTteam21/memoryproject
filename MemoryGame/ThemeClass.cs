@@ -84,7 +84,7 @@ namespace MemoryGame
         // thema 1 = disney
         private void Theme1()
         {
-            disney.Source = new BitmapImage(new Uri("Images/banners/disneybanner.jpg", UriKind.Relative));
+            disney.Source = new BitmapImage(new Uri("Images/banners/disneybanner.png", UriKind.Relative));
             disney.MouseDown += new MouseButtonEventHandler(SelectThema);
             Grid.SetRow(disney, 3);
             Grid.SetColumn(disney, 1);
@@ -96,7 +96,7 @@ namespace MemoryGame
         // thema 2 = gebouwen
         private void Theme2()
         {
-            gebouwen.Source = new BitmapImage(new Uri("Images/banners/gebouwenbanner.jpg", UriKind.Relative));
+            gebouwen.Source = new BitmapImage(new Uri("Images/banners/gebouwenbanner.png", UriKind.Relative));
             gebouwen.MouseDown += new MouseButtonEventHandler(SelectThema);
             Grid.SetRow(gebouwen, 6);
             Grid.SetColumn(gebouwen, 1);
@@ -108,7 +108,7 @@ namespace MemoryGame
         // thema 3 = logo
         private void Theme3()
         {
-            logo.Source = new BitmapImage(new Uri("Images/banners/logobanner.jpg", UriKind.Relative));
+            logo.Source = new BitmapImage(new Uri("Images/banners/logobanner.png", UriKind.Relative));
             logo.MouseDown += new MouseButtonEventHandler(SelectThema);
             Grid.SetRow(logo, 9);
             Grid.SetColumn(logo, 1);

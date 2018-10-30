@@ -149,6 +149,7 @@
     <Resource Include="Images\background.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Images\banners\" />
     <Folder Include="Images\shapes\" />
     <Folder Include="Statistics\Highscorestats\" />
     <Folder Include="Textdocs\NewGame\" />
@@ -245,9 +246,6 @@
     <Resource Include="Images\logos\9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\banners\disneybanner.jpg" />
-    <Resource Include="Images\banners\gebouwenbanner.jpg" />
-    <Resource Include="Images\banners\logobanner.jpg" />
     <Resource Include="Images\cardbacks\disneycardback.png" />
     <Resource Include="Images\cardbacks\gebouwcardback.png" />
     <Resource Include="Images\cardbacks\logobackcard.png" />
