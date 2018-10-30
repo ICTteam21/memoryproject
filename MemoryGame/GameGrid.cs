@@ -217,7 +217,7 @@ namespace MemoryGame
             // get lists
             List<ImageSource> images = GetImagesList(thema);
 
-            // logic
+            // hier wordt het geselecteerde thema aangeroepen
             if (thema.Equals("logos"))
             {
                 themanaamsave = "Logo's";
@@ -286,6 +286,74 @@ namespace MemoryGame
                     }
                 }
             }
+            else if (thema.Equals("autos"))
+            {
+
+                themanaamsave = "Autos";
+                for (int row = 0; row < rows; row++)
+                {
+                    for (int column = 0; column < cols; column++)
+                    {
+                        Image backgroudImage = new Image
+                        {
+                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Tag = images.First()
+                        };
+                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
+                        images.RemoveAt(0);
+                        backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
+                        Grid.SetColumn(backgroudImage, column);
+                        Grid.SetRow(backgroudImage, row);
+                        grid.Children.Add(backgroudImage);
+                    }
+                }
+            }
+
+            else if (thema.Equals("planeten"))
+            {
+
+                themanaamsave = "Planeten";
+                for (int row = 0; row < rows; row++)
+                {
+                    for (int column = 0; column < cols; column++)
+                    {
+                        Image backgroudImage = new Image
+                        {
+                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Tag = images.First()
+                        };
+                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
+                        images.RemoveAt(0);
+                        backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
+                        Grid.SetColumn(backgroudImage, column);
+                        Grid.SetRow(backgroudImage, row);
+                        grid.Children.Add(backgroudImage);
+                    }
+                }
+            }
+            else if (thema.Equals("shapes"))
+            {
+
+                themanaamsave = "Shapes";
+                for (int row = 0; row < rows; row++)
+                {
+                    for (int column = 0; column < cols; column++)
+                    {
+                        Image backgroudImage = new Image
+                        {
+                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Tag = images.First()
+                        };
+                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
+                        images.RemoveAt(0);
+                        backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
+                        Grid.SetColumn(backgroudImage, column);
+                        Grid.SetRow(backgroudImage, row);
+                        grid.Children.Add(backgroudImage);
+                    }
+                }
+            }
+
             if (SelectClass.diff.Equals(0))
             {
 
@@ -556,7 +624,7 @@ namespace MemoryGame
                 }
                 if (pairs.Equals(8)) // als er iemand alle plaatjes heeft gewonnen, ga naar highscores
                 {
-                    if (P1Points > P2Points)
+                    if (P1Points > P2Points) // hier heeft speler 1 gewonnen
                     {
                         int pDiff = P1Points - P2Points;
 
@@ -571,7 +639,7 @@ namespace MemoryGame
                         window.Close();
                         highscoresWindow.Show();
                     }
-                    else if ( P1Points < P2Points){
+                    else if ( P1Points < P2Points){ // hier heeft speler 2 gewonnen
                         int pDiff = P2Points - P1Points;
 
                         eindtijd = DateTime.Now.TimeOfDay;
@@ -585,7 +653,7 @@ namespace MemoryGame
                         window.Close();
                         highscoresWindow.Show();
                     }
-                    else if (P1Points.Equals(P2Points))
+                    else if (P1Points.Equals(P2Points)) // hier is het gelijkspel gebleven
                     {
                         eindtijd = DateTime.Now.TimeOfDay;
                         var diff = eindtijd.Subtract(starttijd);
@@ -609,7 +677,7 @@ namespace MemoryGame
         /// <param name="diff"> diff is de "globale" parameter dei gelijk staat aan de moeilijkheidsgraad </param>
         private void SetTimer()
         {
-            if (MainClass.aantalSpelers.Equals(1))
+            if (MainClass.aantalSpelers.Equals(1)) // 1 speler + timer daarbij
             {
                 if (SelectClass.diff.Equals(0))
                 {
@@ -640,7 +708,7 @@ namespace MemoryGame
                     aTimer.Enabled = true;
                 }
             }
-            if (MainClass.aantalSpelers.Equals(2))
+            if (MainClass.aantalSpelers.Equals(2)) // 2 spelers + de timer daarbij
             {
                 if (SelectClass.diff.Equals(0))
                 {
@@ -690,18 +758,18 @@ namespace MemoryGame
             }
             if (MainClass.aantalSpelers.Equals(2))
             {
-                if (aandebeurt.Equals(1))
+                if (aandebeurt.Equals(1)) //hier wordt de achtegrond kleur van de persoon groen/grijs gekleurd om te zien wie er aan de beurt is
                 {
                     aandebeurt = 2;
 
-                    Player2name.Background = Brushes.Green;
+                    Player2name.Background = Brushes.Green; // aan de beurt
                     Player1name.Background = Brushes.LightGray;
                 }
                 else if (aandebeurt.Equals(2))
                 {
                     aandebeurt = 1;
 
-                    Player1name.Background = Brushes.Green;
+                    Player1name.Background = Brushes.Green; // aan de beurt
                     Player2name.Background = Brushes.LightGray;
                 }
             }
@@ -709,7 +777,10 @@ namespace MemoryGame
 
         }
        
-
+        /// <summary>
+        /// hieronder wordt gekeken of je singleplayer of multiplayer speelt en laadt daarbij de benodigdheden bij
+        /// </summary>
+        /// <param name="aantalSpelers"></param>
         public void Playerstats(int aantalSpelers)
         {
             if (aantalSpelers.Equals(1))
@@ -717,6 +788,7 @@ namespace MemoryGame
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
 
+                // door de code hieronder komt het scoreboard + naam van player 1 in beeld
 
                 Player1name.Background = Brushes.Green;
                 Player1name.Content = Player1Name;
@@ -744,7 +816,7 @@ namespace MemoryGame
                 Grid.SetColumn(Player1Score, 5);
                 grid.Children.Add(Player1Score);
             }
-            if (aantalSpelers.Equals(2))
+            if (aantalSpelers.Equals(2)) // door de code hieronder komt het scoreboard + naam van player 1 in beeld
             {
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -804,7 +876,7 @@ namespace MemoryGame
 
 
 
-        public void Savegameandclosebutton()
+        public void Savegameandclosebutton() 
         {
            
             SaveGameandClose.Content = "Save Game";
@@ -813,7 +885,7 @@ namespace MemoryGame
             Grid.SetRow(SaveGameandClose, 4);
             Grid.SetColumn(SaveGameandClose, 5);
 
-            SaveGameandClose.Click += new RoutedEventHandler(SaveGame_Click);
+            SaveGameandClose.Click += new RoutedEventHandler(SaveGame_Click); // hierdoor wordt het spel opgeslagen als je dr op klikt
             grid.Children.Add(SaveGameandClose);
         }
 
@@ -856,7 +928,7 @@ namespace MemoryGame
             window.Close();
         }
 
-        public void MainmenuButton()
+        public void MainmenuButton() // button verwijst je terug naar het main menu
         {
             BackToMain.Content = "Main Menu";
             BackToMain.FontSize = 30;
@@ -904,7 +976,7 @@ namespace MemoryGame
             xlWorkBook = xlApp.Workbooks.Open(statspath, 0, false, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
             xlApp.UserControl = true;
 
-            // dit selecteerd op het moment het eerste werkblad ( variabel op difficulty en players ).
+            // dit selecteert op het moment het eerste werkblad ( variabel op difficulty en players ).
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(worksheet);
             range = xlWorkSheet.UsedRange;
 

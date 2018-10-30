@@ -19,8 +19,9 @@ namespace MemoryGame
         Image logo = new Image();
         Image gebouwen = new Image();
         Image disney = new Image();
-
-
+        Image autos = new Image();
+        Image planeten = new Image();
+        Image shapes = new Image();
 
 
         public ThemaClass(Themas window, Grid grid, int kolommen, int rijen)
@@ -37,18 +38,20 @@ namespace MemoryGame
 
             this.window = window;
             this.grid = grid;
-
+            rijen = 20;
+            kolommen = 13;
             InitializeMain(kolommen, rijen);
             Title();
             Theme1();
             Theme2();
             Theme3();
-
-            
+            Theme4();
+            Theme5();
+            Theme6();
 
             AddBack();
             
-           
+
 
         }
         //Grid
@@ -70,56 +73,91 @@ namespace MemoryGame
             Label title = new Label
             {
                 Content = "Theme Selector",
-                FontSize = 80,
+                FontSize = 120,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 FontFamily = new FontFamily("Bahnschrift"),
             };
 
             Grid.SetRow(title, 0);
-            Grid.SetColumn(title, 1);
-            Grid.SetColumnSpan(title, 3);
-            Grid.SetRowSpan(title, 2);
+            Grid.SetColumn(title, 0);
+            Grid.SetColumnSpan(title, 13);
+            Grid.SetRowSpan(title, 3);
             grid.Children.Add(title);
         }
-
+        // thema 1 = disney
         private void Theme1()
         {
-            disney.Source = new BitmapImage(new Uri("Images/banners/disneybanner.jpg", UriKind.Relative));
+            disney.Source = new BitmapImage(new Uri("Images/banners/disneybanner.png", UriKind.Relative));
             disney.MouseDown += new MouseButtonEventHandler(SelectThema);
-            Grid.SetRow(disney, 3);
+            Grid.SetRow(disney, 4);
             Grid.SetColumn(disney, 1);
-            Grid.SetColumnSpan(disney, 3);
-            Grid.SetRowSpan(disney, 2);
+            Grid.SetColumnSpan(disney, 5);
+            Grid.SetRowSpan(disney, 6);
             grid.Children.Add(disney);
 
         }
-        
+        // thema 2 = gebouwen
         private void Theme2()
         {
-            gebouwen.Source = new BitmapImage(new Uri("Images/banners/gebouwenbanner.jpg", UriKind.Relative));
+            gebouwen.Source = new BitmapImage(new Uri("Images/banners/gebouwenbanner.png", UriKind.Relative));
             gebouwen.MouseDown += new MouseButtonEventHandler(SelectThema);
-            Grid.SetRow(gebouwen, 6);
+            Grid.SetRow(gebouwen, 8);
             Grid.SetColumn(gebouwen, 1);
-            Grid.SetColumnSpan(gebouwen, 3);
-            Grid.SetRowSpan(gebouwen, 2);
+            Grid.SetColumnSpan(gebouwen, 5);
+            Grid.SetRowSpan(gebouwen, 6);
             grid.Children.Add(gebouwen);
         }
 
-
+        // thema 3 = logo
         private void Theme3()
         {
-            logo.Source = new BitmapImage(new Uri("Images/banners/logobanner.jpg", UriKind.Relative));
+            logo.Source = new BitmapImage(new Uri("Images/banners/logobanner.png", UriKind.Relative));
             logo.MouseDown += new MouseButtonEventHandler(SelectThema);
-            Grid.SetRow(logo, 9);
+            Grid.SetRow(logo, 12);
             Grid.SetColumn(logo, 1);
-            Grid.SetColumnSpan(logo, 3);
-            Grid.SetRowSpan(logo, 2);
+            Grid.SetColumnSpan(logo, 5);
+            Grid.SetRowSpan(logo, 6);
             grid.Children.Add(logo);
+        }
+        // thema 4 = auto
+        private void Theme4()
+        {
+            autos.Source = new BitmapImage(new Uri("Images/banners/autobanner.png", UriKind.Relative));
+            autos.MouseDown += new MouseButtonEventHandler(SelectThema);
+            Grid.SetRow(autos, 4);
+            Grid.SetColumn(autos, 7);
+            Grid.SetColumnSpan(autos, 5);
+            Grid.SetRowSpan(autos, 6);
+            grid.Children.Add(autos);
+        }
+        // thema 5 = planeten
+        private void Theme5()
+        {
+            planeten.Source = new BitmapImage(new Uri("Images/banners/planetenbanner.png", UriKind.Relative));
+            planeten.MouseDown += new MouseButtonEventHandler(SelectThema);
+            Grid.SetRow(planeten, 8);
+            Grid.SetColumn(planeten, 7);
+            Grid.SetColumnSpan(planeten, 5);
+            Grid.SetRowSpan(planeten, 6);
+            grid.Children.Add(planeten);
+        }        
+        // thema 6 = shapes
+        private void Theme6()
+        {
+            shapes.Source = new BitmapImage(new Uri("Images/banners/vormenbanner.png", UriKind.Relative));
+            shapes.MouseDown += new MouseButtonEventHandler(SelectThema);
+            Grid.SetRow(shapes, 12);
+            Grid.SetColumn(shapes, 7);
+            Grid.SetColumnSpan(shapes, 5);
+            Grid.SetRowSpan(shapes, 6);
+            grid.Children.Add(shapes);
         }
 
 
 
-
+        /// <summary>
+        /// hier wordt gekeken welke optie je hebt aangedrukt en welke thema hij dus moet laden
+        /// </summary>
         private static string thema;
 
         public void SelectThema(object sender, RoutedEventArgs e)
@@ -134,6 +172,17 @@ namespace MemoryGame
             }else if(sender == disney)
             {
                 thema = "disney";
+            }else if(sender == autos)
+            {
+                thema = "autos";
+            }
+            else if (sender == planeten)
+            {
+                thema = "planeten";
+            }
+            else if (sender == shapes)
+            {
+                thema = "shapes";
             }
             var nieuwSpel = new GameWindow( thema,1  ); //create your new form.
             nieuwSpel.Show(); //show the new form.
@@ -145,21 +194,26 @@ namespace MemoryGame
         //Back button (to select)//
         public void AddBack()
         {
-            Button Back = new Button();
-            Back.Content = "Back";
-            Back.FontSize = 18;
-            //startgame.HorizontalAlignment = HorizontalAlignment.Center;
+            Button Back = new Button
+            {
+                Content = "Back",
+                FontSize = 40,
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(3),
+                FontFamily = new FontFamily("Bahnschrift"),
+                Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
+            };
 
-            Grid.SetRow(Back, 13);
-            Grid.SetColumn(Back, 5);
-            Grid.SetColumnSpan(Back, 1);
-            Grid.SetRowSpan(Back, 2);
+            Grid.SetRow(Back, 18);
+            Grid.SetRowSpan(Back, 4);
+            Grid.SetColumn(Back, 11);
+            Grid.SetColumnSpan(Back, 2);
             grid.Children.Add(Back);
             Back.Click += Back_Click1;
         }
 
         public void Back_Click1(object sender, RoutedEventArgs e)
-        {
+        { // functie om naar de vorige pagina te gaan
             var SelectScherm = new SelectOptions(MainClass.aantalSpelers); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();

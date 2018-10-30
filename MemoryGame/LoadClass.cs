@@ -59,7 +59,7 @@ namespace MemoryGame
             }
         }
 
-        public void AddBack()
+        public void AddBack() // button zodat je terug kan naar de vorige pagina
         {
             Button Back = new Button();
             Back.Content = "Back";

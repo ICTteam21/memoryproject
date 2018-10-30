@@ -24,7 +24,7 @@ namespace MemoryGame
 
         string pathing;
         string path1;
-
+        // hier worden de verschillende grids + classes daarbij 4x4/5/6 / single/multiplayer aangemaakt
         Grid highscores1 = new Grid();
         Grid highscores2 = new Grid();
         Grid highscores3 = new Grid();
@@ -311,7 +311,7 @@ namespace MemoryGame
 
 
             switch (sheetnr)
-            {
+            { // case 1/8 = grid 1/8 die daarbij de data van spelers, puntjes en de tijdsduratie invult.
                 case 1:
                     highscores1.Children.Add(speler);
                     highscores1.Children.Add(puntjes);
