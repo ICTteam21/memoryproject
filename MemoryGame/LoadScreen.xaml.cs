@@ -15,22 +15,20 @@ using System.Windows.Shapes;
 namespace MemoryGame
 {
     /// <summary>
-    /// Interaction logic for SelectOptions.xaml
+    /// Interaction logic for LoadScreen.xaml
     /// </summary>
-    public partial class SelectOptions : Window
+    public partial class LoadScreen : Window
     {
-        SelectClass grid;
+        LoadClass grid;
+        private const int kolommen = 3;
+        private const int rijen = 10;
 
-        private const int kolommen = 9;
-        private const int rijen = 20;
 
-        public SelectOptions(int AantalSpelers )
+        public LoadScreen()
         {
+
             InitializeComponent();
-
-            grid = new SelectClass(this, SelectOpties ,kolommen , rijen, AantalSpelers);
+            grid = new LoadClass(this, LoadingScreen, kolommen, rijen );
         }
-       
-
     }
 }

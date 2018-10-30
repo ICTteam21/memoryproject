@@ -17,20 +17,18 @@ namespace MemoryGame
     /// <summary>
     /// Interaction logic for SelectOptions.xaml
     /// </summary>
-    public partial class SelectOptions : Window
+    public partial class Settings : Window
     {
-        SelectClass grid;
-
+        SettingsClass grid;
         private const int kolommen = 9;
         private const int rijen = 20;
 
-        public SelectOptions(int AantalSpelers )
+        public Settings()
         {
             InitializeComponent();
+            grid = new SettingsClass(this, SettingsScherm, kolommen, rijen);
 
-            grid = new SelectClass(this, SelectOpties ,kolommen , rijen, AantalSpelers);
         }
-       
-
     }
 }
+

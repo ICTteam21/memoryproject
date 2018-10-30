@@ -36,6 +36,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -54,6 +56,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GameGrid.cs" />
+    <Compile Include="HighScores.xaml.cs">
+      <DependentUpon>HighScores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HighScoresClass.cs" />
+    <Compile Include="LoadClass.cs" />
+    <Compile Include="LoadScreen.xaml.cs">
+      <DependentUpon>LoadScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainClass.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -62,6 +73,10 @@
     <Compile Include="SelectOptions.xaml.cs">
       <DependentUpon>SelectOptions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsClass.cs" />
     <Compile Include="StaticClass.cs" />
     <Compile Include="Themas.xaml.cs">
       <DependentUpon>Themas.xaml</DependentUpon>
@@ -75,16 +90,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameGrid.cs" />
     <Compile Include="GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="HighScores.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoadScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SelectOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,6 +149,7 @@
     <Resource Include="Images\background.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Statistics\Highscorestats\" />
     <Folder Include="Textdocs\NewGame\" />
     <Folder Include="Textdocs\SavedGames\" />
   </ItemGroup>
@@ -137,26 +164,17 @@
     <Resource Include="Images\logos\8.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\gebouwen\1.png" />
-    <Resource Include="Images\gebouwen\1-2.jpg" />
-    <Resource Include="Images\gebouwen\2-1.jpg" />
-    <Content Include="Images\gebouwen\2.png" />
-    <Content Include="Images\gebouwen\3.png" />
-    <Resource Include="Images\gebouwen\3-2.jpg" />
-    <Content Include="Images\gebouwen\4.png" />
-    <Resource Include="Images\gebouwen\4-2.jpg" />
-    <Content Include="Images\gebouwen\5.png" />
-    <Resource Include="Images\gebouwen\5-2.jpg" />
-    <Resource Include="Images\gebouwen\6-1.jpg" />
-    <Content Include="Images\gebouwen\6.png" />
-    <Content Include="Images\gebouwen\7.png" />
-    <Resource Include="Images\gebouwen\7-2.jpg" />
-    <Resource Include="Images\gebouwen\8-1.jpg" />
-    <Content Include="Images\gebouwen\8.png" />
+    <Resource Include="Images\gebouwen\1.png" />
+    <Resource Include="Images\gebouwen\2.png" />
+    <Resource Include="Images\gebouwen\3.png" />
+    <Resource Include="Images\gebouwen\4.png" />
+    <Resource Include="Images\gebouwen\5.png" />
+    <Resource Include="Images\gebouwen\6.png" />
+    <Resource Include="Images\gebouwen\7.png" />
+    <Resource Include="Images\gebouwen\8.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\disney\1.png" />
-    <Resource Include="Images\disney\1-2.png" />
     <Resource Include="Images\disney\2-1.png" />
     <Resource Include="Images\disney\2.png" />
     <Resource Include="Images\disney\3-1.png" />
@@ -164,9 +182,7 @@
     <Resource Include="Images\disney\4-1.png" />
     <Resource Include="Images\disney\4.png" />
     <Resource Include="Images\disney\5.png" />
-    <Resource Include="Images\disney\5-2.png" />
     <Resource Include="Images\disney\6.png" />
-    <Resource Include="Images\disney\6-2.png" />
     <Resource Include="Images\disney\7-1.png" />
     <Resource Include="Images\disney\7.png" />
     <Resource Include="Images\disney\8-1.png" />
@@ -174,6 +190,114 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\4x4 preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\disney\1-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\disney\5-1.png" />
+    <Resource Include="Images\disney\6-1.png" />
+    <Resource Include="Images\gebouwen\1-1.png" />
+    <Resource Include="Images\gebouwen\10-1.png" />
+    <Resource Include="Images\gebouwen\10.png" />
+    <Resource Include="Images\gebouwen\2-1.png" />
+    <Resource Include="Images\gebouwen\3-1.png" />
+    <Resource Include="Images\gebouwen\4-1.png" />
+    <Resource Include="Images\gebouwen\5-1.png" />
+    <Resource Include="Images\gebouwen\6-1.png" />
+    <Resource Include="Images\gebouwen\7-1.png" />
+    <Resource Include="Images\gebouwen\8-1.png" />
+    <Resource Include="Images\gebouwen\9-1.png" />
+    <Resource Include="Images\gebouwen\9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logos\10.png" />
+    <Resource Include="Images\logos\9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cardbacks\disneyback.png" />
+    <Resource Include="Images\cardbacks\gebouwenback.png" />
+    <Resource Include="Images\cardbacks\logosback.png" />
+    <Resource Include="Images\cardbacks\shapesback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sounds\cardflip.wav" />
+    <Resource Include="Sounds\click.wav" />
+    <Resource Include="Images\shapes\1.png" />
+    <Resource Include="Images\shapes\10.png" />
+    <Resource Include="Images\shapes\2.png" />
+    <Resource Include="Images\shapes\3.png" />
+    <Resource Include="Images\shapes\4.png" />
+    <Resource Include="Images\shapes\5.png" />
+    <Resource Include="Images\shapes\6.png" />
+    <Resource Include="Images\shapes\7.png" />
+    <Resource Include="Images\shapes\8.png" />
+    <Resource Include="Images\shapes\9.png" />
+    <Content Include="Sounds\correct.wav" />
+    <Content Include="Sounds\wow.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\car\1.png" />
+    <Resource Include="Images\car\2.png" />
+    <Resource Include="Images\car\3.png" />
+    <Resource Include="Images\car\4.png" />
+    <Resource Include="Images\car\5.png" />
+    <Resource Include="Images\car\6.png" />
+    <Resource Include="Images\car\7.png" />
+    <Resource Include="Images\car\8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\planeten\1.png" />
+    <Resource Include="Images\planeten\2.png" />
+    <Resource Include="Images\planeten\3.png" />
+    <Resource Include="Images\planeten\4.png" />
+    <Resource Include="Images\planeten\5.png" />
+    <Resource Include="Images\planeten\6.png" />
+    <Resource Include="Images\planeten\7.png" />
+    <Resource Include="Images\planeten\8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\banners\autobanner.png" />
+    <Resource Include="Images\banners\gebouwenbanner.png" />
+    <Resource Include="Images\banners\logobanner.png" />
+    <Resource Include="Images\banners\planetenbanner.png" />
+    <Resource Include="Images\banners\vormenbanner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\banners\disneybanner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cardbacks\carback.png" />
+    <Resource Include="Images\cardbacks\planetenback.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

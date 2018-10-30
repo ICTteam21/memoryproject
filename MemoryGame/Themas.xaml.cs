@@ -25,8 +25,10 @@ namespace MemoryGame
 
         public Themas()
         {
+           
             InitializeComponent();
-            grid = new ThemaClass(this, ThemaWindow , kolommen , rijen);
+            grid = new ThemaClass(this, ThemaWindow, kolommen, rijen) ;
+            
         }
 
 

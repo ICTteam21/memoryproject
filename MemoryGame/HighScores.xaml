@@ -1,13 +1,12 @@
-﻿
-<Window x:Class="MemoryGame.Themas"
+﻿<Window x:Class="MemoryGame.HighScores"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MemoryGame"
         mc:Ignorable="d"
-        Title="Themas"  Height="1000" Width="1600" WindowStartupLocation="CenterScreen" Background= "#C8C8C8">
-    <Grid x:Name="ThemaWindow">
-
+        Title="HighScores" Height="1000" Width="1600" WindowStartupLocation="CenterScreen" Background="#C8C8C8">
+    <Grid x:Name="HighScoresScreen">
+        
     </Grid>
 </Window>

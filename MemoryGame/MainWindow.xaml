@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MemoryGame"
         mc:Ignorable="d"
-        Title="Title menu" Height="600" Width="800">
+        Title="Title menu" Height="1000" Width="1600" WindowStartupLocation="CenterScreen" >
 
-    <Grid x:Name="StartScherm" Background="#FFCD1A1A">
+    <Grid x:Name="StartScherm" Background= "#c8c8c8" AutomationProperties.IsOffscreenBehavior="Offscreen">
         <StackPanel HorizontalAlignment="Left" Name="stackPanel1" VerticalAlignment="Stretch" Margin="0,32" Width="792" />
     </Grid>
 

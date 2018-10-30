@@ -12,25 +12,35 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace MemoryGame
 {
     /// <summary>
-    /// Interaction logic for SelectOptions.xaml
+    /// Interaction logic for HighScores.xaml
     /// </summary>
-    public partial class SelectOptions : Window
+    public partial class HighScores : Window
     {
-        SelectClass grid;
+        HighScoresClass grid;
+        private const int kolommen = 13;
+        private const int rijen = 10;
 
-        private const int kolommen = 9;
-        private const int rijen = 20;
-
-        public SelectOptions(int AantalSpelers )
+        public HighScores()
         {
             InitializeComponent();
-
-            grid = new SelectClass(this, SelectOpties ,kolommen , rijen, AantalSpelers);
+            grid = new HighScoresClass(this, HighScoresScreen, kolommen, rijen );            
         }
-       
+
+
+
+
+        
+
+
 
     }
+
+
+
+
+
 }
