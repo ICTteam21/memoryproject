@@ -149,7 +149,6 @@
     <Resource Include="Images\background.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\shapes\" />
     <Folder Include="Statistics\Highscorestats\" />
     <Folder Include="Textdocs\NewGame\" />
     <Folder Include="Textdocs\SavedGames\" />
@@ -246,30 +245,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\shapes\1.png" />
-    <Resource Include="Images\shapes\animal2.png" />
     <Resource Include="Images\shapes\2.png" />
-    <Resource Include="Images\shapes\boom2.png" />
     <Resource Include="Images\shapes\3.png" />
-    <Resource Include="Images\shapes\checkmark2.png" />
     <Resource Include="Images\shapes\4.png" />
-    <Resource Include="Images\shapes\circle2.png" />
     <Resource Include="Images\shapes\5.png" />
-    <Resource Include="Images\shapes\crown2.png" />
     <Resource Include="Images\shapes\6.png" />
-    <Resource Include="Images\shapes\heart2.png" />
     <Resource Include="Images\shapes\7.png" />
-    <Resource Include="Images\shapes\pentagon2.png" />
     <Resource Include="Images\shapes\8.png" />
-    <Resource Include="Images\shapes\square2.png" />
     <Resource Include="Images\shapes\9.png" />
-    <Resource Include="Images\shapes\star2.png" />
     <Resource Include="Images\shapes\10.png" />
-    <Resource Include="Images\shapes\triangle2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\banners\disneybanner.jpg" />
-    <Resource Include="Images\banners\gebouwenbanner.jpg" />
-    <Resource Include="Images\banners\logobanner.jpg" />
     <Resource Include="Images\cardbacks\disneyback.png" />
     <Resource Include="Images\cardbacks\gebouwenback.png" />
     <Resource Include="Images\cardbacks\logosback.png" />
