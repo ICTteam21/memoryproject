@@ -43,6 +43,7 @@ namespace MemoryGame
         private int pairs = 0;
 
         private string themanaamsave;
+        string themavoorsave;
         private int fileCount;
         string pathing;
         string path3;
@@ -55,14 +56,36 @@ namespace MemoryGame
         TimeSpan eindtijd;
         string totaletijd;
 
+        private Image imgCardOne;
+        private Image imgCardTwo;
+        private string xyTwo;
+        private string xyOne;
+        private string tagOne;
+        private string tagTwo;
+
+        public List<ImageSource> imagesList = new List<ImageSource>();
         public List<string> plaatjesvolgorde = new List<string>();
+        MediaPlayer mplayer = new MediaPlayer();
+        MediaPlayer mplayer2 = new MediaPlayer();
 
-
+        /// <summary>
+        /// dit initieert het speelveld
+        /// </summary>
+        /// <param name="window"></param> 
+        /// <param name="grid"></param>
+        /// <param name="cols"></param>      Het aantal kolommen van het grid
+        /// <param name="rows"></param>      Het aantal rijen van het grid
+        /// <param name="thema"></param>     Het thema waarvoor gekozen is.
+        /// <param name="newofload"></param> Een int die zegt of het een newgame of een loadgame is.
         public GameGrid(Window window, Grid grid, int cols, int rows, string thema, int newofload)
         {   //settings//
 
             if (newofload == 1)
             {
+                CardFlipSoundEffect();
+                MatchSoundEffect();
+
+                themavoorsave = thema;
                 newofloadteller = 1;
                 if (MainClass.windowstyle == 2)
                 { window.WindowStyle = WindowStyle.None; }
@@ -89,6 +112,9 @@ namespace MemoryGame
                 aTimer.Tick += OnTimedEvent;
                 aTimer.Start();
 
+                CardFlipSoundEffect();
+                MatchSoundEffect();
+
                 fileCount = (from file in Directory.EnumerateFiles(path3, "*", SearchOption.AllDirectories)
                              select file).Count();
 
@@ -97,6 +123,10 @@ namespace MemoryGame
             {
                 newofloadteller = 2;
                 padnaarsave = thema;
+
+                CardFlipSoundEffect();
+                MatchSoundEffect();
+
                 if (MainClass.windowstyle == 2)
                 { window.WindowStyle = WindowStyle.None; }
                 else
@@ -105,33 +135,26 @@ namespace MemoryGame
                 { window.WindowState = WindowState.Maximized; }
                 else
                 { window.WindowState = WindowState.Normal; }
-                BackgroundSource = new BitmapImage(new Uri("Images/cardbacks/" + thema + "back.png", UriKind.Relative));
+
+                themavoorsave = File.ReadLines(thema).Skip(24).Take(1).First();
+                BackgroundSource = new BitmapImage(new Uri("Images/cardbacks/" + themavoorsave + "back.png", UriKind.Relative));
+                
                 this.window = window;
                 this.grid = grid;
                 InitializeGameGrid(cols, rows);
                 addimagesload(cols,rows,thema);
                 Savedgamesfolderlocatie();
 
-                if (Convert.ToInt32(File.ReadLines(thema).Skip(16).Take(1).First()) == 1)
-                {
-                    Player1Name = File.ReadLines(thema).Skip(17).Take(1).First();
-                    P1Points = Convert.ToInt32(File.ReadLines(thema).Skip(16).Take(1).First());
-
-                } else
-                {
-                    Player1Name = File.ReadLines(thema).Skip(17).Take(1).First();
-                    Player2Name = File.ReadLines(thema).Skip(18).Take(1).First();
-                    aandebeurt = Convert.ToInt32(File.ReadLines(thema).Skip(19).Take(1).First());
-
-
-
-                    P1Points = Convert.ToInt32(File.ReadLines(thema).Skip(20).Take(1).First());
-                    P2Points = Convert.ToInt32(File.ReadLines(thema).Skip(21).Take(1).First());
-                }
+                Player1Name = File.ReadLines(thema).Skip(17).Take(1).First();
+                Player2Name = File.ReadLines(thema).Skip(18).Take(1).First();
+                aandebeurt = Convert.ToInt32(File.ReadLines(thema).Skip(19).Take(1).First());
+                P1Points = Convert.ToInt32(File.ReadLines(thema).Skip(20).Take(1).First());
+                P2Points = Convert.ToInt32(File.ReadLines(thema).Skip(21).Take(1).First());
 
                 pairs = Convert.ToInt32(File.ReadLines(thema).Skip(22).Take(1).First());
+                SelectClass.diff = Convert.ToInt32(File.ReadLines(thema).Skip(23).Take(1).First());
                 Playerstats(Convert.ToInt32(File.ReadLines(thema).Skip(16).Take(1).First()));
-
+                
                 if (aandebeurt == 1)
                 {
                     Player1name.Background = Brushes.Green;
@@ -148,7 +171,11 @@ namespace MemoryGame
                 starttijd = DateTime.Now.TimeOfDay;
                 MainmenuButton();
 
-                
+                aTimer = new DispatcherTimer();
+                aTimer.Interval = new TimeSpan(0, 0, 1);
+                aTimer.Tick += OnTimedEvent;
+                aTimer.Start();
+
                 fileCount = (from file in Directory.EnumerateFiles(path3, "*", SearchOption.AllDirectories)
                              select file).Count();
 
@@ -172,6 +199,11 @@ namespace MemoryGame
 
         }
         
+        /// <summary>
+        /// maakt het grid aan.
+        /// </summary>
+        /// <param name="cols"></param> Aantal kolommen.
+        /// <param name="rows"></param> Aantal rijen.
         private void InitializeGameGrid(int cols, int rows)
         {
 
@@ -191,14 +223,8 @@ namespace MemoryGame
         /// Laad de images op een random manier in een list.
         /// </summary>
         /// <returns></returns>
-        /// 
-        public List<ImageSource> imagesList = new List<ImageSource>();
-
         private List<ImageSource> GetImagesList(string thema)
         {
-
-
-
             for (int i = 0; i < 16; i++)
             {
                 int imageNr = i % 8 + 1;
@@ -371,6 +397,12 @@ namespace MemoryGame
 
         }
 
+        /// <summary>
+        /// voegt plaatjes toe aan het grid ingeval van een loadgame
+        /// </summary>
+        /// <param name="rows"></param> Het aantal rijen van het grid.
+        /// <param name="cols"></param> Het aantal kolommen van het grid.
+        /// <param name="pad"></param>  De locatie van de savefile.
         private void addimagesload(int rows, int cols,string pad)
         {
 
@@ -389,7 +421,7 @@ namespace MemoryGame
 
                     Image backgroudImage = new Image
                     {
-                        Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                        Source = BackgroundSource,
                         Tag = sourceplaatje
                     };
 
@@ -416,13 +448,6 @@ namespace MemoryGame
                 }
             }
 
-
-
-
-
-
-
-
             if (SelectClass.diff.Equals(0))
             {
 
@@ -435,19 +460,12 @@ namespace MemoryGame
 
 
         }
+       
         /// <summary>
         /// Is de functie die bepaald wat er gebeurt als je op een kaart klikt
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
-        private Image imgCardOne;
-        private Image imgCardTwo;
-        private string xyTwo;
-        private string xyOne;
-        private string tagOne;
-        private string tagTwo;
-
 
         /// <summary>
         /// Slaat img.Tag op en gridpositie in string en geeft ze door aan CheckCards
@@ -458,28 +476,32 @@ namespace MemoryGame
         {
             var element = (UIElement)e.Source;
             Image card = (Image)sender;
-
             ImageSource front = (ImageSource)card.Tag;
-            CardFlipSoundEffect();
+            
 
             if (IsTaskRunning == false)
             {
+       
                 if (imgCardOne == null)
                 {
+                    
                     imgCardOne = (Image)sender;
                     tagOne = Convert.ToString(front);
                     int xOne = Grid.GetColumn(element);
                     int yOne = Grid.GetRow(element);
                     xyOne = Convert.ToString(xOne) + Convert.ToString(yOne);
+                    mplayer.Play();
                     card.Source = front;
                 }
                 else if (imgCardTwo == null)
                 {
+                    
                     imgCardTwo = (Image)sender;
                     tagTwo = Convert.ToString(front);
                     int xTwo = Grid.GetColumn(element);
                     int yTwo = Grid.GetRow(element);
                     xyTwo = Convert.ToString(xTwo) + Convert.ToString(yTwo);
+                    mplayer.Play();
                     card.Source = front;
                     CheckCards(tagOne, tagTwo, xyOne, xyTwo);
 
@@ -490,10 +512,10 @@ namespace MemoryGame
         /// <summary>
         ///  Checks cards and turns them with the delay
         /// </summary>
-        /// <param name="tag1"></param>
-        /// <param name="tag2"></param>
-        /// <param name="pos1"></param>
-        /// <param name="pos2"></param>
+        /// <param name="tag1"></param> De tag van plaatje1
+        /// <param name="tag2"></param> De tag van plaatje2
+        /// <param name="pos1"></param> De coördinaten van plaatje1 
+        /// <param name="pos2"></param> De coördinaten van plaatje2
         ///
         private bool win;
         private async void CheckCards(string tag1, string tag2, string pos1, string pos2)
@@ -555,6 +577,7 @@ namespace MemoryGame
 
             IsTaskRunning = false;
         }
+       
         /// <summary>
         ///  kijkt wie er aan de beurt is en kent punten toe 
         ///  kijkt eerst of er 1 of 2 spelers zijn.
@@ -563,11 +586,9 @@ namespace MemoryGame
         {
             if (MainClass.aantalSpelers.Equals(1)) // als er 1 speler is 
             {
-                if (win.Equals(true)) // geef punten aan speler als er een paar is gevonden 
-                {
-                    P1Points += 50;
-                    Player1Score.Content = P1Points;
-                }
+                P1Points++;
+                Player1Score.Content = P1Points;
+
                 if (pairs.Equals(8) && !SelectClass.diff.Equals(0)) 
                 {
                     eindtijd = DateTime.Now.TimeOfDay;
@@ -600,7 +621,7 @@ namespace MemoryGame
             {
                 if (win.Equals(true)) // als de huidige speler de kaartjes bij elkaar heeft geef punten 
                 {
-
+                    mplayer2.Play();
                     if (aandebeurt == 1)
                     {
                         P1Points += 50;
@@ -680,6 +701,7 @@ namespace MemoryGame
 
             }
         }
+       
         /// <summary>
         /// De timer en hierin de handelingen die er uitvoerd moeten 
         /// Resetten of gwn klaar etc.
@@ -734,6 +756,7 @@ namespace MemoryGame
                 }
             }
         }
+        
         /// <summary>
         /// event handler voor de setTimer
         /// Dus wat er gebeurt als de timer is verstreken
@@ -904,7 +927,9 @@ namespace MemoryGame
         }
 
 
-
+        /// <summary>
+        /// De savegame button en bijbehorende click functie.
+        /// </summary>
         public void Savegameandclosebutton() 
         {
            
@@ -917,13 +942,6 @@ namespace MemoryGame
             SaveGameandClose.Click += new RoutedEventHandler(SaveGame_Click); // hierdoor wordt het spel opgeslagen als je dr op klikt
             grid.Children.Add(SaveGameandClose);
         }
-
-
-        /// <summary>
-        /// Dit slaat het spel op in een text bestand.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         public void SaveGame_Click(Object sender, RoutedEventArgs e)
         {
 
@@ -947,16 +965,20 @@ namespace MemoryGame
             plaatjesvolgorde.Add(Convert.ToString(P1Points));
             plaatjesvolgorde.Add(Convert.ToString(P2Points));
             plaatjesvolgorde.Add(Convert.ToString(pairs));
-
+            plaatjesvolgorde.Add(Convert.ToString(SelectClass.diff));
+            plaatjesvolgorde.Add(themavoorsave);
             if (newofloadteller == 2)
             { File.Delete(padnaarsave); }
 
-            System.IO.File.WriteAllLines(path3 + (fileCount+1) +  " " + themanaamsave  + Player1Name + " vs " + Player2Name + ".sav", plaatjesvolgorde);
+            System.IO.File.WriteAllLines(path3 + (fileCount+1) +  " " + themavoorsave  + Player1Name + " vs " + Player2Name + ".sav", plaatjesvolgorde);
             var SelectScherm = new MainMenuWindow(); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
         }
 
+        /// <summary>
+        /// Een button om terug te gaan naar het mainmenu.
+        /// </summary>
         public void MainmenuButton() // button verwijst je terug naar het main menu
         {
             BackToMain.Content = "Main Menu";
@@ -969,7 +991,6 @@ namespace MemoryGame
             grid.Children.Add(BackToMain);
 
         }
-
         private void BackToMain_Click(object sender, RoutedEventArgs e)
         {
 
@@ -983,7 +1004,7 @@ namespace MemoryGame
         /// Deze methode moet opgeroepen worden wanneer een spel klaar is.
         /// Hij zal vervolgens de data wegschrijven in excel.
         /// </summary>
-        /// <param name="difficulty"></param>   moeilijkheidsgraad 1 tot 4
+        /// <param name="difficulty"></param>   moeilijkheidsgraad 0 tot 4
         /// <param name="players"></param>      aantal spelers 1 a 2.
         public void thegameisdone(int difficulty, int players)
         {
@@ -1042,11 +1063,15 @@ namespace MemoryGame
             }
         }
 
+        /// <summary>
+        /// roept een delete aan maar kijkt eerst of het wel de bedoeling is.
+        /// </summary>
         public void Deletesave()
         {
             if (newofloadteller == 2)
             { File.Delete(padnaarsave); }
         }
+        
         /// <summary>
         /// Haalt het pad op voor de methode die naar excel schrijft.
         /// </summary>
@@ -1064,16 +1089,12 @@ namespace MemoryGame
         /// </summary>
         private void CardFlipSoundEffect()
         {
-
-            MediaPlayer mplayer = new MediaPlayer();
-            mplayer.Open(new Uri(@"../../Sounds/cardflip.wav", UriKind.Relative));
-            mplayer.Play();
+            mplayer.Open(new Uri(@"../../Sounds/cardflip.wav", UriKind.Relative)); 
         }
         private void MatchSoundEffect()
         {
-            MediaPlayer mplayer = new MediaPlayer();
-            mplayer.Open(new Uri(@"../../Sounds/correct.wav", UriKind.Relative));
-            mplayer.Play();
+            mplayer2.Open(new Uri(@"../../Sounds/correct.wav", UriKind.Relative));
+
         }
     }
 }
