@@ -79,6 +79,8 @@ namespace MemoryGame
         public GameGrid(Window window, Grid grid, int cols, int rows, string thema, int newofload)
         {   //settings//
 
+            Savedgamesfolderlocatie();
+
             if (newofload == 1)
             {
                 CardFlipSoundEffect();
@@ -150,7 +152,7 @@ namespace MemoryGame
                 }
             }
 
-            Savedgamesfolderlocatie();
+            
             CardFlipSoundEffect();
             MatchSoundEffect();
             starttijd = DateTime.Now.TimeOfDay;
@@ -176,7 +178,6 @@ namespace MemoryGame
             pathing = System.AppDomain.CurrentDomain.BaseDirectory;
             pathing = pathing.Replace("bin", "Textdocs");
             pathing = pathing.Replace("Debug", "SavedGames");
-
         }
 
         /// <summary>
@@ -929,8 +930,8 @@ namespace MemoryGame
         /// </summary>
         public void padnaarstatistics()
         {
-            pathing = System.AppDomain.CurrentDomain.BaseDirectory;
-            statspath = pathing.Replace("bin", "Statistics");
+            statspath = System.AppDomain.CurrentDomain.BaseDirectory;
+            statspath = statspath.Replace("bin", "Statistics");
             statspath = statspath.Replace("Debug", "Highscorestats");
             statspath = statspath + "HighscoresMemory.xlsx";
 
