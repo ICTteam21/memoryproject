@@ -149,7 +149,6 @@
     <Resource Include="Images\background.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\banners\" />
     <Folder Include="Images\shapes\" />
     <Folder Include="Statistics\Highscorestats\" />
     <Folder Include="Textdocs\NewGame\" />
@@ -270,6 +269,16 @@
     <Resource Include="Images\planeten\6.png" />
     <Resource Include="Images\planeten\7.png" />
     <Resource Include="Images\planeten\8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\banners\autobanner.png" />
+    <Resource Include="Images\banners\gebouwenbanner.png" />
+    <Resource Include="Images\banners\logobanner.png" />
+    <Resource Include="Images\banners\planetenbanner.png" />
+    <Resource Include="Images\banners\vormenbanner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\banners\disneybanner.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
