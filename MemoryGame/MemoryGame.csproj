@@ -244,18 +244,6 @@
     <Resource Include="Images\logos\9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\shapes\1.png" />
-    <Resource Include="Images\shapes\2.png" />
-    <Resource Include="Images\shapes\3.png" />
-    <Resource Include="Images\shapes\4.png" />
-    <Resource Include="Images\shapes\5.png" />
-    <Resource Include="Images\shapes\6.png" />
-    <Resource Include="Images\shapes\7.png" />
-    <Resource Include="Images\shapes\8.png" />
-    <Resource Include="Images\shapes\9.png" />
-    <Resource Include="Images\shapes\10.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\cardbacks\disneyback.png" />
     <Resource Include="Images\cardbacks\gebouwenback.png" />
     <Resource Include="Images\cardbacks\logosback.png" />
@@ -264,6 +252,16 @@
   <ItemGroup>
     <Resource Include="Sounds\cardflip.wav" />
     <Resource Include="Sounds\click.wav" />
+    <Resource Include="Images\shapes\1.png" />
+    <Resource Include="Images\shapes\10.png" />
+    <Resource Include="Images\shapes\2.png" />
+    <Resource Include="Images\shapes\3.png" />
+    <Resource Include="Images\shapes\4.png" />
+    <Resource Include="Images\shapes\5.png" />
+    <Resource Include="Images\shapes\6.png" />
+    <Resource Include="Images\shapes\7.png" />
+    <Resource Include="Images\shapes\8.png" />
+    <Resource Include="Images\shapes\9.png" />
     <Content Include="Sounds\correct.wav" />
     <Content Include="Sounds\wow.wav" />
   </ItemGroup>
@@ -300,18 +298,6 @@
   <ItemGroup>
     <Resource Include="Images\cardbacks\carback.png" />
     <Resource Include="Images\cardbacks\planetenback.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\shapes\1.png" />
-    <Resource Include="Images\shapes\10.png" />
-    <Resource Include="Images\shapes\2.png" />
-    <Resource Include="Images\shapes\3.png" />
-    <Resource Include="Images\shapes\4.png" />
-    <Resource Include="Images\shapes\5.png" />
-    <Resource Include="Images\shapes\6.png" />
-    <Resource Include="Images\shapes\7.png" />
-    <Resource Include="Images\shapes\8.png" />
-    <Resource Include="Images\shapes\9.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
