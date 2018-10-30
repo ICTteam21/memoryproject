@@ -19,11 +19,17 @@ namespace MemoryGame
         private Grid grid;
 
 
-        string path3;
+        string pathing;
         StackPanel Savedgames = new StackPanel();
-        
-        
         private LoadScreen window;
+
+        /// <summary>
+        /// Dit is de methode die het Loadgame screen initieert.
+        /// </summary>
+        /// <param name="window"></param>
+        /// <param name="grid"></param>
+        /// <param name="kolommen"></param>
+        /// <param name="rijen"></param>
         public LoadClass(LoadScreen window, Grid grid, int kolommen, int rijen)
         {   //settings//
             if (MainClass.windowstyle == 2)
@@ -40,13 +46,17 @@ namespace MemoryGame
             InitializeMain(kolommen, rijen);
             AddBack();
             Title();
-            pathing();
+            padnaarsavefiles();
             addsavesgrid();
 
 
         }
 
-
+        /// <summary>
+        /// De methode die het hoofdgrid aanmaakt.
+        /// </summary>
+        /// <param name="kolommen"></param>
+        /// <param name="rijen"></param>
         public void InitializeMain(int kolommen, int rijen)
         {
             for (int i = 0; i < rijen; i++)
@@ -59,13 +69,15 @@ namespace MemoryGame
             }
         }
 
-        public void AddBack() // button zodat je terug kan naar de vorige pagina
+        /// <summary>
+        /// Het toevoegen van de back button.
+        /// </summary>
+        public void AddBack()
         {
             Button Back = new Button();
             Back.Content = "Back";
             Back.FontSize = 18;
-            //startgame.HorizontalAlignment = HorizontalAlignment.Center;
-
+ 
             Grid.SetRow(Back, 9);
             Grid.SetColumn(Back, 2);
             Grid.SetColumnSpan(Back, 1);
@@ -73,6 +85,10 @@ namespace MemoryGame
             grid.Children.Add(Back);
             Back.Click += Back_Click1;
         }
+
+        /// <summary>
+        /// voegt de title toe aan het grid.
+        /// </summary>
         public void Title()
         {
             Label title = new Label();
@@ -86,18 +102,32 @@ namespace MemoryGame
             grid.Children.Add(title);
 
         }
+
+        /// <summary>
+        /// de click funtie van de back button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Back_Click1(object sender, RoutedEventArgs e)
         {
             var SelectScherm = new MainMenuWindow(); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
         }
-        public void pathing()
+
+        /// <summary>
+        /// haalt de locatie op van de savefiles.
+        /// </summary>
+        public void padnaarsavefiles()
         {
-            path3 = System.AppDomain.CurrentDomain.BaseDirectory;
-            path3 = path3.Replace("bin", "Textdocs");
-            path3 = path3.Replace("Debug", "SavedGames");
+            pathing = System.AppDomain.CurrentDomain.BaseDirectory;
+            pathing = pathing.Replace("bin", "Textdocs");
+            pathing = pathing.Replace("Debug", "SavedGames");
         }
+
+        /// <summary>
+        /// Maakt  voor elke savefile een button aan  in het grid.
+        /// </summary>
         public void addsavesgrid()
         {
             Savedgames.VerticalAlignment = VerticalAlignment.Stretch;
@@ -108,7 +138,7 @@ namespace MemoryGame
             Grid.SetColumnSpan(Savedgames, 3);
             grid.Children.Add(Savedgames);
 
-            String[] files = Directory.GetFiles(path3);
+            String[] files = Directory.GetFiles(pathing);
             foreach (string saves in files)
             {
                 string naam = saves;
@@ -126,6 +156,11 @@ namespace MemoryGame
             }
         }
 
+        /// <summary>
+        /// de methode die moet worden uitgevoerd zodra en op één van de buttons wordt geclicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void loadgame_Click(object sender, RoutedEventArgs e)
         {
             Button loadgame = (Button)sender;

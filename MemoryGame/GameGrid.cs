@@ -33,8 +33,8 @@ namespace MemoryGame
         private DispatcherTimer aTimer;
         Label TimerDisplay = new Label();
 
-        string Player1Name; 
-        string Player2Name;
+        string Player1Name = SelectClass.spelernaam1;
+        string Player2Name = SelectClass.spelernaam2;
         int newofloadteller;
         int regel = 0;
         int aandebeurt = 1;
@@ -46,7 +46,6 @@ namespace MemoryGame
         string themavoorsave;
         private int fileCount;
         string pathing;
-        string path3;
         string statspath;
         ImageSource BackgroundSource;
         string padnaarsave;
@@ -87,6 +86,7 @@ namespace MemoryGame
 
                 themavoorsave = thema;
                 newofloadteller = 1;
+
                 if (MainClass.windowstyle == 2)
                 { window.WindowStyle = WindowStyle.None; }
                 else
@@ -95,28 +95,14 @@ namespace MemoryGame
                 { window.WindowState = WindowState.Maximized; }
                 else
                 { window.WindowState = WindowState.Normal; }
+
                 BackgroundSource = new BitmapImage(new Uri("Images/cardbacks/"+ thema +"back.png", UriKind.Relative));
                 this.window = window;
                 this.grid = grid;
                 InitializeGameGrid(cols, rows);
                 AddImages(thema, cols, rows);
-                Savedgamesfolderlocatie();
+               
                 Playerstats(MainClass.aantalSpelers);
-                padnaarstatistics();
-                Savegameandclosebutton();
-                starttijd = DateTime.Now.TimeOfDay;
-                MainmenuButton();
-
-                aTimer = new DispatcherTimer();
-                aTimer.Interval = new TimeSpan(0, 0, 1);
-                aTimer.Tick += OnTimedEvent;
-                aTimer.Start();
-
-                CardFlipSoundEffect();
-                MatchSoundEffect();
-
-                fileCount = (from file in Directory.EnumerateFiles(path3, "*", SearchOption.AllDirectories)
-                             select file).Count();
 
             }
             else if(newofload == 2)
@@ -124,8 +110,6 @@ namespace MemoryGame
                 newofloadteller = 2;
                 padnaarsave = thema;
 
-                CardFlipSoundEffect();
-                MatchSoundEffect();
 
                 if (MainClass.windowstyle == 2)
                 { window.WindowStyle = WindowStyle.None; }
@@ -143,7 +127,6 @@ namespace MemoryGame
                 this.grid = grid;
                 InitializeGameGrid(cols, rows);
                 addimagesload(cols,rows,thema);
-                Savedgamesfolderlocatie();
 
                 Player1Name = File.ReadLines(thema).Skip(17).Take(1).First();
                 Player2Name = File.ReadLines(thema).Skip(18).Take(1).First();
@@ -165,40 +148,37 @@ namespace MemoryGame
                     Player2name.Background = Brushes.Green;
                     Player1name.Background = Brushes.LightGray;
                 }
-
-                padnaarstatistics();
-                Savegameandclosebutton();
-                starttijd = DateTime.Now.TimeOfDay;
-                MainmenuButton();
-
-                aTimer = new DispatcherTimer();
-                aTimer.Interval = new TimeSpan(0, 0, 1);
-                aTimer.Tick += OnTimedEvent;
-                aTimer.Start();
-
-                fileCount = (from file in Directory.EnumerateFiles(path3, "*", SearchOption.AllDirectories)
-                             select file).Count();
-
             }
+
+            Savedgamesfolderlocatie();
+            CardFlipSoundEffect();
+            MatchSoundEffect();
+            starttijd = DateTime.Now.TimeOfDay;
+            MainmenuButton();
+            padnaarstatistics();
+            Savegameandclosebutton();
+
+            aTimer = new DispatcherTimer();
+            aTimer.Interval = new TimeSpan(0, 0, 1);
+            aTimer.Tick += OnTimedEvent;
+            aTimer.Start();
+
+            fileCount = (from file in Directory.EnumerateFiles(pathing, "*", SearchOption.AllDirectories)
+                         select file).Count();
+
         }
 
+        /// <summary>
+        /// Haalt het pad op van de savedgames folder.
+        /// </summary>
         public void Savedgamesfolderlocatie()
         {
             pathing = System.AppDomain.CurrentDomain.BaseDirectory;
-            //path2 = pathing.Replace("bin", "Textdocs");
-            //path2 = path2.Replace("Debug", "NewGame");
-
-            path3 = pathing.Replace("bin", "Textdocs");
-            path3 = path3.Replace("Debug", "SavedGames");
-
-            //Player1Name = File.ReadLines(path2 + "New.txt").Skip(0).Take(1).First();
-            //Player2Name = File.ReadLines(path2 + "New.txt").Skip(1).Take(1).First();
-            Player1Name = SelectClass.spelernaam1;
-            Player2Name = SelectClass.spelernaam2;
-
+            pathing = pathing.Replace("bin", "Textdocs");
+            pathing = pathing.Replace("Debug", "SavedGames");
 
         }
-        
+
         /// <summary>
         /// maakt het grid aan.
         /// </summary>
@@ -822,11 +802,6 @@ namespace MemoryGame
         public void SaveGame_Click(Object sender, RoutedEventArgs e)
         {
 
-            string pathing;
-            string path2;
-            pathing = System.AppDomain.CurrentDomain.BaseDirectory;
-            path2 = pathing.Replace("bin", "Textdocs");
-            path2 = path2.Replace("Debug", "SavedGames");
             if (newofloadteller == 1)
             {
                 plaatjesvolgorde.Add(Convert.ToString(MainClass.aantalSpelers));
@@ -847,7 +822,7 @@ namespace MemoryGame
             if (newofloadteller == 2)
             { File.Delete(padnaarsave); }
 
-            System.IO.File.WriteAllLines(path3 + (fileCount+1) +  " " + themavoorsave  + Player1Name + " vs " + Player2Name + ".sav", plaatjesvolgorde);
+            System.IO.File.WriteAllLines(pathing + (fileCount+1) +  " " + themavoorsave + " " + Player1Name + " vs " + Player2Name + ".sav", plaatjesvolgorde);
             var SelectScherm = new MainMenuWindow(); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
