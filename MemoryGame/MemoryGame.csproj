@@ -280,5 +280,9 @@
   <ItemGroup>
     <Resource Include="Images\banners\disneybanner.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cardbacks\carcardback.png" />
+    <Resource Include="Images\cardbacks\planetencardback.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
