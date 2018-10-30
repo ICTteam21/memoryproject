@@ -922,7 +922,7 @@ namespace MemoryGame
             if (newofloadteller == 2)
             { File.Delete(padnaarsave); }
 
-            System.IO.File.WriteAllLines(path3 + fileCount + " save.txt", plaatjesvolgorde);
+            System.IO.File.WriteAllLines(path3 + (fileCount+1) + Player1Name + " vs " + Player2Name + themanaamsave + ".sav", plaatjesvolgorde);
             var SelectScherm = new MainMenuWindow(); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
