@@ -268,14 +268,14 @@
     <Content Include="Sounds\wow.wav" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\autos\1.png" />
-    <Resource Include="Images\autos\2.png" />
-    <Resource Include="Images\autos\3.png" />
-    <Resource Include="Images\autos\4.png" />
-    <Resource Include="Images\autos\5.png" />
-    <Resource Include="Images\autos\6.png" />
-    <Resource Include="Images\autos\7.png" />
-    <Resource Include="Images\autos\8.png" />
+    <Resource Include="Images\car\1.png" />
+    <Resource Include="Images\car\2.png" />
+    <Resource Include="Images\car\3.png" />
+    <Resource Include="Images\car\4.png" />
+    <Resource Include="Images\car\5.png" />
+    <Resource Include="Images\car\6.png" />
+    <Resource Include="Images\car\7.png" />
+    <Resource Include="Images\car\8.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\planeten\1.png" />
@@ -298,8 +298,8 @@
     <Resource Include="Images\banners\disneybanner.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\cardbacks\carcardback.png" />
-    <Resource Include="Images\cardbacks\planetencardback.png" />
+    <Resource Include="Images\cardbacks\carback.png" />
+    <Resource Include="Images\cardbacks\planetenback.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\shapes\1.png" />
@@ -312,9 +312,6 @@
     <Resource Include="Images\shapes\7.png" />
     <Resource Include="Images\shapes\8.png" />
     <Resource Include="Images\shapes\9.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\cardbacks\logocardback.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

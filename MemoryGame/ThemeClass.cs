@@ -174,7 +174,7 @@ namespace MemoryGame
                 thema = "disney";
             }else if(sender == autos)
             {
-                thema = "autos";
+                thema = "car";
             }
             else if (sender == planeten)
             {

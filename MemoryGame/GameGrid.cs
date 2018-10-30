@@ -100,7 +100,7 @@ namespace MemoryGame
                 { window.WindowState = WindowState.Maximized; }
                 else
                 { window.WindowState = WindowState.Normal; }
-
+                BackgroundSource = new BitmapImage(new Uri("Images/cardbacks/" + thema + "back.png", UriKind.Relative));
                 this.window = window;
                 this.grid = grid;
                 InitializeGameGrid(cols, rows);
@@ -287,7 +287,7 @@ namespace MemoryGame
                     }
                 }
             }
-            else if (thema.Equals("autos"))
+            else if (thema.Equals("car"))
             {
 
                 themanaamsave = "Autos";
@@ -297,7 +297,7 @@ namespace MemoryGame
                     {
                         Image backgroudImage = new Image
                         {
-                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Source = BackgroundSource,
                             Tag = images.First()
                         };
                         plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
@@ -309,7 +309,6 @@ namespace MemoryGame
                     }
                 }
             }
-
             else if (thema.Equals("planeten"))
             {
 
@@ -320,7 +319,7 @@ namespace MemoryGame
                     {
                         Image backgroudImage = new Image
                         {
-                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Source = BackgroundSource,
                             Tag = images.First()
                         };
                         plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
@@ -342,7 +341,7 @@ namespace MemoryGame
                     {
                         Image backgroudImage = new Image
                         {
-                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Source = BackgroundSource,
                             Tag = images.First()
                         };
                         plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
@@ -454,7 +453,7 @@ namespace MemoryGame
         {
             var element = (UIElement)e.Source;
             Image card = (Image)sender;
-            ImageSource back = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
+
             ImageSource front = (ImageSource)card.Tag;
             CardFlipSoundEffect();
 
