@@ -245,10 +245,41 @@
     <Resource Include="Images\logos\9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\cardbacks\disneycardback.png" />
-    <Resource Include="Images\cardbacks\gebouwcardback.png" />
-    <Resource Include="Images\cardbacks\logobackcard.png" />
-    <Resource Include="Images\cardbacks\shapescardback.png" />
+    <Resource Include="Images\shapes\1.png" />
+    <Resource Include="Images\shapes\animal2.png" />
+    <Resource Include="Images\shapes\2.png" />
+    <Resource Include="Images\shapes\boom2.png" />
+    <Resource Include="Images\shapes\3.png" />
+    <Resource Include="Images\shapes\checkmark2.png" />
+    <Resource Include="Images\shapes\4.png" />
+    <Resource Include="Images\shapes\circle2.png" />
+    <Resource Include="Images\shapes\5.png" />
+    <Resource Include="Images\shapes\crown2.png" />
+    <Resource Include="Images\shapes\6.png" />
+    <Resource Include="Images\shapes\heart2.png" />
+    <Resource Include="Images\shapes\7.png" />
+    <Resource Include="Images\shapes\pentagon2.png" />
+    <Resource Include="Images\shapes\8.png" />
+    <Resource Include="Images\shapes\square2.png" />
+    <Resource Include="Images\shapes\9.png" />
+    <Resource Include="Images\shapes\star2.png" />
+    <Resource Include="Images\shapes\10.png" />
+    <Resource Include="Images\shapes\triangle2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\banners\disneybanner.jpg" />
+    <Resource Include="Images\banners\gebouwenbanner.jpg" />
+    <Resource Include="Images\banners\logobanner.jpg" />
+    <Resource Include="Images\cardbacks\disneyback.png" />
+    <Resource Include="Images\cardbacks\gebouwenback.png" />
+    <Resource Include="Images\cardbacks\logosback.png" />
+    <Resource Include="Images\cardbacks\shapesback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sounds\cardflip.wav" />
+    <Resource Include="Sounds\click.wav" />
+    <Content Include="Sounds\correct.wav" />
+    <Content Include="Sounds\wow.wav" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\autos\1.png" />

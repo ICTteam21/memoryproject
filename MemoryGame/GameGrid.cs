@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Timers;
-
+using System.Media;
 
 namespace MemoryGame
 {
@@ -42,6 +42,7 @@ namespace MemoryGame
         string pathing;
         string path3;
         string statspath;
+        ImageSource BackgroundSource;
 
         TimeSpan starttijd;
         TimeSpan eindtijd;
@@ -61,8 +62,7 @@ namespace MemoryGame
             else
             { window.WindowState = WindowState.Normal; }
 
-            // hier wordt het gamegrid aangeroepen + alle details op dat scherm
-
+            BackgroundSource = new BitmapImage(new Uri("Images/cardbacks/"+ thema +"back.png", UriKind.Relative));
             this.window = window; 
             this.grid = grid;
             InitializeGameGrid(cols, rows);
@@ -159,9 +159,8 @@ namespace MemoryGame
                     {
                         Image backgroudImage = new Image
                         {
-                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Source = BackgroundSource,
                             Tag = images.First()
-
                         };
                         plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
                         images.RemoveAt(0);
@@ -181,7 +180,7 @@ namespace MemoryGame
                     {
                         Image backgroudImage = new Image
                         {
-                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Source = BackgroundSource,
                             Tag = images.First()
                         };
                         plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
@@ -203,7 +202,7 @@ namespace MemoryGame
                     {
                         Image backgroudImage = new Image
                         {
-                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Source = BackgroundSource,
                             Tag = images.First()
                         };
                         plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
@@ -254,9 +253,9 @@ namespace MemoryGame
             Image card = (Image)sender;
             ImageSource back = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
             ImageSource front = (ImageSource)card.Tag;
+            CardFlipSoundEffect();
 
-
-            if(IsTaskRunning == false)
+            if (IsTaskRunning == false)
             {
                 if (imgCardOne == null)
                 {
@@ -292,7 +291,6 @@ namespace MemoryGame
         private bool win;
         private async void CheckCards(string tag1, string tag2, string pos1, string pos2)
         {
-            ImageSource back = new BitmapImage(new Uri("Images/background.png", UriKind.Relative));
 
             IsTaskRunning = true;
             await Task.Delay(300);
@@ -304,6 +302,7 @@ namespace MemoryGame
 
             if (CardsEqual && !PosEqual) // win 
             {
+                MatchSoundEffect();
                 win = true;
                 pairs++;
                 imgCardOne.Source = null;
@@ -317,8 +316,8 @@ namespace MemoryGame
             else if (!CardsEqual && !PosEqual) // lose
             {
                 win = false;
-                imgCardOne.Source = back;
-                imgCardTwo.Source = back;
+                imgCardOne.Source = BackgroundSource;
+                imgCardTwo.Source = BackgroundSource;
                 CheckTurns();
 
                 imgCardOne = null;
@@ -393,7 +392,7 @@ namespace MemoryGame
                 }
                 else if (win.Equals(false)) // als er niet een paar is gevonden ga dan naar de volgende speler
                 {
-                    if (aandebeurt == 1)
+                    if (aandebeurt.Equals(1))
                     {
                         aandebeurt = 2;
                         Player2name.Background = Brushes.Green;
@@ -545,7 +544,7 @@ namespace MemoryGame
                     Player2name.Background = Brushes.Green; // aan de beurt
                     Player1name.Background = Brushes.LightGray;
                 }
-                else if (aandebeurt.Equals(2))
+                else
                 {
                     aandebeurt = 1;
 
@@ -710,9 +709,11 @@ namespace MemoryGame
 
         private void BackToMain_Click(object sender, RoutedEventArgs e)
         {
+
             var SelectScherm = new MainMenuWindow(); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
+
         }
 
         /// <summary>
@@ -786,6 +787,23 @@ namespace MemoryGame
             statspath = statspath + "HighscoresMemory.xlsx";
 
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void CardFlipSoundEffect()
+        {
+
+            MediaPlayer mplayer = new MediaPlayer();
+            mplayer.Open(new Uri(@"../../Sounds/cardflip.wav", UriKind.Relative));
+            mplayer.Play();
+        }
+        private void MatchSoundEffect()
+        {
+            MediaPlayer mplayer = new MediaPlayer();
+            mplayer.Open(new Uri(@"../../Sounds/correct.wav", UriKind.Relative));
+            mplayer.Play();
+        }
     }
 }
-
+    
