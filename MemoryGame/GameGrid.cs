@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -277,8 +277,8 @@ namespace MemoryGame
                             Source = BackgroundSource,
                             Tag = images.First()
                         };
-                        tijdelijkestring = Convert.ToString(backgroudImage.Tag);
-                        plaatjesvolgorde.Add(tijdelijkestring);
+                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
+
                         images.RemoveAt(0);
                         backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
                         Grid.SetColumn(backgroudImage, column);
@@ -570,7 +570,7 @@ namespace MemoryGame
                     totaletijd = String.Format("{0}:{1}:{2}", diff.Hours, diff.Minutes, diff.Seconds);
 
                     MessageBox.Show("Goed gedaan! Je hebt binnen de tijd alle paren gevonden!", "Klik op ok om de highscores te zien");
-                    thegameisdone(1, 1);
+                    thegameisdone(SelectClass.diff, 1);
                     var highscoresWindow = new HighScores();
                     Deletesave();
                     window.Close();
@@ -583,7 +583,7 @@ namespace MemoryGame
                     totaletijd = String.Format("{0}:{1}:{2}", diff.Hours, diff.Minutes, diff.Seconds);
 
                     MessageBox.Show("Goed gedaan! Je hebt alle paren gevonden!", "Klik op ok om de highscores te zien");
-                    thegameisdone(1, 1);
+                    thegameisdone(SelectClass.diff, 1);
                     var highscoresWindow = new HighScores();
                     Deletesave();
                     window.Close();
@@ -633,7 +633,7 @@ namespace MemoryGame
                         totaletijd = String.Format("{0}:{1}:{2}",diff.Hours,diff.Minutes, diff.Seconds);
 
                         MessageBox.Show("Speler " + Player1Name + " heeft gewonnen! \n" + Player1Name + " heeft met " + pDiff + " punten meer gewonnen! het duurde: " + totaletijd, "Klik op ok om je highscores te zien");
-                        thegameisdone(1, 2);
+                        thegameisdone(SelectClass.diff, 2);
                         var highscoresWindow = new HighScores();
                         Deletesave();
                         window.Close();
@@ -647,7 +647,7 @@ namespace MemoryGame
                         totaletijd = String.Format("{0}:{1}:{2}", diff.Hours, diff.Minutes, diff.Seconds);
 
                         MessageBox.Show("Speler " + Player2Name + " heeft gewonnen! \n" + Player2Name + " heeft met " + pDiff + " punten meer gewonnen! het duurde: " + totaletijd, "Klik op ok om je highscores te zien");
-                        thegameisdone(1, 2);
+                        thegameisdone(SelectClass.diff, 2);
                         var highscoresWindow = new HighScores();
                         Deletesave();
                         window.Close();
@@ -660,7 +660,7 @@ namespace MemoryGame
                         totaletijd = String.Format("{0}:{1}:{2}", diff.Hours, diff.Minutes, diff.Seconds);
 
                         MessageBox.Show( Player1Name + " en " + Player2Name + " jullie zijn erg aan elkaar gewaagt !\n  " + "Probeer het nog een keer! het duurde: " + totaletijd, "Klik op ok om je highscores te zien");
-                        thegameisdone(1, 2);
+                        thegameisdone(SelectClass.diff, 2);
                         var highscoresWindow = new HighScores();
                         Deletesave();
                         window.Close();
@@ -922,7 +922,7 @@ namespace MemoryGame
             if (newofloadteller == 2)
             { File.Delete(padnaarsave); }
 
-            System.IO.File.WriteAllLines(path3 + (fileCount+1) + Player1Name + " vs " + Player2Name + themanaamsave + ".sav", plaatjesvolgorde);
+            System.IO.File.WriteAllLines(path3 + (fileCount+1) +  " " + themanaamsave  + Player1Name + " vs " + Player2Name + ".sav", plaatjesvolgorde);
             var SelectScherm = new MainMenuWindow(); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
