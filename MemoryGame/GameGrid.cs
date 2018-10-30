@@ -987,56 +987,59 @@ namespace MemoryGame
         /// <param name="players"></param>      aantal spelers 1 a 2.
         public void thegameisdone(int difficulty, int players)
         {
-            Excel.Application xlApp;
-            Excel.Workbook xlWorkBook;
-            Excel.Worksheet xlWorkSheet;
-            Excel.Range range;
-            int worksheet;
 
-            if(players == 1)
+            if (difficulty > 0)
             {
-                worksheet = 4 + difficulty;
-            }else
-            {
-                worksheet = difficulty;
+                Excel.Application xlApp;
+                Excel.Workbook xlWorkBook;
+                Excel.Worksheet xlWorkSheet;
+                Excel.Range range;
+                int worksheet;
+
+                if (players == 1)
+                {
+                    worksheet = 4 + difficulty;
+                } else
+                {
+                    worksheet = difficulty;
+                }
+
+
+                xlApp = new Microsoft.Office.Interop.Excel.Application();
+
+                xlWorkBook = xlApp.Workbooks.Open(statspath, 0, false, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+                xlApp.UserControl = true;
+
+                // dit selecteert op het moment het eerste werkblad ( variabel op difficulty en players ).
+                xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(worksheet);
+                range = xlWorkSheet.UsedRange;
+
+                //geeft het aantal gebruikte rijen terug.
+                double rij = xlApp.WorksheetFunction.CountA(xlWorkSheet.Columns[1]);
+
+                //voert data in op basis van spelers.
+                if (players == 1)
+                {
+                    xlWorkSheet.Cells[rij + 1, 1] = Player1Name;
+                    xlWorkSheet.Cells[rij + 1, 2] = P1Points;
+                    xlWorkSheet.Cells[rij + 1, 3] = totaletijd;
+                }
+                else
+                {
+                    xlWorkSheet.Cells[rij + 1, 1] = Player1Name;
+                    xlWorkSheet.Cells[rij + 1, 2] = P1Points;
+                    xlWorkSheet.Cells[rij + 1, 3] = totaletijd;
+                    xlWorkSheet.Cells[rij + 2, 1] = Player2Name;
+                    xlWorkSheet.Cells[rij + 2, 2] = P2Points;
+                    xlWorkSheet.Cells[rij + 2, 3] = totaletijd;
+                }
+                //dit pakt alle cellen met daarin scores en namen en sorteerd deze.
+                range = xlWorkSheet.Range[xlWorkSheet.Cells[3, 1], xlWorkSheet.Cells[rij + 2, 3]];
+                range.Sort(range.Columns[2], Excel.XlSortOrder.xlDescending);
+
+                xlWorkBook.Save();
+                xlApp.Quit();
             }
-
-
-            xlApp = new Microsoft.Office.Interop.Excel.Application();
-
-            xlWorkBook = xlApp.Workbooks.Open(statspath, 0, false, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
-            xlApp.UserControl = true;
-
-            // dit selecteert op het moment het eerste werkblad ( variabel op difficulty en players ).
-            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(worksheet);
-            range = xlWorkSheet.UsedRange;
-
-            //geeft het aantal gebruikte rijen terug.
-            double rij = xlApp.WorksheetFunction.CountA(xlWorkSheet.Columns[1]);
-
-            //voert data in op basis van spelers.
-            if (players == 1)
-            {
-                xlWorkSheet.Cells[rij + 1, 1] = Player1Name;
-                xlWorkSheet.Cells[rij + 1, 2] = P1Points;
-                xlWorkSheet.Cells[rij + 1, 3] = totaletijd;
-            }
-            else
-            {
-                xlWorkSheet.Cells[rij + 1, 1] = Player1Name;
-                xlWorkSheet.Cells[rij + 1, 2] = P1Points;
-                xlWorkSheet.Cells[rij + 1, 3] = totaletijd;
-                xlWorkSheet.Cells[rij + 2, 1] = Player2Name;
-                xlWorkSheet.Cells[rij + 2, 2] = P2Points;
-                xlWorkSheet.Cells[rij + 2, 3] = totaletijd;
-            }
-            //dit pakt alle cellen met daarin scores en namen en sorteerd deze.
-            range = xlWorkSheet.Range[xlWorkSheet.Cells[3, 1], xlWorkSheet.Cells[rij + 2, 3]];
-            range.Sort(range.Columns[2], Excel.XlSortOrder.xlDescending);
-
-            xlWorkBook.Save();
-            xlApp.Quit();
-
         }
 
         public void Deletesave()
