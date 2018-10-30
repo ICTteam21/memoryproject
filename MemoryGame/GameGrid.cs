@@ -42,7 +42,7 @@ namespace MemoryGame
         int P2Points = 0;
         private int pairs = 0;
 
-        private string themanaamsave;
+
         string themavoorsave;
         private int fileCount;
         string pathing;
@@ -243,85 +243,12 @@ namespace MemoryGame
         /// Voegt de plaatjes aan de grid 
         /// </summary>
         /// <param name="rows"></param>
-        /// <param name="cols"></param>
-        
+        /// <param name="cols"></param>   
         private void AddImages(string thema, int rows, int cols)
         {
             // get lists
             List<ImageSource> images = GetImagesList(thema);
 
-            // hier wordt het geselecteerde thema aangeroepen
-            if (thema.Equals("logos"))
-            {
-                themanaamsave = "Logo's";
-                for (int row = 0; row < rows; row++)
-                {
-                    for (int column = 0; column < cols; column++)
-                    {
-                        Image backgroudImage = new Image
-                        {
-                            Source = BackgroundSource,
-                            Tag = images.First()
-                        };
-                        tijdelijkestring = Convert.ToString(backgroudImage.Tag);
-                        plaatjesvolgorde.Add(tijdelijkestring);
-                        images.RemoveAt(0);
-                        backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
-                        Grid.SetColumn(backgroudImage, column);
-                        Grid.SetRow(backgroudImage, row);
-                        grid.Children.Add(backgroudImage);
-                    }
-                }
-            }
-            else if (thema.Equals("gebouwen"))
-            {
-                themanaamsave = "Gebouwen";
-                for (int row = 0; row < rows; row++)
-                {
-                    for (int column = 0; column < cols; column++)
-                    {
-                        Image backgroudImage = new Image
-                        {
-                            Source = BackgroundSource,
-                            Tag = images.First()
-                        };
-                        tijdelijkestring = Convert.ToString(backgroudImage.Tag);
-                        plaatjesvolgorde.Add(tijdelijkestring);
-                        images.RemoveAt(0);
-                        backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
-                        Grid.SetColumn(backgroudImage, column);
-                        Grid.SetRow(backgroudImage, row);
-                        grid.Children.Add(backgroudImage);
-                    }
-                }
-            }
-            else if (thema.Equals("disney"))
-            {
-
-                themanaamsave = "Disney";
-                for (int row = 0; row < rows; row++)
-                {
-                    for (int column = 0; column < cols; column++)
-                    {
-                        Image backgroudImage = new Image
-                        {
-                            Source = BackgroundSource,
-                            Tag = images.First()
-                        };
-                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
-
-                        images.RemoveAt(0);
-                        backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
-                        Grid.SetColumn(backgroudImage, column);
-                        Grid.SetRow(backgroudImage, row);
-                        grid.Children.Add(backgroudImage);
-                    }
-                }
-            }
-            else if (thema.Equals("car"))
-            {
-
-                themanaamsave = "Autos";
                 for (int row = 0; row < rows; row++)
                 {
                     for (int column = 0; column < cols; column++)
@@ -339,51 +266,6 @@ namespace MemoryGame
                         grid.Children.Add(backgroudImage);
                     }
                 }
-            }
-            else if (thema.Equals("planeten"))
-            {
-
-                themanaamsave = "Planeten";
-                for (int row = 0; row < rows; row++)
-                {
-                    for (int column = 0; column < cols; column++)
-                    {
-                        Image backgroudImage = new Image
-                        {
-                            Source = BackgroundSource,
-                            Tag = images.First()
-                        };
-                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
-                        images.RemoveAt(0);
-                        backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
-                        Grid.SetColumn(backgroudImage, column);
-                        Grid.SetRow(backgroudImage, row);
-                        grid.Children.Add(backgroudImage);
-                    }
-                }
-            }
-            else if (thema.Equals("shapes"))
-            {
-
-                themanaamsave = "Shapes";
-                for (int row = 0; row < rows; row++)
-                {
-                    for (int column = 0; column < cols; column++)
-                    {
-                        Image backgroudImage = new Image
-                        {
-                            Source = BackgroundSource,
-                            Tag = images.First()
-                        };
-                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
-                        images.RemoveAt(0);
-                        backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
-                        Grid.SetColumn(backgroudImage, column);
-                        Grid.SetRow(backgroudImage, row);
-                        grid.Children.Add(backgroudImage);
-                    }
-                }
-            }
 
             if (SelectClass.diff.Equals(0))
             {
@@ -461,11 +343,6 @@ namespace MemoryGame
 
         }
        
-        /// <summary>
-        /// Is de functie die bepaald wat er gebeurt als je op een kaart klikt
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
 
         /// <summary>
         /// Slaat img.Tag op en gridpositie in string en geeft ze door aan CheckCards
@@ -1085,7 +962,7 @@ namespace MemoryGame
         }
 
         /// <summary>
-        /// 
+        /// Geluids effectjes.
         /// </summary>
         private void CardFlipSoundEffect()
         {

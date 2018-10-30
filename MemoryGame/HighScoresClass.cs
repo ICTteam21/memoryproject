@@ -38,7 +38,13 @@ namespace MemoryGame
 
         private HighScores window;
 
-
+        /// <summary>
+        /// initieert het highscores scherm.
+        /// </summary>
+        /// <param name="window"></param>
+        /// <param name="grid"></param>
+        /// <param name="kolommen"></param>
+        /// <param name="rijen"></param>
         public HighScoresClass(HighScores window, Grid grid, int kolommen, int rijen)
         {   //settings//
             if (MainClass.windowstyle == 2)
