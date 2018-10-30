@@ -280,6 +280,10 @@
     <Resource Include="Images\banners\disneybanner.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\cardbacks\carcardback.png" />
+    <Resource Include="Images\cardbacks\planetencardback.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Images\shapes\1.png" />
     <Resource Include="Images\shapes\10.png" />
     <Resource Include="Images\shapes\2.png" />
