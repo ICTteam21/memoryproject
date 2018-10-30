@@ -8,7 +8,7 @@
         Title="MemoryGame" Height="1000" Width="1600" WindowStartupLocation="CenterScreen">
 
 
-    <Grid x:Name="Window" MaxHeight="1080" MaxWidth="1920">
+    <Grid x:Name="Window" MaxHeight="1080" MaxWidth="1920" Background="#c8c8c8">
         <!-- GRID SPEEL SPEL -->
         <Grid x:Name="GameGrid" Margin="0,0,-0.4,0.4">
             

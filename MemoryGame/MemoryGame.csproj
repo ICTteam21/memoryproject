@@ -301,5 +301,17 @@
     <Resource Include="Images\cardbacks\carcardback.png" />
     <Resource Include="Images\cardbacks\planetencardback.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\shapes\1.png" />
+    <Resource Include="Images\shapes\10.png" />
+    <Resource Include="Images\shapes\2.png" />
+    <Resource Include="Images\shapes\3.png" />
+    <Resource Include="Images\shapes\4.png" />
+    <Resource Include="Images\shapes\5.png" />
+    <Resource Include="Images\shapes\6.png" />
+    <Resource Include="Images\shapes\7.png" />
+    <Resource Include="Images\shapes\8.png" />
+    <Resource Include="Images\shapes\9.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
