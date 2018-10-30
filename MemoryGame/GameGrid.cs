@@ -215,6 +215,74 @@ namespace MemoryGame
                     }
                 }
             }
+            else if (thema.Equals("autos"))
+            {
+
+                themanaamsave = "Autos";
+                for (int row = 0; row < rows; row++)
+                {
+                    for (int column = 0; column < cols; column++)
+                    {
+                        Image backgroudImage = new Image
+                        {
+                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Tag = images.First()
+                        };
+                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
+                        images.RemoveAt(0);
+                        backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
+                        Grid.SetColumn(backgroudImage, column);
+                        Grid.SetRow(backgroudImage, row);
+                        grid.Children.Add(backgroudImage);
+                    }
+                }
+            }
+
+            else if (thema.Equals("planeten"))
+            {
+
+                themanaamsave = "Planeten";
+                for (int row = 0; row < rows; row++)
+                {
+                    for (int column = 0; column < cols; column++)
+                    {
+                        Image backgroudImage = new Image
+                        {
+                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Tag = images.First()
+                        };
+                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
+                        images.RemoveAt(0);
+                        backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
+                        Grid.SetColumn(backgroudImage, column);
+                        Grid.SetRow(backgroudImage, row);
+                        grid.Children.Add(backgroudImage);
+                    }
+                }
+            }
+            else if (thema.Equals("shapes"))
+            {
+
+                themanaamsave = "Shapes";
+                for (int row = 0; row < rows; row++)
+                {
+                    for (int column = 0; column < cols; column++)
+                    {
+                        Image backgroudImage = new Image
+                        {
+                            Source = new BitmapImage(new Uri("Images/background.png", UriKind.Relative)),
+                            Tag = images.First()
+                        };
+                        plaatjesvolgorde.Add(Convert.ToString(backgroudImage.Tag));
+                        images.RemoveAt(0);
+                        backgroudImage.MouseDown += new MouseButtonEventHandler(CardClick);
+                        Grid.SetColumn(backgroudImage, column);
+                        Grid.SetRow(backgroudImage, row);
+                        grid.Children.Add(backgroudImage);
+                    }
+                }
+            }
+
             if (SelectClass.diff.Equals(0))
             {
 

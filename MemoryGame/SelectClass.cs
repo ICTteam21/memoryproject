@@ -96,13 +96,13 @@ namespace MemoryGame
             Label title = new Label
             {
                 Content = "New Game Selector",
-                FontSize = 80,
+                FontSize = 120,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 FontFamily = new FontFamily("Bahnschrift"),
             };
             Grid.SetRow(title, 0);
-            Grid.SetColumn(title, 2);
-            Grid.SetColumnSpan(title, 4);
+            Grid.SetColumn(title, 0);
+            Grid.SetColumnSpan(title, 10);
             Grid.SetRowSpan(title, 3);
             grid.Children.Add(title);
         }
