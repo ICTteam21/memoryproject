@@ -106,7 +106,7 @@ namespace MemoryGame
             //startgame.HorizontalAlignment = HorizontalAlignment.Center;
 
             Grid.SetRow(Back, 9);
-            Grid.SetColumn(Back, 9);
+            Grid.SetColumn(Back, 11);
             Grid.SetColumnSpan(Back, 2);
             Grid.SetRowSpan(Back, 1);
             grid.Children.Add(Back);
