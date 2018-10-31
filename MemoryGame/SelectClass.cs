@@ -382,7 +382,7 @@ namespace MemoryGame
                     size.FontFamily = new FontFamily("Bahnschrift");
                     grid.Children.Remove(size);
                     grid.Children.Add(size);
-                    diff = 3;
+                    diff = 4;
                     return;
                 }
                 else if (Check.IsChecked == true)

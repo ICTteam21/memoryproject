@@ -83,8 +83,6 @@ namespace MemoryGame
 
             if (newofload == 1)
             {
-                CardFlipSoundEffect();
-                MatchSoundEffect();
 
                 themavoorsave = thema;
                 newofloadteller = 1;
@@ -153,8 +151,7 @@ namespace MemoryGame
             }
 
             
-            CardFlipSoundEffect();
-            MatchSoundEffect();
+
             starttijd = DateTime.Now.TimeOfDay;
             MainmenuButton();
             padnaarstatistics();
@@ -332,10 +329,12 @@ namespace MemoryGame
         /// <param name="e"></param>
         private void CardClick(object sender, MouseButtonEventArgs e)
         {
+            CardFlipSoundEffect();
+            
             var element = (UIElement)e.Source;
             Image card = (Image)sender;
             ImageSource front = (ImageSource)card.Tag;
-            
+            mplayer.Play();
 
             if (IsTaskRunning == false)
             {
@@ -348,7 +347,7 @@ namespace MemoryGame
                     int xOne = Grid.GetColumn(element);
                     int yOne = Grid.GetRow(element);
                     xyOne = Convert.ToString(xOne) + Convert.ToString(yOne);
-                    mplayer.Play();
+                    
                     card.Source = front;
                 }
                 else if (imgCardTwo == null)
@@ -359,7 +358,7 @@ namespace MemoryGame
                     int xTwo = Grid.GetColumn(element);
                     int yTwo = Grid.GetRow(element);
                     xyTwo = Convert.ToString(xTwo) + Convert.ToString(yTwo);
-                    mplayer.Play();
+                   
                     card.Source = front;
                     CheckCards(tagOne, tagTwo, xyOne, xyTwo);
 
@@ -446,6 +445,8 @@ namespace MemoryGame
             {
                 P1Points++;
                 Player1Score.Content = P1Points;
+
+
 
                 if (pairs.Equals(8) && !SelectClass.diff.Equals(0)) 
                 {
@@ -837,6 +838,7 @@ namespace MemoryGame
             BackToMain.Content = "Main Menu";
             BackToMain.FontSize = 30;
 
+
             Grid.SetRow(BackToMain, 4);
             Grid.SetColumn(BackToMain, 4);
 
@@ -846,7 +848,7 @@ namespace MemoryGame
         }
         private void BackToMain_Click(object sender, RoutedEventArgs e)
         {
-
+            aTimer.Stop();
             var SelectScherm = new MainMenuWindow(); //create your new form.
             SelectScherm.Show(); //show the new form.
             window.Close();
@@ -942,11 +944,13 @@ namespace MemoryGame
         /// </summary>
         private void CardFlipSoundEffect()
         {
-            mplayer.Open(new Uri(@"../../Sounds/cardflip.wav", UriKind.Relative)); 
+            mplayer.Open(new Uri(@"../../Sounds/cardflip.wav", UriKind.Relative));
+            mplayer.Play();
         }
         private void MatchSoundEffect()
         {
             mplayer2.Open(new Uri(@"../../Sounds/correct.wav", UriKind.Relative));
+            mplayer2.Play();
 
         }
     }
