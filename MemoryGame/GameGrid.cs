@@ -327,6 +327,8 @@ namespace MemoryGame
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        
+      
         private void CardClick(object sender, MouseButtonEventArgs e)
         {
             CardFlipSoundEffect();
@@ -344,9 +346,7 @@ namespace MemoryGame
                     
                     imgCardOne = (Image)sender;
                     tagOne = Convert.ToString(front);
-                    int xOne = Grid.GetColumn(element);
-                    int yOne = Grid.GetRow(element);
-                    xyOne = Convert.ToString(xOne) + Convert.ToString(yOne);
+                    xyOne = Convert.ToString(Grid.GetColumn(element)) + Convert.ToString(Grid.GetRow(element));
                     
                     card.Source = front;
                 }
@@ -355,10 +355,8 @@ namespace MemoryGame
                     
                     imgCardTwo = (Image)sender;
                     tagTwo = Convert.ToString(front);
-                    int xTwo = Grid.GetColumn(element);
-                    int yTwo = Grid.GetRow(element);
-                    xyTwo = Convert.ToString(xTwo) + Convert.ToString(yTwo);
-                   
+                    xyTwo = Convert.ToString(Grid.GetColumn(element)) + Convert.ToString(Grid.GetRow(element));
+
                     card.Source = front;
                     CheckCards(tagOne, tagTwo, xyOne, xyTwo);
 
@@ -426,8 +424,7 @@ namespace MemoryGame
             if (CardsEqual || PosEqual) // op hetzelfde kaartje geklikt
             {
                 imgCardTwo = null;
-                
-                imgCardTwo = null;
+               
             }
 
 
