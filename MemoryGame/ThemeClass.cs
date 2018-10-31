@@ -218,53 +218,5 @@ namespace MemoryGame
             SelectScherm.Show(); //show the new form.
             window.Close();
         }
-
-
-
-
-        //Click geluid laden
-        private void PlayClick()
-        {
-                MediaPlayer Sound1 = new MediaPlayer();
-                Sound1.Open(new Uri(@"D:\stuff\school\Memory Project\Sound Effects - Memory Game\click.mp3"));
-                Sound1.Play();
-        }
-
-        //Correct geluid laden
-        private void PlayCorrect()
-        {
-            MediaPlayer Sound1 = new MediaPlayer();
-            Sound1.Open(new Uri(@"D:\stuff\school\Memory Project\Sound Effects - Memory Game\correct.mp3"));
-            Sound1.Play();
-        }
-
-        //Wow geluid laden
-        private void PlayWow()
-        {
-            MediaPlayer Sound1 = new MediaPlayer();
-            Sound1.Open(new Uri(@"D:\stuff\school\Memory Project\Sound Effects - Memory Game\wow.mp3"));
-            Sound1.Play();
-        }
-
-        //Click geluid private naar public zodat je het kan gebruiken
-        public void button_click(object sender, RoutedEventArgs e)
-        {
-            PlayClick();
-        }
-
-        //Correct geluid private naar public zodat je het kan gebruiken
-        public void button_correct(object sender, RoutedEventArgs e)
-        {
-            PlayCorrect();
-        }
-
-        //Wow geluid private naar public zodat je het kan gebruiken
-        public void button_wow(object sender, RoutedEventArgs e)
-        {
-            PlayWow();
-        }
-
-
-
     }
 }
