@@ -74,10 +74,16 @@ namespace MemoryGame
         /// </summary>
         public void AddBack()
         {
-            Button Back = new Button();
-            Back.Content = "Back";
-            Back.FontSize = 18;
- 
+            Button Back = new Button
+            {
+                Content = "Back",
+                FontSize = 40,
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(3),
+                FontFamily = new FontFamily("Bahnschrift"),
+                Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
+            };
+
             Grid.SetRow(Back, 9);
             Grid.SetColumn(Back, 2);
             Grid.SetColumnSpan(Back, 1);
@@ -93,7 +99,8 @@ namespace MemoryGame
         {
             Label title = new Label();
             title.Content = "Load Game:";
-            title.FontSize = 60;
+            title.FontSize = 80;
+            title.FontFamily = new FontFamily("Bahnschrift");
             title.HorizontalAlignment = HorizontalAlignment.Center;
 
             Grid.SetRow(title, 0);
@@ -144,10 +151,15 @@ namespace MemoryGame
                 string naam = saves;
                 //.Substring(saves.Length - 10);
                 //naam = naam.Replace(".txt","");
-                Button loadgame = new Button();
-                loadgame.Content = naam;
-                loadgame.FontSize = 20;
-
+                Button loadgame = new Button
+                {
+                    Content = naam,
+                    FontSize = 20,
+                    BorderBrush = Brushes.Black,
+                    BorderThickness = new Thickness(3),
+                    FontFamily = new FontFamily("Bahnschrift"),
+                    Background = new RadialGradientBrush(Colors.White, Colors.LightSteelBlue),
+                };
                 loadgame.Click += new RoutedEventHandler(loadgame_Click);
 
                 Savedgames.Children.Add(loadgame);
