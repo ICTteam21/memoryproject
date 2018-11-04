@@ -406,7 +406,7 @@ namespace MemoryGame
                     grid.Children.Add(preview2);
 
                     // label 3//
-                    size.Content = "Geen diffuculty geselecteerd oneindig veel tijd voor het spel";
+                    size.Content = "No time limit";
                     size.FontSize = 25;
                     size.FontFamily = new FontFamily("Bahnschrift");
                     grid.Children.Remove(size);
@@ -478,7 +478,7 @@ namespace MemoryGame
                     size.FontFamily = new FontFamily("Bahnschrift");
                     grid.Children.Remove(size);
                     grid.Children.Add(size);
-                    diff = 3;
+                    diff = 4;
                     
                 }
                 else if (Check.IsChecked == true)
@@ -487,7 +487,7 @@ namespace MemoryGame
                     grid.Children.Add(preview2);
 
                     // label 3//
-                    size.Content = "Geen diffuculty geselecteerd oneindig veel tijd per beurt";
+                    size.Content = "No time limit";
                     size.FontSize = 25;
                     size.FontFamily = new FontFamily("Bahnschrift");
                     grid.Children.Remove(size);
